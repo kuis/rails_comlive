@@ -126,14 +126,6 @@ feature 'Measurements View' do
     end
   end
 
-  def log_in(user)
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_button 'Log in'
-  end
-
   def properties
     Unitwise::Atom.all.uniq.map {|x| "#{x.property}"}.uniq
   end

@@ -1,6 +1,6 @@
 +function($, window){ 'use strict';
 	var app = {
-		name: 'Infinity',
+		name: 'Commodity Live',
 		version: '1.0.0'
 	};
 
@@ -367,3 +367,7 @@
 	window.app.sidebar.init();
 	window.app.customizer.init();
 }(jQuery, window);
+
+$(document).on('turbolinks:load', function(){
+	$('.dropdown-toggle').dropdown();
+});
