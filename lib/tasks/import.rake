@@ -1,7 +1,7 @@
 namespace :db do
   namespace :import do
     desc "Imports and creates unspsc codes"
-    task :unspsc_codes => :environment do
+    task :families => :environment do
       start_time = Time.now
 
       puts "=> Reading unspsc excel file."
@@ -82,10 +82,8 @@ namespace :db do
             hscode_chapter = HscodeChapter.find_by(category: parent)
             hscode_chapter.hscode_headings.where(category: category).first_or_create!(description: description)
           when 6
-            if result["parent"].length == 4
-              hscode_heading = HscodeHeading.find_by(category: parent) # TODO: fix bug
-              hscode_heading.hscode_subheadings.where(category: category).first_or_create!(description: description)
-            end
+            hscode_heading = HscodeHeading.find_by(category: parent) # TODO: fix bug
+            hscode_heading.hscode_subheadings.where(category: category).first_or_create!(description: description) if hscode_heading
         end
         print "   *" if index % 200 == 0
       end

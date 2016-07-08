@@ -55,5 +55,15 @@ RSpec.describe App, :type => :model do
       assoc = App.reflect_on_association(:custom_units)
       expect(assoc.macro).to eq :has_many
     end
+
+    it "has many brands" do
+      assoc = App.reflect_on_association(:brands)
+      expect(assoc.macro).to eq :has_many
+    end
+
+    it "has many standards" do
+      assoc = App.reflect_on_association(:standards)
+      expect(assoc.macro).to eq :has_many
+    end
   end
 end

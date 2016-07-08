@@ -42,8 +42,8 @@ feature 'References' do
 
   feature "Visiting #new page" do
     background do
-      @generic_commodity = create(:commodity, generic: true)
-      @commodity = create(:commodity)
+      @generic_commodity = create(:commodity)
+      @commodity = create(:non_generic_commodity)
       visit new_app_reference_path(@app)
     end
 
@@ -73,7 +73,8 @@ feature 'References' do
 
   feature "Visiting #edit page" do
     background do
-      @reference = create(:reference, app_id: @app.id, kind: "variation_of")
+      @commodity = create(:non_generic_commodity)
+      @reference = create(:reference, app_id: @app.id, target_commodity_id: @commodity.id)
       visit edit_app_reference_path(@app, @reference)
     end
 

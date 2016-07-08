@@ -5,6 +5,8 @@ class App < ApplicationRecord
   has_many :references
   has_many :measurements
   has_many :custom_units
+  has_many :brands
+  has_many :standards
 
   before_create :assign_uuid
 

@@ -43,5 +43,15 @@ RSpec.describe User, :type => :model do
       assoc = User.reflect_on_association(:apps)
       expect(assoc.macro).to eq :has_many
     end
+
+    it "has many brands" do
+      assoc = User.reflect_on_association(:brands)
+      expect(assoc.macro).to eq :has_many
+    end
+
+    it "has many standards" do
+      assoc = User.reflect_on_association(:standards)
+      expect(assoc.macro).to eq :has_many
+    end
   end
 end

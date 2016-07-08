@@ -12,6 +12,7 @@
  *
  *= require font-awesome
  *= require material-design-iconic-font
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require animate.min
  *= require perfect-scrollbar
  *= require bootstrap

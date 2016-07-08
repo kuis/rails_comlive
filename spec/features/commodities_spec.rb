@@ -59,11 +59,13 @@ feature 'Commodities' do
       visit new_app_commodity_path(@app)
     end
 
-    scenario "With correct details, user should successfully create a commodity" do
+    scenario "With correct details, user should successfully create a commodity", js: true do
 
       fill_in "Short description", with: "a brief short description"
       fill_in "Long description", with: "a very very long description"
+      fill_in "Measured in", with: "litres"
       check('Generic')
+
       click_button "Create Commodity"
 
       expect(page).to have_text("commodity successfully created")

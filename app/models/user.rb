@@ -8,7 +8,9 @@ class User < ApplicationRecord
 
   validates :token, uniqueness: true
   has_many :apps
-
+  has_many :memberships
+  has_many :brands, source: :member, source_type: "Brand", through: :memberships
+  has_many :standards, source: :member, source_type: "Standard", through: :memberships
 
   private
 

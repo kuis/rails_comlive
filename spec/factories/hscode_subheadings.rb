@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :hscode_subheading do
-    category { Faker::Number.between(100000, 999999)}
+    category { SecureRandom.hex(3) }
     description { Faker::Lorem.sentence }
     association :hscode_heading
   end
