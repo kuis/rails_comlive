@@ -28,4 +28,9 @@ module ApplicationHelper
       when :warning then "alert alert-warning"
     end
   end
+
+  def gravatar_for(email, size = 50, classes = "")
+    hash = Digest::MD5.hexdigest(email)
+    image_tag "https://www.gravatar.com/avatar/#{hash}?s=#{size}&d=identicon", class: classes
+  end
 end
