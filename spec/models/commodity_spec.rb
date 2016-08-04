@@ -41,6 +41,11 @@ RSpec.describe Commodity, :type => :model do
       commodity.valid?
       expect(commodity.errors[:brand_id]).to include("can't be blank")
     end
+
+    it "assigns a uuid after create" do
+      commodity = create(:commodity)
+      expect(commodity.uuid).not_to be_nil
+    end
   end
 
   describe "Associations" do

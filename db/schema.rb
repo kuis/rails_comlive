@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160708065230) do
     t.string   "measured_in"
     t.boolean  "generic",              default: false
     t.boolean  "moderated",            default: false
+    t.string   "uuid"
     t.integer  "app_id"
     t.integer  "brand_id"
     t.integer  "hscode_section_id"

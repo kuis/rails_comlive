@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   unauthenticated do
     devise_scope :user do
-      root to: "devise/sessions#new"
+      root to: "welcome#landing"
     end
   end
 
@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   resources :unspsc_segments, :unspsc_families, :unspsc_classes, :unspsc_commodities
   resources :ownerships, :standardizations
   resources :uoms, only: [:index]
+
+  get "/", to: "welcome#landing", as: :landing
 end

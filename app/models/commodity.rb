@@ -24,6 +24,8 @@ class Commodity < ApplicationRecord
   scope :not_generic, -> { where(generic: false )}
 
   before_save :set_unspsc_fields
+  before_create :set_uuid
+
 
   private
 
@@ -36,5 +38,11 @@ class Commodity < ApplicationRecord
     self.unspsc_commodity, self.unspsc_class, self.unspsc_family, self.unspsc_segment = [
         unspsc_commodity, unspsc_class, unspsc_family, unspsc_segment
     ]
+  end
+
+  private
+
+  def set_uuid
+    self.uuid = SecureRandom.uuid
   end
 end

@@ -6,6 +6,7 @@ class CreateCommodities < ActiveRecord::Migration[5.0]
       t.string :measured_in
       t.boolean :generic, default: false
       t.boolean :moderated, default: false
+      t.string :uuid
       t.references :app, foreign_key: true
       t.references :brand, foreign_key: true
       t.references :hscode_section, foreign_key: true
