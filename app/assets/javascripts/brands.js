@@ -13,5 +13,4 @@ ready = function(){
         form.submit();
     });
 }
-
-$(document).on('turbolinks:load', ready);
+$(document).ready(ready);

@@ -1,32 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe MeasurementsController, :type => :controller do
+  let!(:user) { create(:user) }
+  let!(:app) { create(:app, user_id: user.id) }
+  let!(:commodity) { create(:commodity, app_id: app.id) }
+
   context "As an authenticated user" do
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      @user = create(:user)
-      @app = create(:app, user_id: @user.id)
-      sign_in @user
+      sign_in user
     end
 
     describe "GET #index" do
       it "returns 200 http status code" do
-        get :index, params: { app_id: @app.id }
+        get :index, params: { app_id: app.id, commodity_id: commodity.id }
         expect(response.status).to eq 200
       end
     end
 
     describe "GET #show" do
       it "returns 200 http status code" do
-        measurement =  create(:measurement, app_id: @app.id)
-        get :show, params: { app_id: @app.id, id: measurement.id }
+        measurement =  create(:measurement, commodity_id: commodity.id)
+        get :show, params: { app_id: app.id, commodity_id: commodity.id, id: measurement.id }
         expect(response.status).to eq 200
       end
     end
 
     describe "GET #new" do
       it "returns 200 http status code" do
-        get :new, params: { app_id: @app.id }
+        get :new, params: { app_id: app.id, commodity_id: commodity.id }
         expect(response.status).to eq 200
       end
     end
@@ -35,7 +37,7 @@ RSpec.describe MeasurementsController, :type => :controller do
       context "with valid attributes" do
         it "saves the new measurement in the database" do
           expect{
-            post :create, params: { app_id: @app.id, measurement: attributes_for(:measurement) }
+            post :create, params: { app_id: app.id, commodity_id: commodity.id, measurement: attributes_for(:measurement) }
           }.to change(Measurement, :count).by(1)
         end
       end
@@ -43,7 +45,7 @@ RSpec.describe MeasurementsController, :type => :controller do
       context "with invalid attributes" do
         it "does not save the new measurement in the database" do
           expect{
-            post :create, params: { app_id: @app.id, measurement: attributes_for(:invalid_measurement)}
+            post :create, params: { app_id: app.id, commodity_id: commodity.id, measurement: attributes_for(:invalid_measurement)}
           }.not_to change(Measurement, :count)
         end
       end
@@ -51,13 +53,13 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "PATCH #update" do
       before(:each) do
-        @measurement = create(:measurement, app: @app, value: 6.9000)
+        @measurement = create(:measurement, commodity: commodity, value: 6.9000)
       end
 
       context "with valid attributes" do
         it "updates the measurement in the database" do
           @measurement.value = 5.0004
-          patch :update, params: { app_id: @app.id, id: @measurement.id, measurement: @measurement.attributes }
+          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @measurement.id, measurement: @measurement.attributes }
           @measurement.reload
           expect(@measurement.value).to eq  BigDecimal.new("5.0004")
         end
@@ -66,7 +68,7 @@ RSpec.describe MeasurementsController, :type => :controller do
       context "with invalid attributes" do
         it "does not update the measurement" do
           @measurement.value = ""
-          patch :update, params: { app_id: @app.id, id: @measurement.id, measurement: @measurement.attributes }
+          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @measurement.id, measurement: @measurement.attributes }
           @measurement.reload
           expect(@measurement.value).to eq BigDecimal.new("6.9000")
         end
@@ -75,14 +77,10 @@ RSpec.describe MeasurementsController, :type => :controller do
   end
 
   context "As an unauthenticated user" do
-    before(:each) do
-      user = create(:user)
-      @app = create(:app, user_id: user.id)
-    end
 
     describe "GET #index" do
       it "redirects to the signin page" do
-        get :index, params: { app_id: @app.id }
+        get :index, params: { app_id: app.id, commodity_id: commodity.id }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)
@@ -92,7 +90,7 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "GET #new" do
       it "redirects to the signin page" do
-        get :new, params: { app_id: @app.id }
+        get :new, params: { app_id: app.id, commodity_id: commodity.id }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)
@@ -102,7 +100,7 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "POST #create" do
       it "redirects to the signin page" do
-        post :create, params: { app_id: @app.id, measurement: attributes_for(:measurement) }
+        post :create, params: { app_id: app.id, commodity_id: commodity.id, measurement: attributes_for(:measurement) }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)
@@ -112,7 +110,7 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "GET #show" do
       it "redirects to the signin page" do
-        get :show, params: { app_id: @app.id, id: 1 }
+        get :show, params: { app_id: app.id, commodity_id: commodity.id, id: 1 }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)
@@ -122,7 +120,7 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "GET #edit" do
       it "redirects to the signin page" do
-        get :edit, params: { app_id: @app.id, id: 1 }
+        get :edit, params: { app_id: app.id, commodity_id: commodity.id, id: 1 }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)
@@ -130,9 +128,9 @@ RSpec.describe MeasurementsController, :type => :controller do
       end
     end
 
-    describe "PATH #update" do
+    describe "PATCH #update" do
       it "redirects to the signin page" do
-        patch :update, params: { app_id: @app.id, id: 1, measurement: attributes_for(:measurement) }
+        patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: 1, measurement: attributes_for(:measurement) }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)

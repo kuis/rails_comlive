@@ -21,7 +21,7 @@ feature 'References' do
       expect(page).to have_content(reference_2.source_commodity.short_description)
     end
 
-    scenario "With no links present, it should display no references found" do
+    scenario "With no references present, it should display no references found" do
       visit app_references_path(@app)
 
       expect(page).to have_text("No references found")
@@ -42,16 +42,17 @@ feature 'References' do
 
   feature "Visiting #new page" do
     background do
-      @generic_commodity = create(:commodity)
-      @commodity = create(:non_generic_commodity)
+      @generic_commodity = create(:generic_commodity, short_description: "Van point easy and efficient cooking")
+      @commodity = create(:non_generic_commodity, short_description: "We are in this together")
       visit new_app_reference_path(@app)
     end
 
-    scenario "With correct details, user should successfully create a link" do
+    scenario "With correct details, user should successfully create a reference", js: true do
 
       select "specific_of", :from => "reference_kind"
-      select @generic_commodity.short_description, :from => "reference_source_commodity_id"
-      select @commodity.short_description, :from => "reference_target_commodity_id"
+      select2("#reference_source_commodity_id", "cooking", @generic_commodity.id,@generic_commodity.short_description)
+      select2("#reference_target_commodity_id","together", @commodity.id, @commodity.short_description)
+
       fill_in "Description", with: "description for reference"
       click_button "Create Reference"
 
@@ -60,14 +61,15 @@ feature 'References' do
       expect(page).to have_text("specific_of")
     end
 
-    scenario "With incorrect details, a link should not be created" do
+    scenario "With incorrect details, a reference should not be created" do
 
       fill_in "Description", with: ""
       select "specific_of", :from => "reference_kind"
       click_button "Create Reference"
 
-      expect(page).to have_text("New Reference")
       expect(page).to have_content("Description can't be blank")
+      expect(page).to have_content("Target commodity must exist")
+      expect(page).to have_content("Source commodity must exist")
     end
   end
 
@@ -81,13 +83,13 @@ feature 'References' do
     scenario "It should show the current reference's details" do
       expect(page).to have_text("Edit Reference")
       expect(page).to have_select('reference_kind', selected: @reference.kind)
-      expect(page).to have_select('reference_source_commodity_id', selected: @reference.source_commodity.short_description)
-      expect(page).to have_select('reference_target_commodity_id', selected: @reference.target_commodity.short_description)
+      # expect(page).to have_select('reference_source_commodity_id', selected: @reference.source_commodity.short_description)
+      # expect(page).to have_select('reference_target_commodity_id', selected: @reference.target_commodity.short_description)
       expect(find_field('Description').value).to eq @reference.description
     end
 
     context "With valid details" do
-      scenario "User should successfully update a link" do
+      scenario "User should successfully update a reference" do
         fill_in "Description", with: "description of reference updated"
         select "alternative_to", :from => "reference_kind"
 
@@ -100,11 +102,10 @@ feature 'References' do
     end
 
     context "With invalid details" do
-      scenario "Link should not be updated" do
+      scenario "Reference should not be updated" do
         fill_in "Description", with: ""
         click_button "Update Reference"
 
-        expect(page).to have_text("Edit Reference")
         expect(page).to have_text("Description can't be blank")
       end
     end

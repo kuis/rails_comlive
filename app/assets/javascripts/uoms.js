@@ -11,8 +11,8 @@ var build_uoms = function(uoms){
     $("select#measurement_uom").html(arr);
 }
 
-ready = function(){
-    $("select#measurement_property").change(function(){
+function measurementPropertyCallbacks() {
+    $("select#measurement_property").change(function () {
         var select = $(this);
         var selected = $(this).find(":selected");
         var property = selected.val();
@@ -20,11 +20,15 @@ ready = function(){
         $.ajax({
             url: select.data("url"),
             type: "GET",
-            data: { property: property },
-            success: function(data){
+            data: {property: property},
+            success: function (data) {
                 build_uoms(data);
             }
         });
     });
 }
-$(document).on('turbolinks:load', ready);
+ready = function(){
+    measurementPropertyCallbacks();
+}
+
+$(document).ready(ready);

@@ -5,12 +5,15 @@ FactoryGirl.define do
     short_description { Faker::Lorem.sentence }
     long_description { Faker::Lorem.paragraph }
     measured_in { Faker::Lorem.word }
-    generic true
     association :app
     association :brand
 
     factory :invalid_commodity do
       short_description nil
+    end
+
+    factory :generic_commodity do
+      generic true
     end
 
     factory :non_generic_commodity do

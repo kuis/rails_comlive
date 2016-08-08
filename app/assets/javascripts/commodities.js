@@ -9,7 +9,50 @@ var renderOptions = function(options, select){
     select.html(opts);
 }
 
+var select2For = function(select){
+    url = select.data("url");
+
+    select.select2({
+        ajax: {
+            url: url,
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                    page: params.page || 1
+                };
+            },
+            processResults: function (data, params) {
+                // parse the results into the format expected by Select2
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON data, except to indicate that infinite
+                // scrolling can be used
+                params.page = params.page || 1;
+
+                return {
+                    results: $.map(data.items, function(item){
+                        return {
+                            text: item.short_description,
+                            id: item.id
+                        }
+                    }),
+                    pagination: {
+                        more: !data.last_page
+                    }
+                };
+            },
+            cache: true
+        },
+        minimumInputLength: 1,
+        width: '100%'
+    });
+}
+
 ready = function(){
+    // fix for selec2 inside bootstrap modal
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+
     $("input#commodity_generic").change(function(){
         var checked = $(this).is(":checked");
         var select = $("select#commodity_brand_id");
@@ -20,20 +63,6 @@ ready = function(){
         } else {
             select.show();
         }
-    });
-
-    $("button#set-status").click(function(e){
-        e.preventDefault();
-
-        var form = $("form#commodity-state");
-        form.submit();
-    });
-
-    $("button#add-packaging").click(function(e){
-        e.preventDefault();
-
-        var form = $(this).parents('.modal-content').find("form");
-        form.submit();
     });
 
     $("button#assign-hscode").click(function(e){
@@ -106,6 +135,54 @@ ready = function(){
         sAjaxSource: $('table#unspsc_segments').data('source'),
         "order": []
     });
+
+    $("a.load-in-modal").click(function(e){
+        e.preventDefault();
+
+        var url = $(this).attr("href");
+        var title = $(this).text();
+
+        $( "#sharedModal .modal-body" ).load(url, function(response,status,xhr) {
+            var modalBody =  $( "#sharedModal .modal-body" );
+
+            $("#sharedModal .modal-header h4.modal-title").text(title);
+
+            // hide elements
+            modalBody.find('h4.header-title').hide();
+            modalBody.find("p.text-muted").hide();
+            modalBody.find("form input[type='submit']").hide();
+
+            $("#sharedModal").modal();
+
+            // additional scripts
+            var source_commodity = $("#reference_source_commodity_id");
+            var target_commodity = $("#reference_target_commodity_id");
+            if(source_commodity.length && target_commodity.length){
+                select2For(source_commodity);
+                select2For(target_commodity);
+            }
+
+            var measurementProperty =  $("select#measurement_property");
+            if(measurementProperty.length){
+                measurementPropertyCallbacks();
+            }
+        });
+    });
+
+    $("button#submit-modal-form").click(function(e){
+        e.preventDefault();
+
+        var form = $("#sharedModal").find("form");
+        form.submit();
+    });
+
+    // additional scripts
+    var source_commodity = $("#reference_source_commodity_id");
+    var target_commodity = $("#reference_target_commodity_id");
+    if(source_commodity.length && target_commodity.length){
+        select2For(source_commodity);
+        select2For(target_commodity);
+    }
 }
 
 $(document).on("click", "a.unspsc-drilldown", function(e){
@@ -131,4 +208,4 @@ $(document).on("click","a.assign-unspsc", function(e){
     });
 })
 
-$(document).on('turbolinks:load', ready);
+$(document).ready(ready);

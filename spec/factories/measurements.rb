@@ -5,7 +5,7 @@ FactoryGirl.define do
     property "energy"
     value { Faker::Number.decimal(2,4) }
     uom "J"
-    association :app
+    association :commodity
 
     factory :invalid_measurement do
       property nil

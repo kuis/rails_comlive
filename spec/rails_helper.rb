@@ -7,8 +7,23 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'devise'
 require 'support/features/session_helpers'
+require 'support/features/input_helpers'
 
 Capybara.javascript_driver = :poltergeist
+
+options = {
+    js_errors: true,
+    timeout: 30,
+    debug: true,
+    phantomjs_logger: File.open("log/browser-console.log", "w"),
+    logger: File.open("log/phantomjs.log", "w"),
+    phantomjs_options: ['--load-images=no', '--ignore-ssl-errors=yes', '--proxy-type=none'],
+    window_size: [1366,768]
+}
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, options)
+end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -43,6 +58,9 @@ RSpec.configure do |config|
 
   # Session helpers
   config.include Features::SessionHelpers, type: :feature
+
+  # Input helpers
+  config.include Features::InputHelpers, type: :feature
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

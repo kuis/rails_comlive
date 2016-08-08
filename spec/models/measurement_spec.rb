@@ -25,16 +25,16 @@ RSpec.describe Measurement, :type => :model do
       expect(measurement.errors[:uom]).to include("can't be blank")
     end
 
-    it "it invalid without an app" do
-      measurement = build(:measurement, app: nil)
+    it "it invalid without a commodity" do
+      measurement = build(:measurement, commodity: nil)
       measurement.valid?
-      expect(measurement.errors[:app]).to include("can't be blank")
+      expect(measurement.errors[:commodity]).to include("must exist")
     end
   end
 
   describe "Associations" do
-    it "belongs to app" do
-      assoc = Measurement.reflect_on_association(:app)
+    it "belongs to a commodity" do
+      assoc = Measurement.reflect_on_association(:commodity)
       expect(assoc.macro).to eq :belongs_to
     end
   end

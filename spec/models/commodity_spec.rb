@@ -111,5 +111,10 @@ RSpec.describe Commodity, :type => :model do
       assoc = Commodity.reflect_on_association(:standards)
       expect(assoc.macro).to eq :has_many
     end
+
+    it "has many measurements" do
+      assoc = Commodity.reflect_on_association(:measurements)
+      expect(assoc.macro).to eq :has_many
+    end
   end
 end

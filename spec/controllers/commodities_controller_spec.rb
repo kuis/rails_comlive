@@ -34,10 +34,18 @@ RSpec.describe CommoditiesController, :type => :controller do
 
   describe "POST #create" do
     context "with valid attributes" do
-      it "saves the new app in the database" do
+      it "saves a generic commodity in the database" do
         app = create(:app, user_id: @user.id)
         expect{
-          post :create, params: { app_id: app.id, commodity: attributes_for(:commodity) }
+          post :create, params: { app_id: app.id, commodity: attributes_for(:generic_commodity) }
+        }.to change(Commodity, :count).by(1)
+      end
+
+      it "saves a non generic commodity in the database" do
+        app = create(:app, user_id: @user.id)
+        brand = create(:brand, app_id: app.id)
+        expect{
+          post :create, params: { app_id: app.id, commodity: attributes_for(:commodity, brand_id: brand.id) }
         }.to change(Commodity, :count).by(1)
       end
     end
@@ -45,8 +53,10 @@ RSpec.describe CommoditiesController, :type => :controller do
     context "with invalid attributes" do
       it "does not save the new app in the database" do
         app = create(:app, user_id: @user.id)
+        brand = create(:brand, app_id: app.id)
+
         expect{
-          post :create, params: { app_id: app.id, commodity: attributes_for(:invalid_commodity)}
+          post :create, params: { app_id: app.id, commodity: attributes_for(:invalid_commodity, brand_id: brand.id)}
         }.not_to change(Commodity, :count)
       end
     end

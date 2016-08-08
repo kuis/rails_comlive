@@ -4,7 +4,7 @@ class CreateMeasurements < ActiveRecord::Migration[5.0]
       t.string :property
       t.decimal :value
       t.string :uom
-      t.references :app, foreign_key: true
+      t.references :commodity, foreign_key: true
 
       t.timestamps
     end
