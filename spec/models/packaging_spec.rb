@@ -34,7 +34,7 @@ RSpec.describe Packaging, :type => :model do
     it "is invalid without an associated commodity" do
       packaging = build(:packaging, commodity: nil)
       packaging.valid?
-      expect(packaging.errors[:commodity]).to include("must exist")
+      expect(packaging.errors[:commodity]).to include("can't be blank")
     end
 
     it "assigns a uuid after create" do

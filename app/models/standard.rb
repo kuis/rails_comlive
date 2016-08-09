@@ -10,7 +10,7 @@ class Standard < ApplicationRecord
   has_many :brands, through: :standardizations, source: :referable, source_type: "Brand"
   has_many :commodities, through: :standardizations, source: :referable, source_type: "Commodity"
 
-  validates_presence_of :name, :description
+  validates_presence_of :name, :description, :app
 
   scope :official, -> { where(official: true) }
 

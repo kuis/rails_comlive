@@ -22,7 +22,7 @@ RSpec.describe Brand, :type => :model do
     it "is invalid without an app" do
       brand = build(:brand, app: nil)
       brand.valid?
-      expect(brand.errors[:app]).to include("must exist")
+      expect(brand.errors[:app]).to include("can't be blank")
     end
   end
 

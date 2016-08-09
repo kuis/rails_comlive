@@ -28,7 +28,7 @@ RSpec.describe Measurement, :type => :model do
     it "it invalid without a commodity" do
       measurement = build(:measurement, commodity: nil)
       measurement.valid?
-      expect(measurement.errors[:commodity]).to include("must exist")
+      expect(measurement.errors[:commodity]).to include("can't be blank")
     end
   end
 

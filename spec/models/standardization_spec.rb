@@ -10,19 +10,19 @@ RSpec.describe Standardization, :type => :model do
     it "is invalid without a user" do
       standardization = build(:standardization, user: nil)
       standardization.valid?
-      expect(standardization.errors[:user]).to include("must exist")
+      expect(standardization.errors[:user]).to include("can't be blank")
     end
 
     it "is invalid without a standard" do
       standardization = build(:standardization, standard: nil)
       standardization.valid?
-      expect(standardization.errors[:standard]).to include("must exist")
+      expect(standardization.errors[:standard]).to include("can't be blank")
     end
 
     it "is invalid without a referable" do
       standardization = build(:standardization, referable: nil)
       standardization.valid?
-      expect(standardization.errors[:referable]).to include("must exist")
+      expect(standardization.errors[:referable]).to include("can't be blank")
     end
 
     it "is invalid with a duplicate standard of a particular referable" do

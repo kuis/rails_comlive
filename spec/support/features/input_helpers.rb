@@ -15,5 +15,13 @@ module Features
         });
       JS
     end
+
+    def type_ahead(field, options = {})
+      fill_in field, with: options[:with]
+
+      page.execute_script %Q{ $('##{field}').trigger("focus") }
+      page.execute_script %Q{ $('##{field}').trigger("keydown") }
+    end
+
   end
 end

@@ -9,13 +9,13 @@ RSpec.describe Ownership, :type => :model do
     it "is invalid without a parent" do
       ownership = build(:ownership, parent: nil)
       ownership.valid?
-      expect(ownership.errors[:parent]).to include("must exist")
+      expect(ownership.errors[:parent]).to include("can't be blank")
     end
 
     it "is invalid without a child" do
       ownership = build(:ownership, child: nil)
       ownership.valid?
-      expect(ownership.errors[:child]).to include("must exist")
+      expect(ownership.errors[:child]).to include("can't be blank")
     end
 
     it "is invalid with a duplicate child" do

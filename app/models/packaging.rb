@@ -1,7 +1,7 @@
 class Packaging < ApplicationRecord
   belongs_to :commodity
 
-  validates_presence_of :uom, :quantity, :name, :description
+  validates_presence_of :uom, :quantity, :name, :description, :commodity
 
   before_create :set_uuid
 

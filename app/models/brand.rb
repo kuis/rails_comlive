@@ -8,7 +8,7 @@ class Brand < ApplicationRecord
   has_many :standardizations, as: :referable
   has_many :standards, through: :standardizations
 
-  validates_presence_of :name, :description
+  validates_presence_of :name, :description, :app
 
   scope :official, -> { where(official: true) }
 

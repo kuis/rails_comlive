@@ -10,13 +10,13 @@ RSpec.describe Membership, :type => :model do
     it "is invalid without a user_id" do
       membership = build(:membership, user: nil)
       membership.valid?
-      expect(membership.errors[:user]).to include("must exist")
+      expect(membership.errors[:user]).to include("can't be blank")
     end
 
     it "is invalid without a member" do
       membership = build(:membership, member: nil)
       membership.valid?
-      expect(membership.errors[:member]).to include("must exist")
+      expect(membership.errors[:member]).to include("can't be blank")
     end
   end
 

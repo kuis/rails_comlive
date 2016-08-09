@@ -44,6 +44,7 @@ RSpec.describe Reference, :type => :model do
     end
   end
 
+
   describe "Associations" do
     it "belongs to app" do
       assoc = Reference.reflect_on_association(:app)

@@ -3,6 +3,7 @@ class Ownership < ApplicationRecord
   belongs_to :child, :polymorphic => true
 
   validates_uniqueness_of :child_id, scope: :parent_type
+  validates_presence_of :parent, :child
   validate :official_can_own
   validate :offical_cannot_be_owned
 

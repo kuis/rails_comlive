@@ -34,7 +34,7 @@ RSpec.describe State, :type => :model do
     it "is invalid without a commodity" do
       state = build(:state, commodity: nil)
       state.valid?
-      expect(state.errors[:commodity]).to include("must exist")
+      expect(state.errors[:commodity]).to include("can't be blank")
     end
 
     it "is invalid if status is not one of allowed status" do
