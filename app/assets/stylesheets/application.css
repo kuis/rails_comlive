@@ -16,7 +16,9 @@
  *= require animate.min
  *= require perfect-scrollbar
  *= require bootstrap
+ *= require typeahead
  *= require select2.min
  *= require app
+ *= require commodities
  *= require_self
  */

@@ -23,6 +23,7 @@
 //= require perfect-scrollbar.jquery
 //= require library
 //= require plugins
+//= require typeahead.bundle
 //= require app
 //= require uoms
 //= require commodities

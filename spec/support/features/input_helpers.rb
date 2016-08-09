@@ -6,7 +6,7 @@ module Features
         $('.select2-search__field').val("#{search_term}").trigger('keyup'); // emulate typing
       JS
 
-      sleep(0.5) # wait for ajax to return
+      sleep(0.1) # wait for ajax to return
 
       # emulate selecting search result
       page.execute_script <<-JS

@@ -183,6 +183,42 @@ ready = function(){
         select2For(source_commodity);
         select2For(target_commodity);
     }
+
+    // autocomplete
+    var engine, prefetch_url, autocomplete_url;
+
+    prefetch_url        =  $("#commodity-search").data("prefetch-url");
+    autocomplete_url    =  $("#commodity-search").data("autocomplete-url");
+
+    if($("#commodity-search").length)
+
+        engine = new Bloodhound({
+            identify: function(o) { return o.id; },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('short_description'),
+            dupDetector: function(a, b) { return a.id === b.id; },
+            prefetch: {
+                url: prefetch_url
+            },
+            remote: {
+                url: autocomplete_url + '?query=%QUERY',
+                wildcard: '%QUERY'
+            }
+        });
+
+        $("#commodity-search").typeahead({
+            minLength: 2,
+            highlight: true,
+            hint: true
+        }, {
+            source: engine,
+            displayKey: 'short_description',
+            templates:{
+                suggestion:function(data) {
+                    return "<a href=" + data.href + ">"+ data.short_description +"</a>";
+                }
+            }
+        });
 }
 
 $(document).on("click", "a.unspsc-drilldown", function(e){

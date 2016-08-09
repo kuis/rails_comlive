@@ -117,4 +117,25 @@ RSpec.describe Commodity, :type => :model do
       expect(assoc.macro).to eq :has_many
     end
   end
+
+  describe "Class Methods" do
+    describe ".simple_search" do
+      it "returns commodities matching the query" do
+        generic_commodity = create(:generic_commodity, short_description: "Add a simple controller which hides and displays the search autocomplete dropdown")
+        non_generic_commodity = create(:non_generic_commodity, short_description: "We search each index separately, aggregate all the results in the response object and return")
+
+        generic_search = Commodity.simple_search("simple controller", true)
+        non_generic_search = Commodity.simple_search("aggregate all", false)
+        no_results_search = Commodity.simple_search("western digital", true)
+
+        expect(generic_search).to match_array([generic_commodity])
+        expect(generic_search).not_to match_array([non_generic_commodity])
+
+        expect(non_generic_search).to match_array([non_generic_commodity])
+        expect(non_generic_search).not_to match_array([generic_commodity])
+
+        expect(no_results_search).to be_empty
+      end
+    end
+  end
 end

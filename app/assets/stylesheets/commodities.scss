@@ -4,3 +4,19 @@
 .modal-body #new_packaging input[type="submit"] {
   display: none;
 }
+
+// search box on commodities#index
+.stylish-input-group .input-group-addon{
+  background: white !important;
+}
+.stylish-input-group .form-control{
+  border-right: solid 1px #c7c7c7;
+}
+.stylish-input-group button{
+  border:0;
+  background:transparent;
+}
+
+.search-result{
+  color: #188ae2 !important;
+}
