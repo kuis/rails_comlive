@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 feature 'Searching commodities' do
-  let!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
-  let!(:app) { create(:app, user_id: user.id) }
-  let!(:samsung){ create(:commodity, app_id: app.id, short_description: "Samsung Tvs") }
-  let!(:sony){ create(:commodity,  app_id: app.id, short_description: "Sony home theatre") }
-  let!(:hotpoint){ create(:commodity,  app_id: app.id, short_description: "Hotpoint electronics") }
+  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+  given!(:app) { create(:app, user_id: user.id) }
+  given!(:samsung){ create(:commodity, app_id: app.id, short_description: "Samsung Tvs") }
+  given!(:sony){ create(:commodity,  app_id: app.id, short_description: "Sony home theatre") }
+  given!(:hotpoint){ create(:commodity,  app_id: app.id, short_description: "Hotpoint electronics") }
 
   background do
     log_in(user)
