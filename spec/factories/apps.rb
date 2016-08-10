@@ -2,12 +2,13 @@
 
 FactoryGirl.define do
   factory :app do
-    association :user
-
+    name { Faker::App.name}
     description { Faker::Lorem.paragraph }
 
+    association :user
+
     factory :invalid_app do
-      description nil
+      name nil
     end
   end
 end

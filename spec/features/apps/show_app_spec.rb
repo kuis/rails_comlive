@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Show App' do
+feature 'Viewing an app' do
   given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
   given!(:app) { create(:app, user_id: user.id) }
 
@@ -9,7 +9,8 @@ feature 'Show App' do
     visit app_path(app)
   end
 
-  scenario "user can view app" do
+  scenario "should show the app details" do
+    expect(page).to have_text(app.name)
     expect(page).to have_text(app.description)
   end
 end

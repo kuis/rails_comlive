@@ -10,8 +10,7 @@ class App < ApplicationRecord
 
   before_create :assign_uuid
 
-  validates_presence_of :user, :description
-
+  validates_presence_of :user, :name
 
   private
 

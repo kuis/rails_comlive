@@ -7,10 +7,10 @@ RSpec.describe App, :type => :model do
       expect(app).to be_valid
     end
 
-    it "is invalid without a description" do
-      app = build(:app, description: nil)
+    it "is invalid without a name" do
+      app = build(:app, name: nil)
       app.valid?
-      expect(app.errors[:description]).to include("can't be blank")
+      expect(app.errors[:name]).to include("can't be blank")
     end
 
     it "is invalid without a user_id" do
