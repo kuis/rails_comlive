@@ -1,4 +1,4 @@
-module MeasurementsHelper
+module SpecificationsHelper
   def options_for_property(app)
     {
         'Custom Units' => app.custom_units.map(&:property),

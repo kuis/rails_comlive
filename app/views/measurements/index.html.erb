@@ -1,7 +1,0 @@
-<h1>Measurements <small><%= link_to "Add", new_app_commodity_measurement_path(@app, @commodity) %></small></h1>
-
-<% if @measurements.any? %>
-    <%= render @measurements %>
-<% else %>
-    <p>No measurements found</p>
-<% end %>

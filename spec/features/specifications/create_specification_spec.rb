@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User can create measurement' do
+feature 'Creating a specification' do
   given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
   given!(:commodity) { create(:commodity, app_id: app.id) }
@@ -9,46 +9,48 @@ feature 'User can create measurement' do
   feature "Visiting #new page" do
     background do
       log_in(user)
-      visit new_app_commodity_measurement_path(app, commodity)
+      visit new_app_commodity_specification_path(app, commodity)
     end
 
     context "When the selected property is from the database" do
-      scenario "User should successfully create a measurement", js: true do
+      scenario "User should successfully create a specification", js: true do
         custom_unit = custom_units.sample
 
-        select custom_unit.property, from: "measurement[property]"
-        fill_in "measurement[value]", with: "10.56"
-        select custom_unit.uom, from: "measurement[uom]"
+        select custom_unit.property, from: "specification[property]"
+        fill_in "specification[value]", with: "10.56"
+        select custom_unit.uom, from: "specification[uom]"
 
-        click_button "Create Measurement"
+        click_button "Create Specification"
 
-        expect(page).to have_text("Measurement successfully created")
+        expect(page).to have_text("Specification successfully created")
         expect(page).to have_text("#{custom_unit.property}: 10.56#{custom_unit.uom}")
       end
     end
 
     context "When the selected property is from unitwise" do
-      scenario "User should successfully create a measurement", js: true do
+      scenario "User should successfully create a specification", js: true do
         property = properties.sample
         unit_of_measure = uom(property).sample
 
-        select property, :from => "measurement[property]"
-        fill_in "measurement[value]", with: "5.67"
-        select unit_of_measure[0], :from => "measurement[uom]"
+        select property, :from => "specification[property]"
+        fill_in "specification[value]", with: "5.67"
+        select unit_of_measure[0], :from => "specification[uom]"
 
-        click_button "Create Measurement"
+        click_button "Create Specification"
 
-        expect(page).to have_text("Measurement successfully created")
+        expect(page).to have_text("Specification successfully created")
         expect(page).to have_text("#{property}: 5.67#{unit_of_measure[1]}")
       end
     end
 
-    scenario "With incorrect details, a measurement should not be created" do
+    context "With incorrect details" do
+      scenario "a specification should not be created" do
 
-      fill_in "measurement[value]", with: ""
-      click_button "Create Measurement"
+        fill_in "specification[value]", with: ""
+        click_button "Create Specification"
 
-      expect(page).to have_content("Value can't be blank")
+        expect(page).to have_content("Value can't be blank")
+      end
     end
   end
 end

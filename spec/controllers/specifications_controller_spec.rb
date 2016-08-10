@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MeasurementsController, :type => :controller do
+RSpec.describe SpecificationsController, :type => :controller do
   let!(:user) { create(:user) }
   let!(:app) { create(:app, user_id: user.id) }
   let!(:commodity) { create(:commodity, app_id: app.id) }
@@ -20,8 +20,8 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "GET #show" do
       it "returns 200 http status code" do
-        measurement =  create(:measurement, commodity_id: commodity.id)
-        get :show, params: { app_id: app.id, commodity_id: commodity.id, id: measurement.id }
+        specification =  create(:specification, commodity_id: commodity.id)
+        get :show, params: { app_id: app.id, commodity_id: commodity.id, id: specification.id }
         expect(response.status).to eq 200
       end
     end
@@ -35,42 +35,42 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "POST #create" do
       context "with valid attributes" do
-        it "saves the new measurement in the database" do
+        it "saves the new specification in the database" do
           expect{
-            post :create, params: { app_id: app.id, commodity_id: commodity.id, measurement: attributes_for(:measurement) }
-          }.to change(Measurement, :count).by(1)
+            post :create, params: { app_id: app.id, commodity_id: commodity.id, specification: attributes_for(:specification) }
+          }.to change(Specification, :count).by(1)
         end
       end
 
       context "with invalid attributes" do
-        it "does not save the new measurement in the database" do
+        it "does not save the new specification in the database" do
           expect{
-            post :create, params: { app_id: app.id, commodity_id: commodity.id, measurement: attributes_for(:invalid_measurement)}
-          }.not_to change(Measurement, :count)
+            post :create, params: { app_id: app.id, commodity_id: commodity.id, specification: attributes_for(:invalid_specification)}
+          }.not_to change(Specification, :count)
         end
       end
     end
 
     describe "PATCH #update" do
       before(:each) do
-        @measurement = create(:measurement, commodity: commodity, value: 6.9000)
+        @specification = create(:specification, commodity: commodity, value: 6.9000)
       end
 
       context "with valid attributes" do
-        it "updates the measurement in the database" do
-          @measurement.value = 5.0004
-          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @measurement.id, measurement: @measurement.attributes }
-          @measurement.reload
-          expect(@measurement.value).to eq  BigDecimal.new("5.0004")
+        it "updates the specification in the database" do
+          @specification.value = 5.0004
+          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @specification.id, specification: @specification.attributes }
+          @specification.reload
+          expect(@specification.value).to eq  BigDecimal.new("5.0004")
         end
       end
 
       context "with invalid attributes" do
-        it "does not update the measurement" do
-          @measurement.value = ""
-          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @measurement.id, measurement: @measurement.attributes }
-          @measurement.reload
-          expect(@measurement.value).to eq BigDecimal.new("6.9000")
+        it "does not update the specification" do
+          @specification.value = ""
+          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @specification.id, specification: @specification.attributes }
+          @specification.reload
+          expect(@specification.value).to eq BigDecimal.new("6.9000")
         end
       end
     end
@@ -100,7 +100,7 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "POST #create" do
       it "redirects to the signin page" do
-        post :create, params: { app_id: app.id, commodity_id: commodity.id, measurement: attributes_for(:measurement) }
+        post :create, params: { app_id: app.id, commodity_id: commodity.id, specification: attributes_for(:specification) }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)
@@ -130,7 +130,7 @@ RSpec.describe MeasurementsController, :type => :controller do
 
     describe "PATCH #update" do
       it "redirects to the signin page" do
-        patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: 1, measurement: attributes_for(:measurement) }
+        patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: 1, specification: attributes_for(:specification) }
 
         expect(response.status).to eq 302
         expect(response).to redirect_to(new_user_session_path)

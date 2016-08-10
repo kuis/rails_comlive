@@ -8,11 +8,11 @@ var build_uoms = function(uoms){
         arr.push(option);
     });
 
-    $("select#measurement_uom").html(arr);
+    $("select#specification_uom").html(arr);
 }
 
-function measurementPropertyCallbacks() {
-    $("select#measurement_property").change(function () {
+function specificationPropertyCallbacks() {
+    $("select#specification_property").change(function () {
         var select = $(this);
         var selected = $(this).find(":selected");
         var property = selected.val();
@@ -28,7 +28,7 @@ function measurementPropertyCallbacks() {
     });
 }
 ready = function(){
-    measurementPropertyCallbacks();
+    specificationPropertyCallbacks();
 }
 
 $(document).ready(ready);
