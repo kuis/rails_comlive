@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :commodity do
-    name { Faker::Name.name }
+    name { Faker::Team.name }
     short_description nil
     long_description nil
     measured_in { %w(length time mass temparature number fraction).sample }
