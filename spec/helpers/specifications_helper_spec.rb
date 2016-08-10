@@ -11,9 +11,16 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe SpecificationsHelper, :type => :helper do
+  describe ".unitwise_atoms" do
+    it "returns atoms from unitwise gem" do
+      atoms = Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq
+      expect(helper.unitwise_atoms).to eq atoms
+    end
+  end
+
   describe ".options_for_property" do
     app = FactoryGirl.create(:app)
-    3.times { FactoryGirl.create(:custom_unit, app: app) }
+    FactoryGirl.create_list(:custom_unit, 3, app: app)
     results = {
         'Custom Units' => app.custom_units.map(&:property),
         'Global Units' => Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq

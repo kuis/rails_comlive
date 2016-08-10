@@ -61,4 +61,5 @@ RSpec.describe CommoditiesController, :type => :controller do
       end
     end
   end
+
 end

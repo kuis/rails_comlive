@@ -2,18 +2,20 @@
 
 FactoryGirl.define do
   factory :commodity do
-    short_description { Faker::Lorem.sentence }
-    long_description { Faker::Lorem.paragraph }
-    measured_in { Faker::Lorem.word }
+    name { Faker::Name.name }
+    short_description nil
+    long_description nil
+    measured_in { %w(length time mass temparature number fraction).sample }
     association :app
     association :brand
 
     factory :invalid_commodity do
-      short_description nil
+      name nil
     end
 
     factory :generic_commodity do
       generic true
+      brand nil
     end
 
     factory :non_generic_commodity do

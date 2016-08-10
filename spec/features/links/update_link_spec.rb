@@ -15,14 +15,14 @@ feature 'Update Link' do
     scenario "It should show the current link's details" do
       expect(page).to have_text("Edit Link")
       expect(find_field('link[url]').value).to eq link.url
-      expect(page).to have_select('link[commodity_id]', selected: link.commodity.short_description)
+      expect(page).to have_select('link[commodity_id]', selected: link.commodity.name)
       expect(find_field('link[description]').value).to eq link.description
     end
 
     scenario "With correct details, user should successfully update a link" do
       fill_in "link[description]", with: "description updated"
       fill_in "link[url]", with: "https://www.google.com/search?q=strengtheningthenumbers"
-      select commodity.short_description, :from => "link[commodity_id]"
+      select commodity.name, :from => "link[commodity_id]"
 
       click_button "Update Link"
 

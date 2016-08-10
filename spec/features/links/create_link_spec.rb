@@ -27,9 +27,10 @@ feature 'Create Link' do
 
     scenario "With incorrect details, a link should not be created" do
 
-      fill_in "Url", with: ""
-      fill_in "Description", with: ""
-      select commodity.short_description, :from => "link_commodity_id"
+      fill_in "link[url]", with: ""
+      fill_in "link[description]", with: ""
+      select commodity.name, :from => "link[commodity_id]"
+
       click_button "Create Link"
 
       expect(page).to have_button("Create Link")

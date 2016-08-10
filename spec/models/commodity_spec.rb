@@ -7,16 +7,10 @@ RSpec.describe Commodity, :type => :model do
       expect(commodity).to be_valid
     end
 
-    it "is invalid without short description" do
-      commodity = build(:commodity, short_description: nil)
+    it "is invalid without a name" do
+      commodity = build(:commodity, name: nil)
       commodity.valid?
-      expect(commodity.errors[:short_description]).to include("can't be blank")
-    end
-
-    it "is invalid without long description" do
-      commodity = build(:commodity, long_description: nil)
-      commodity.valid?
-      expect(commodity.errors[:long_description]).to include("can't be blank")
+      expect(commodity.errors[:name]).to include("can't be blank")
     end
 
     it "is generic field is false by default" do
@@ -119,14 +113,16 @@ RSpec.describe Commodity, :type => :model do
   end
 
   describe "Class Methods" do
-    describe ".simple_search" do
+    describe ".search" do
       it "returns commodities matching the query" do
-        generic_commodity = create(:generic_commodity, short_description: "Add a simple controller which hides and displays the search autocomplete dropdown")
-        non_generic_commodity = create(:non_generic_commodity, short_description: "We search each index separately, aggregate all the results in the response object and return")
+        generic_commodity = create(:generic_commodity, name: "Western Digital")
+        non_generic_commodity = create(:non_generic_commodity, name: "Dell Inc")
 
-        generic_search = Commodity.simple_search("simple controller", true)
-        non_generic_search = Commodity.simple_search("aggregate all", false)
-        no_results_search = Commodity.simple_search("western digital", true)
+        Commodity.reindex
+
+        generic_search = Commodity.search("western").records
+        non_generic_search = Commodity.search("inc").records
+        no_results_search = Commodity.search("remote").records
 
         expect(generic_search).to match_array([generic_commodity])
         expect(generic_search).not_to match_array([non_generic_commodity])

@@ -1,36 +1,75 @@
 require 'rails_helper'
 
-feature 'Create Commodity' do
+feature 'Commodity creation' do
+  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+  given!(:app) { create(:app, user_id: user.id) }
+  given!(:brand) { create(:brand, app_id: app.id) }
+
+  given(:commodity) { build(:commodity, short_description: "short description", long_description: "very long description") }
+
   background do
-    @user = create(:user, email: 'user@example.com', password: 'secretpass')
-    @app = create(:app, user_id: @user.id)
-    log_in(@user)
-    visit new_app_commodity_path(@app)
+    log_in(user)
+    visit new_app_commodity_path(app)
   end
 
-  scenario "With correct details", js: true do
 
-    fill_in "commodity[short_description]", with: "a brief short description"
-    fill_in "Long description", with: "a very very long description"
-    fill_in "Measured in", with: "litres"
-    check('Generic')
+  context "Creating a generic commodity" do
+    scenario "With the minimum required details", js: true do
+      fill_in "commodity[name]", with: commodity.name
+      select "area", from: "commodity[measured_in]"
 
-    click_button "Create Commodity"
+      check('commodity[generic]')
 
-    expect(page).to have_text("commodity successfully created")
-    expect(page).to have_text("a brief short description")
-    expect(page).to have_text("a very very long description")
-    expect(page).to have_text("THIS IS A GENERIC COMMODITY")
+      click_button "Create Commodity"
+
+      expect(page).to have_text("commodity successfully created")
+      expect(page).to have_text(commodity.name)
+      expect(page).to have_text("THIS IS A GENERIC COMMODITY")
+    end
+
+    scenario "With all possible details", js: true do
+      fill_in "commodity[name]", with: commodity.name
+      select "mass", from: "commodity[measured_in]"
+      fill_in "commodity[short_description]", with: commodity.short_description
+      fill_in "commodity[long_description]", with: commodity.long_description
+
+      check('commodity[generic]')
+
+      click_button "Create Commodity"
+
+      expect(page).to have_text("commodity successfully created")
+      expect(page).to have_text("THIS IS A GENERIC COMMODITY")
+      expect(page).to have_text(commodity.name)
+      expect(page).to have_text(commodity.short_description)
+      expect(page).to have_text(commodity.long_description)
+    end
   end
 
-  scenario "With incorrect details, a commodity should not be created" do
+  context "Creating a non generic commodity" do
+    scenario "it should successfully create the commodity" do
+      fill_in "commodity[name]", with: commodity.name
+      select "time", from: "commodity[measured_in]"
+      select brand.name, from: "commodity[brand_id]"
 
-    fill_in "Short description", with: ""
-    fill_in "Long description", with: ""
-    click_button "Create Commodity"
 
-    expect(page).to have_text("New Commodity")
-    expect(page).to have_content("Short description can't be blank")
-    expect(page).to have_content("Long description can't be blank")
+      click_button "Create Commodity"
+
+      expect(page).to have_text(commodity.name)
+      expect(page).to have_text("commodity successfully created")
+      expect(page).not_to have_text("THIS IS A GENERIC COMMODITY")
+    end
+  end
+
+  context "With invalid details" do
+    scenario "Commodity should not be created" do
+      fill_in 'commodity[name]', with: ''
+
+      click_button "Create Commodity"
+
+      expect(page).to have_text("New Commodity")
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Brand can't be blank")
+      expect(page).to have_content("Measured in can't be blank")
+    end
   end
 end
