@@ -249,6 +249,22 @@ $(document).on("click","a.assign-unspsc", function(e){
         url: url,
         data: { commodity: { unspsc_commodity_id: unspsc_commodity_id } }
     });
-})
+});
+
+$(document).on("change", "input[name='value-opts']", function(){
+    var radio = $(this);
+    if(radio.is(":checked"))
+        var value = radio.val();
+        if(value == "value"){
+            $("#min-max-container").addClass('hidden');
+            $("#value-container").removeClass('hidden');
+            $('#min-max-container').find('input[type="number"]').val('');
+        }
+        if(value == "min-max"){
+            $("#value-container").addClass('hidden');
+            $("#min-max-container").removeClass('hidden');
+            $("#value-container").find('input[type="number"]').val('');
+        }
+});
 
 $(document).ready(ready);

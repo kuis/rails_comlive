@@ -5,7 +5,13 @@ FactoryGirl.define do
     property "energy"
     value { Faker::Number.decimal(2,4) }
     uom "J"
-    association :commodity
+    association :parent, factory: :commodity
+
+    factory :spec_with_min_max do
+      min { Faker::Number.decimal(2,4) }
+      max { Faker::Number.decimal(2,4) }
+      value nil
+    end
 
     factory :invalid_specification do
       property nil

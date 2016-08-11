@@ -20,7 +20,7 @@ RSpec.describe SpecificationsController, :type => :controller do
 
     describe "GET #show" do
       it "returns 200 http status code" do
-        specification =  create(:specification, commodity_id: commodity.id)
+        specification =  create(:specification, parent: commodity)
         get :show, params: { app_id: app.id, commodity_id: commodity.id, id: specification.id }
         expect(response.status).to eq 200
       end
@@ -35,10 +35,24 @@ RSpec.describe SpecificationsController, :type => :controller do
 
     describe "POST #create" do
       context "with valid attributes" do
-        it "saves the new specification in the database" do
-          expect{
-            post :create, params: { app_id: app.id, commodity_id: commodity.id, specification: attributes_for(:specification) }
-          }.to change(Specification, :count).by(1)
+        context "providing only value" do
+          it "saves the new specification in the database" do
+            expect{
+              post :create, params: { app_id: app.id, commodity_id: commodity.id, specification: attributes_for(:specification) }
+            }.to change(Specification, :count).by(1)
+          end
+        end
+
+        context "providing either a min or max" do
+          it "saves the new specification in the database" do
+            expect{
+              post :create, params: { app_id: app.id, commodity_id: commodity.id, specification: attributes_for(:spec_with_min_max, min: nil) }
+            }.to change(Specification, :count).by(1)
+
+            expect{
+              post :create, params: { app_id: app.id, commodity_id: commodity.id, specification: attributes_for(:spec_with_min_max, max: nil) }
+            }.to change(Specification, :count).by(1)
+          end
         end
       end
 
@@ -52,25 +66,23 @@ RSpec.describe SpecificationsController, :type => :controller do
     end
 
     describe "PATCH #update" do
-      before(:each) do
-        @specification = create(:specification, commodity: commodity, value: 6.9000)
-      end
+      let!(:specification){  create(:specification, parent: commodity, value: 6.9000) }
 
       context "with valid attributes" do
         it "updates the specification in the database" do
-          @specification.value = 5.0004
-          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @specification.id, specification: @specification.attributes }
-          @specification.reload
-          expect(@specification.value).to eq  BigDecimal.new("5.0004")
+          specification.value = 5.0004
+          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: specification.id, specification: specification.attributes }
+          specification.reload
+          expect(specification.value).to eq  BigDecimal.new("5.0004")
         end
       end
 
       context "with invalid attributes" do
         it "does not update the specification" do
-          @specification.value = ""
-          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: @specification.id, specification: @specification.attributes }
-          @specification.reload
-          expect(@specification.value).to eq BigDecimal.new("6.9000")
+          specification.value = ""
+          patch :update, params: { app_id: app.id, commodity_id: commodity.id, id: specification.id, specification: specification.attributes }
+          specification.reload
+          expect(specification.value).to eq BigDecimal.new("6.9000")
         end
       end
     end

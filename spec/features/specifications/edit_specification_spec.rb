@@ -4,7 +4,7 @@ feature 'Updating a specification' do
   given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
   given!(:commodity) { create(:commodity, app_id: app.id) }
-  given!(:specification) { create(:specification, commodity_id: commodity.id ) }
+  given!(:specification) { create(:specification, parent: commodity ) }
 
   background do
     log_in(user)
@@ -33,7 +33,9 @@ feature 'Updating a specification' do
         click_button "Update Specification"
 
         expect(page).to have_text("Specification updated successfully")
-        expect(page).to have_text("#{property}: 30.87#{unit_of_measure[1]}")
+        expect(page).to have_text(property)
+        expect(page).to have_text("30.87")
+        expect(page).to have_text(unit_of_measure[1])
       end
     end
 

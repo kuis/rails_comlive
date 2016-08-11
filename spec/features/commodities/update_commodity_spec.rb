@@ -10,7 +10,7 @@ feature 'Updating commodities' do
     visit edit_app_commodity_path(app, commodity)
   end
 
-  scenario "It should show the current commodity's details" do
+  scenario "It should show the current commodity's details", js: true do
     expect(page).to have_text("Edit Commodity")
     expect(find_field('commodity[name]').value).to eq commodity.name
     expect(page).to have_select('commodity[measured_in]', selected: commodity.measured_in)
