@@ -23,8 +23,7 @@ feature 'Adding packaging to a commodity' do
       click_button 'Submit'
     end
 
-    expect(page).to have_content(packaging.name)
-    expect(page).to have_content(packaging.description)
+    expect(page).to have_link(packaging.name)
     expect(page).to have_content(packaging.quantity)
     expect(page).to have_content(packaging.uom)
     expect(page).to have_content("Packaging successfully saved")

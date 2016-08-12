@@ -11,6 +11,30 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe SpecificationsHelper, :type => :helper do
+  describe ".object_url" do
+    include ActionDispatch::Routing::PolymorphicRoutes
+    include Rails.application.routes.url_helpers
+
+    before(:each) do
+      @commodity = create(:commodity)
+      @specification = Specification.new
+    end
+
+    context "Given a commodity" do
+      it "returns path for commodity specification" do
+        expect(polymorphic_path(helper.object_url(@commodity))).to eq polymorphic_path([@commodity.app,@commodity,@specification])
+        expect(new_polymorphic_path(helper.object_url(@commodity))).to eq new_polymorphic_path([@commodity.app,@commodity,@specification])
+      end
+    end
+
+    context "Given a packaging" do
+      it "returns path  for packaging specification" do
+        @packaging = create(:packaging, commodity_id: @commodity.id)
+        expect(polymorphic_path(helper.object_url(@packaging))).to eq polymorphic_path([@commodity.app,@commodity,@packaging, @specification])
+        expect(new_polymorphic_path(helper.object_url(@packaging))).to eq new_polymorphic_path([@commodity.app,@commodity,@packaging, @specification])
+      end
+    end
+  end
   describe ".unitwise_atoms" do
     it "returns atoms from unitwise gem" do
       atoms = Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq
