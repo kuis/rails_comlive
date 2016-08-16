@@ -35,6 +35,30 @@ RSpec.describe SpecificationsHelper, :type => :helper do
       end
     end
   end
+
+  describe '.is_checked?' do
+    context "Given type value and a new specification" do
+      it "returns true" do
+        specification = Specification.new
+        expect(helper.is_checked?(specification, "value")).to eq true
+      end
+    end
+
+    context "Given type value and a specification with a value" do
+      it "returns true" do
+        specification = create(:specification)
+        expect(helper.is_checked?(specification,"value")).to eq true
+      end
+    end
+
+    context "Given type min-max with min or max present" do
+      it "returns true" do
+        specification = create(:spec_with_min_max)
+        expect(helper.is_checked?(specification, "min-max")).to eq true
+      end
+    end
+  end
+
   describe ".unitwise_atoms" do
     it "returns atoms from unitwise gem" do
       atoms = Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq

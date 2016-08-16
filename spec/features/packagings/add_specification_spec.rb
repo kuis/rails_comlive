@@ -19,8 +19,9 @@ feature 'Adding specification to a packaging' do
 
     scenario "Providing only value" do
       within("div#sharedModal") do
-        select specification.property, from: "specification[property]"
+        fill_in "specification[property]", with: specification.property
         fill_in "specification[value]", with: specification.value
+        select specification.property, from: "type_of_measure"
         select "Joule (J)", from: "specification[uom]"
 
         click_button "Submit"
@@ -33,10 +34,11 @@ feature 'Adding specification to a packaging' do
 
     scenario "Providing either a min or a max" do
       within("div#sharedModal") do
-        select specification.property, from: "specification[property]"
+        fill_in "specification[property]", with: specification.property
         choose('Define Min / Max')
         fill_in 'specification[min]', with: specification.min
         fill_in 'specification[max]', with: specification.max
+        select specification.property, from: "type_of_measure"
         select "Joule (J)", from: "specification[uom]"
 
         click_button "Submit"

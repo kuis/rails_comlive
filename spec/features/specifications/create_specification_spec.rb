@@ -17,9 +17,11 @@ feature 'Creating a specification' do
         scenario "User should successfully create a specification", js: true do
           custom_unit = custom_units.sample
 
-          select custom_unit.property, from: "specification[property]"
+          fill_in "specification[property]", with: custom_unit.property
           fill_in "specification[value]", with: "10.56"
+          select custom_unit.property, from: "type_of_measure"
           select custom_unit.uom, from: "specification[uom]"
+
 
           click_button "Create Specification"
 
@@ -35,9 +37,10 @@ feature 'Creating a specification' do
           property = properties.sample
           unit_of_measure = uom(property).sample
 
-          select property, :from => "specification[property]"
+          fill_in "specification[property]", with: property
           fill_in "specification[value]", with: "5.67"
-          select unit_of_measure[0], :from => "specification[uom]"
+          select property, from: "type_of_measure"
+          select unit_of_measure[0], from: "specification[uom]"
 
           click_button "Create Specification"
 

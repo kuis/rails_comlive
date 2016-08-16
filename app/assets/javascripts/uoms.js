@@ -12,7 +12,7 @@ var build_uoms = function(uoms){
 }
 
 function specificationPropertyCallbacks() {
-    $("select#specification_property").change(function () {
+    $("select#type_of_measure").change(function () {
         var select = $(this);
         var selected = $(this).find(":selected");
         var property = selected.val();
