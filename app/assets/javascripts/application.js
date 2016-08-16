@@ -25,6 +25,7 @@
 //= require plugins
 //= require typeahead.bundle
 //= require app
+//= require unitwise_atoms
 //= require uoms
 //= require commodities
 //= require brands

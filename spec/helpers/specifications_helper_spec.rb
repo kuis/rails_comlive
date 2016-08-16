@@ -61,7 +61,9 @@ RSpec.describe SpecificationsHelper, :type => :helper do
 
   describe ".unitwise_atoms" do
     it "returns atoms from unitwise gem" do
-      atoms = Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq
+      atoms = Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq.map{|a|
+        [a, a.titleize.split(' ').join.underscore]
+      }
       expect(helper.unitwise_atoms).to eq atoms
     end
   end
@@ -69,9 +71,12 @@ RSpec.describe SpecificationsHelper, :type => :helper do
   describe ".options_for_property" do
     app = FactoryGirl.create(:app)
     FactoryGirl.create_list(:custom_unit, 3, app: app)
+    atoms = Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq.map{|a|
+      [a, a.titleize.split(' ').join.underscore]
+    }
     results = {
         'Custom Units' => app.custom_units.map(&:property),
-        'Global Units' => Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq
+        'Global Units' => atoms
     }
     it "returns all grouped properties from unitwise and custom units" do
       expect(helper.options_for_property(app)).to eq results
@@ -105,4 +110,10 @@ RSpec.describe SpecificationsHelper, :type => :helper do
       end
     end
   end
+end
+
+def atoms
+  Unitwise::Atom.all.uniq.map { |x| "#{x.property}" }.uniq.map{|a|
+    [a, a.titleize.split(' ').join.underscore]
+  }
 end
