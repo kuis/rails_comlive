@@ -13,7 +13,7 @@ Capybara.javascript_driver = :poltergeist
 
 options = {
     js_errors: true,
-    timeout: 30,
+    timeout: 60,
     debug: true,
     phantomjs_logger: File.open("log/browser-console.log", "w"),
     logger: File.open("log/phantomjs.log", "w"),
