@@ -39,8 +39,8 @@ RSpec.describe User, :type => :model do
   end
 
   describe "Associations" do
-    it "has many apps" do
-      assoc = User.reflect_on_association(:apps)
+    it "has many invited apps" do
+      assoc = User.reflect_on_association(:invited_apps)
       expect(assoc.macro).to eq :has_many
     end
 
@@ -51,6 +51,11 @@ RSpec.describe User, :type => :model do
 
     it "has many standards" do
       assoc = User.reflect_on_association(:standards)
+      expect(assoc.macro).to eq :has_many
+    end
+
+    it "has many apps" do
+      assoc = User.reflect_on_association(:apps)
       expect(assoc.macro).to eq :has_many
     end
   end

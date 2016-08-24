@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   before_create :assign_token
@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :brands, source: :member, source_type: "Brand", through: :memberships
   has_many :standards, source: :member, source_type: "Standard", through: :memberships
+  has_many :members
+  has_many :invited_apps, through: :members, source: :app
 
   private
 
