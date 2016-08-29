@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe BrandsController, :type => :controller do
   context "As an authenticated user" do
     before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
+      #@request.env["devise.mapping"] = Devise.mappings[:user]
       @user = create(:user)
       @app = create(:app, user_id: @user.id)
       sign_in @user
