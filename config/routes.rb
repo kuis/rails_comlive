@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+
   get "/auth/auth0/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
+  get "/logout" => "application#logout"
 
   #devise_for :users, :controllers => {
   #    :invitations => 'users/invitations'
@@ -40,4 +42,14 @@ Rails.application.routes.draw do
   resources :uoms, only: [:index]
 
   get "/", to: "welcome#landing", as: :landing
+
+
+  # API STUFF
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :apps
+    end
+  end
+
 end
