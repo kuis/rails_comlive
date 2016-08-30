@@ -31,10 +31,10 @@ RSpec.describe State, :type => :model do
       expect(state.errors[:url]).to include("is invalid")
     end
 
-    it "is invalid without a commodity" do
-      state = build(:state, commodity: nil)
+    it "is invalid without a commodity reference" do
+      state = build(:state, commodity_reference: nil)
       state.valid?
-      expect(state.errors[:commodity]).to include("can't be blank")
+      expect(state.errors[:commodity_reference]).to include("can't be blank")
     end
 
     it "is invalid if status is not one of allowed status" do
@@ -45,8 +45,8 @@ RSpec.describe State, :type => :model do
   end
 
   describe "Associations" do
-    it "belongs to a commodity" do
-      assoc = State.reflect_on_association(:commodity)
+    it "belongs to a commodity reference" do
+      assoc = State.reflect_on_association(:commodity_reference)
       expect(assoc.macro).to eq :belongs_to
     end
   end

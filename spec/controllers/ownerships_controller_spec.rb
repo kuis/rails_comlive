@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe OwnershipsController, :type => :controller do
+  let!(:user) { create(:user) }
+
   context "As an authenticated user" do
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      @user = create(:user)
-      sign_in @user
+      sign_in user
     end
 
     describe "POST #create" do

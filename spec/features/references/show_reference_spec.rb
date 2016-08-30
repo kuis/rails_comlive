@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Visiting reference#show page" do
 
-  given!(:user){ create(:user, email: 'user@example.com', password: 'secretpass') }
+  given!(:user){ create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
   given!(:reference) { create(:reference, app: app) }
 
@@ -15,7 +15,7 @@ feature "Visiting reference#show page" do
 
     expect(page).to have_text(reference.kind)
     expect(page).to have_text(reference.description)
-    expect(page).to have_text(reference.source_commodity.short_description)
-    expect(page).to have_text(reference.target_commodity.short_description)
+    expect(page).to have_text(reference.source_commodity_reference.name)
+    expect(page).to have_text(reference.target_commodity_reference.name)
   end
 end

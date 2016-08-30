@@ -3,8 +3,8 @@ require 'rails_helper'
 feature 'Updating a Reference' do
   given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:non_generic_commodity, app_id: app.id) }
-  given!(:reference){ create(:reference, app_id: app.id, target_commodity_id: commodity.id) }
+  given!(:commodity_reference) { create(:non_generic_commodity_reference, app_id: app.id) }
+  given!(:reference){ create(:reference, app_id: app.id, target_commodity_reference_id: commodity_reference.id) }
 
   background do
     log_in(user)
@@ -14,10 +14,10 @@ feature 'Updating a Reference' do
   feature "Visiting #edit page" do
     scenario "Should show the current reference's details" do
       expect(page).to have_text("Edit Reference")
-      expect(page).to have_select('reference_kind', selected: reference.kind)
+      expect(page).to have_select('reference[kind]', selected: reference.kind)
       # expect(page).to have_select('reference_source_commodity_id', selected: @reference.source_commodity.short_description)
       # expect(page).to have_select('reference_target_commodity_id', selected: @reference.target_commodity.short_description)
-      expect(find_field('Description').value).to eq reference.description
+      expect(find_field('reference[description]').value).to eq reference.description
     end
   end
 

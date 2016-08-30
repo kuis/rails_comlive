@@ -6,7 +6,6 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence }
     logo { Faker::Company.logo }
     official false
-    association :app
 
     factory :official_standard do
       official true

@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-feature 'Adding specification to a commodity' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+feature 'Adding specification to a commodity_reference' do
+  given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:generic_commodity, app_id: app.id) }
+  given!(:commodity_reference) { create(:generic_commodity_reference, app_id: app.id) }
   given(:specification) { build(:spec_with_min_max, value: 34.90) }
 
 
   background do
     log_in(user)
-    visit app_commodity_path(app, commodity)
+    visit app_commodity_reference_path(app, commodity_reference)
   end
 
-  feature 'User can add a specification to a commodity', js: true do
+  feature 'User can add a specification to a commodity reference', js: true do
     background do
       click_link "Add Specification"
     end

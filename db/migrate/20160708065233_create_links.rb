@@ -4,7 +4,7 @@ class CreateLinks < ActiveRecord::Migration[5.0]
       t.string :url
       t.text :description
       t.references :app, foreign_key: true
-      t.references :commodity, foreign_key: true
+      t.references :commodity_reference, foreign_key: true
 
       t.timestamps
     end

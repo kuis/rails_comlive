@@ -5,7 +5,6 @@ class CreateStandards < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :logo
       t.boolean :official, default: false
-      t.references :app, foreign_key: true
 
       t.timestamps
     end
