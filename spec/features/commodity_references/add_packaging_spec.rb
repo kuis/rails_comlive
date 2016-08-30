@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 feature 'Adding packaging to a commodity' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+  given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:generic_commodity, app_id: app.id) }
+  given!(:commodity_reference) { create(:generic_commodity_reference, app_id: app.id) }
   given(:packaging) { build(:packaging) }
 
   background do
     log_in(user)
-    visit app_commodity_path(app, commodity)
+    visit app_commodity_reference_path(app, commodity_reference)
   end
 
-  scenario 'User can add packaging to a commodity', js: true do
+  scenario 'User can add packaging to a commodity reference', js: true do
     click_link "Add Packaging"
 
     within("div#sharedModal") do

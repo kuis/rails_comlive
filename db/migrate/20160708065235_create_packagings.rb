@@ -6,7 +6,7 @@ class CreatePackagings < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :description
       t.string :uuid
-      t.references :commodity, foreign_key: true
+      t.references :commodity_reference, foreign_key: true
 
       t.timestamps
     end

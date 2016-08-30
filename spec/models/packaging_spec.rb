@@ -31,10 +31,10 @@ RSpec.describe Packaging, :type => :model do
       expect(packaging.errors[:description]).to include("can't be blank")
     end
 
-    it "is invalid without an associated commodity" do
-      packaging = build(:packaging, commodity: nil)
+    it "is invalid without an associated commodity reference" do
+      packaging = build(:packaging, commodity_reference: nil)
       packaging.valid?
-      expect(packaging.errors[:commodity]).to include("can't be blank")
+      expect(packaging.errors[:commodity_reference]).to include("can't be blank")
     end
 
     it "assigns a uuid after create" do
@@ -44,8 +44,8 @@ RSpec.describe Packaging, :type => :model do
   end
 
   describe "Associations" do
-    it "belongs to commodity" do
-      assoc = Packaging.reflect_on_association(:commodity)
+    it "belongs to commodity reference" do
+      assoc = Packaging.reflect_on_association(:commodity_reference)
       expect(assoc.macro).to eq :belongs_to
     end
 

@@ -4,7 +4,7 @@ feature 'User logout' do
   given!(:user) { create(:user) }
 
   background do
-    login(user)
+    log_in(user)
   end
 
   scenario 'Should Logout user from system' do

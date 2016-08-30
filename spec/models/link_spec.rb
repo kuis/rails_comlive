@@ -21,10 +21,10 @@ RSpec.describe Link, :type => :model do
       link.valid?
       expect(link.errors[:app]).to include("can't be blank")
     end
-    it "is invalid without a commodity" do
-      link = build(:link, commodity_id: nil)
+    it "is invalid without a commodity reference" do
+      link = build(:link, commodity_reference_id: nil)
       link.valid?
-      expect(link.errors[:commodity]).to include("can't be blank")
+      expect(link.errors[:commodity_reference]).to include("can't be blank")
     end
     it "validates format of url" do
       link = build(:link, url: "http://fake")
@@ -34,8 +34,8 @@ RSpec.describe Link, :type => :model do
   end
 
   describe "Associations" do
-    it "belongs to a commodity" do
-      assoc = Link.reflect_on_association(:commodity)
+    it "belongs to a commodity reference" do
+      assoc = Link.reflect_on_association(:commodity_reference)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to an app" do

@@ -1,17 +1,15 @@
 require 'rails_helper'
 
 feature 'Commodity creation' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:brand) { create(:brand, app_id: app.id) }
+  given!(:user) { create(:user) }
+  given!(:brand) { create(:brand) }
 
   given(:commodity) { build(:commodity, short_description: "short description", long_description: "very long description") }
 
   background do
     log_in(user)
-    visit new_app_commodity_path(app)
+    visit new_commodity_path
   end
-
 
   context "Creating a generic commodity" do
     scenario "With the minimum required details", js: true do

@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-feature 'Commodity state' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+feature 'Commodity Reference state' do
+  given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:commodity, app: app) }
+  given!(:commodity_reference) { create(:commodity_reference, app: app) }
   given(:state) { build(:state) }
 
   background do
     log_in(user)
-    visit app_commodity_path(app, commodity)
+    visit app_commodity_reference_path(app, commodity_reference)
   end
 
-  scenario 'User can set state to a commodity', js: true do
+  scenario 'User can set state to a commodity reference', js: true do
     click_link "Set State"
 
     within("div#sharedModal") do

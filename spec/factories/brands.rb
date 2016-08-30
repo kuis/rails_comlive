@@ -6,7 +6,6 @@ FactoryGirl.define do
     official false
     logo { Faker::Company.logo }
     description { Faker::Lorem.sentence }
-    association :app
 
     factory :invalid_brand do
       name nil

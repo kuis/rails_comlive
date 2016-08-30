@@ -6,7 +6,7 @@ FactoryGirl.define do
     quantity { Faker::Number.decimal(2) }
     name { Faker::Name.name  }
     description { Faker::Lorem.sentence }
-    association :commodity
+    association :commodity_reference
 
     factory :invalid_packaging do
       name nil

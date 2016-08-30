@@ -18,20 +18,9 @@ RSpec.describe Brand, :type => :model do
       brand.valid?
       expect(brand.errors[:description]).to include("can't be blank")
     end
-
-    it "is invalid without an app" do
-      brand = build(:brand, app: nil)
-      brand.valid?
-      expect(brand.errors[:app]).to include("can't be blank")
-    end
   end
 
   describe "Associations" do
-    it "belongs to an app" do
-      assoc = Brand.reflect_on_association(:app)
-      expect(assoc.macro).to eq :belongs_to
-    end
-
     it "has many users" do
       assoc = Brand.reflect_on_association(:users)
       expect(assoc.macro).to eq :has_many

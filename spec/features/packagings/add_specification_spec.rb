@@ -1,22 +1,19 @@
 require 'rails_helper'
 
 feature 'Adding specification to a packaging' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+  given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:generic_commodity, app_id: app.id) }
-  given!(:packaging) { create(:packaging, commodity_id: commodity.id) }
+  given!(:commodity_reference) { create(:generic_commodity_reference, app_id: app.id) }
+  given!(:packaging) { create(:packaging, commodity_reference_id: commodity_reference.id) }
   given(:specification) { build(:spec_with_min_max, value: 34.90) }
 
   background do
     log_in(user)
-    visit app_commodity_packaging_path(app, commodity, packaging)
+    visit app_commodity_reference_packaging_path(app, commodity_reference, packaging)
+    click_link "Add Specification"
   end
 
-  feature 'User can add a specification to a packaing', js: true do
-    background do
-      click_link "Add Specification"
-    end
-
+  feature 'User can add a specification to a packaging', js: true do
     scenario "Providing only value" do
       within("div#sharedModal") do
         fill_in "specification[property]", with: specification.property

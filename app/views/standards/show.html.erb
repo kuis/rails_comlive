@@ -28,7 +28,7 @@
             <%= f.hidden_field :child_type, value: @standard.class.to_s %>
             <div class="form-group">
               <%= f.label :owning_standard %>
-              <%= f.select :parent_id, options_for_standards(current_user), {}, class: "form-control" %>
+              <%= f.select :parent_id, options_for_standards, {}, class: "form-control" %>
             </div>
         <% end %>
       </div>

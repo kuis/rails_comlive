@@ -1,23 +1,23 @@
 require 'rails_helper'
 
-feature 'Adding link to a commodity' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+feature 'Adding link to a commodity reference' do
+  given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:generic_commodity, app_id: app.id) }
+  given!(:commodity_reference) { create(:generic_commodity_reference, app_id: app.id) }
   given(:link) { build(:link) }
 
   background do
     log_in(user)
-    visit app_commodity_path(app, commodity)
+    visit app_commodity_reference_path(app, commodity_reference)
   end
 
-  scenario 'User can add a link to a commodity', js: true do
+  scenario 'User can add a link to a commodity_reference', js: true do
     click_link "Add Link"
 
     within("div#sharedModal") do
       fill_in 'link[url]', with: link.url
       fill_in 'link[description]',with: link.description
-      select commodity.short_description, from: 'link[commodity_id]'
+      select commodity_reference.name, from: 'link[commodity_reference_id]'
 
       click_button 'Submit'
     end
