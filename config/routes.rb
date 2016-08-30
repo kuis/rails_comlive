@@ -2,21 +2,11 @@ Rails.application.routes.draw do
   get "/auth/auth0/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
 
-  #devise_for :users, :controllers => {
-  #    :invitations => 'users/invitations'
-  #}
+  get "login" => "sessions#new", as: :login
+  delete "logout" => "sessions#destroy", as: :logout
 
-  #authenticated :user do
-  #  devise_scope :user do
-  #    root to: "apps#index"
-  #  end
-  #end
-
-  #unauthenticated do
-  #  devise_scope :user do
+  root to: "apps#index", constraints: lambda { |request| request.session[:user_id].present? }
   root to: "welcome#landing"
-  #  end
-  #end
 
   resources :apps do
     resources :brands, :standards, :invitations

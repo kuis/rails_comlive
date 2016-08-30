@@ -1,5 +1,5 @@
 class OwnershipsController < ApplicationController
-  before_action :logged_in_using_omniauth?
+  before_action :authenticate_user!
 
   def create
     parent_type, parent_id = ownership_params[:parent_id].split("-")

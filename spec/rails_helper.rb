@@ -5,15 +5,18 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
-#require 'devise'
 require 'support/auth0'
+require 'support/controllers/request_helpers'
 require 'support/features/session_helpers'
 require 'support/features/input_helpers'
+require 'support/features/ajax_helpers'
+require 'support/omniauth/macros'
 
 Capybara.javascript_driver = :poltergeist
+Capybara.default_max_wait_time = 10
 
 options = {
-    js_errors: true,
+    js_errors: false,
     timeout: 60,
     debug: true,
     phantomjs_logger: File.open("log/browser-console.log", "w"),
@@ -47,6 +50,9 @@ end
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+# set omniauth to test mode
+OmniAuth.config.test_mode = true
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -54,14 +60,18 @@ RSpec.configure do |config|
   # Include Factory Girl syntax to simplify calls to factories
   config.include FactoryGirl::Syntax::Methods
 
-  # Devise helpers
-  config.include Devise::TestHelpers, :type => :controller
-
   # Session helpers
   config.include Features::SessionHelpers, type: :feature
+  config.include Controllers::RequestHelpers, type: :controller
 
   # Input helpers
   config.include Features::InputHelpers, type: :feature
+
+  # Ajax helpers
+  config.include Features::AjaxHelpers, type: :feature
+
+  # Omniauth macro
+  config.include Omniauth::Macros
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
