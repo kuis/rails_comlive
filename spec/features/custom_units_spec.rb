@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Custom units View' do
   background do
-    @user = create(:user, email: 'user@example.com', password: 'secretpass')
+    @user = create(:user)
     @app = create(:app, user_id: @user.id)
     log_in(@user)
   end

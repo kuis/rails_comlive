@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 feature 'App Creation' do
-  let!(:user) { create(:user, email: 'user@example.com', password: 'secretpass')  }
+  given!(:user) { create(:user)  }
+  given(:app) { build(:app) }
 
   background do
     log_in(user)
@@ -9,8 +10,6 @@ feature 'App Creation' do
 
   scenario "With valid details" do
     visit new_app_path
-
-    app = build(:app)
 
     fill_in "app[name]", with: app.name
     fill_in "app[description]", with: app.description

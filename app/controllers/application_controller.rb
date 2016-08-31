@@ -5,12 +5,21 @@ class ApplicationController < ActionController::Base
   after_action :last_accessed_app, :record_recent_commodity
 
 
-  helper_method :current_app
+  helper_method :current_user, :current_app, :user_signed_in?
+
+  private
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def user_signed_in?
+    session[:user_id].present?
+  end
 
   def current_app
     App.find_by(id: params[:app_id] || params[:id])
   end
-
 
   def last_accessed_app
     return unless request.get?
@@ -34,10 +43,7 @@ class ApplicationController < ActionController::Base
     cookies.permanent[:recent_commodities] = commodities.join(",")
   end
 
-  def after_sign_in_path_for(resource)
-    return root_path unless cookies[:last_app_id]
-    app = App.find_by(id: cookies[:last_app_id])
-    return root_path if app.nil?
-    app_path(app)
+  def authenticate_user!
+    redirect_to login_path, alert: "You need to sign in or sign up before continuing." unless session[:user_id].present?
   end
 end

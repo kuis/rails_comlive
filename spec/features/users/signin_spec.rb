@@ -1,42 +1,39 @@
 require 'rails_helper'
 
-feature 'User signs in' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+feature 'Login with Omniauth' do
+  given!(:user) { create(:user) }
+  given(:app) { create(:app, user: user) }
 
-  scenario 'with valid email and password' do
-    sign_in_with(user.email, user.password)
+  context "With valid credentials" do
+    scenario 'Should successfully login user' do
+      log_in(user)
 
-    expect(page).to have_content('Signed in successfully')
-    expect(page).to have_link("Logout", href: destroy_user_session_path)
+      expect(page).to have_content('Signed in successfully')
+      expect(page).to have_link("Logout", href: logout_path)
+    end
+
+    scenario "Should redirect to last visited app if user visited app" do
+      log_in(user)
+      visit app_path(app)
+      click_link "Logout"
+
+      log_in(user)
+
+      expect(page.current_path).to eq app_path(app)
+    end
+
+    scenario "should redirect to root path if no last visited app" do
+      log_in(user)
+      click_link "Logout"
+      log_in(user)
+      expect(page.current_path).to eq root_path
+    end
   end
 
-  scenario "with invalid email" do
-    sign_in_with('invalid.com', 'secretpass')
-
-    expect(page).to have_content("Invalid Email or password.")
-  end
-
-  scenario "with invalid password" do
-    sign_in_with(user.email, 'invalidpass')
-
-    expect(page).to have_content("Invalid Email or password.")
-  end
-
-  scenario "redirects to last visited app if user visited app" do
-    log_in(user)
-    4.times { create(:app, user: user) }
-    app = user.apps.sample
-    visit app_path(app)
-    click_link "Logout"
-
-    log_in(user)
-    expect(page.current_path).to eq app_path(app)
-  end
-
-  scenario "redirects to root path if no last visited app" do
-    log_in(user)
-    click_link "Logout"
-    log_in(user)
-    expect(page.current_path).to eq root_path
+  context "With invalid credentials" do
+    scenario "Should not log in user" do
+      log_in(user, true)
+      expect(page).to have_content('invalid_credentials')
+    end
   end
 end

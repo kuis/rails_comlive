@@ -1,24 +1,23 @@
 require 'rails_helper'
 
 feature 'Commodity creation' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:brand) { create(:brand, app_id: app.id) }
+  given!(:user) { create(:user) }
+  given!(:brand) { create(:brand) }
 
   given(:commodity) { build(:commodity, short_description: "short description", long_description: "very long description") }
 
   background do
     log_in(user)
-    visit new_app_commodity_path(app)
+    visit new_commodity_path
   end
-
 
   context "Creating a generic commodity" do
     scenario "With the minimum required details", js: true do
       fill_in "commodity[name]", with: commodity.name
       select "area", from: "commodity[measured_in]"
 
-      check('commodity[generic]')
+      find('label[for="commodity_generic"]').click
+      # check('commodity[generic]')
 
       click_button "Create Commodity"
 
@@ -33,7 +32,8 @@ feature 'Commodity creation' do
       fill_in "commodity[short_description]", with: commodity.short_description
       fill_in "commodity[long_description]", with: commodity.long_description
 
-      check('commodity[generic]')
+      # check('commodity[generic]')
+      find('label[for="commodity_generic"]').click
 
       click_button "Create Commodity"
 

@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 feature 'Updating a Brand' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:brand) { create(:brand, app_id: app.id) }
+  given!(:user) { create(:user) }
+  given!(:brand) { create(:brand) }
 
   background do
     log_in(user)
-    visit edit_app_brand_path(app,brand)
+    visit edit_brand_path(brand)
   end
 
   context "With valid details" do

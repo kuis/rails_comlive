@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Create Link' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
+  given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:commodity, app_id: app.id) }
+  given!(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
   given(:link) { build(:link) }
 
   background do
@@ -16,7 +16,7 @@ feature 'Create Link' do
 
       fill_in "link[url]", with: link.url
       fill_in "link[description]", with: link.description
-      select commodity.short_description, from: "link[commodity_id]"
+      select commodity_reference.name, from: "link[commodity_reference_id]"
 
       click_button "Create Link"
 
@@ -29,7 +29,7 @@ feature 'Create Link' do
 
       fill_in "link[url]", with: ""
       fill_in "link[description]", with: ""
-      select commodity.name, :from => "link[commodity_id]"
+      select commodity_reference.name, :from => "link[commodity_reference_id]"
 
       click_button "Create Link"
 

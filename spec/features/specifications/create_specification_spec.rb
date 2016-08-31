@@ -3,13 +3,13 @@ require 'rails_helper'
 feature 'Creating a specification' do
   given!(:user) { create(:user) }
   given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity) { create(:commodity, app_id: app.id) }
+  given!(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
   given!(:custom_units) { create_list(:custom_unit, 4, app_id: app.id) }
 
   feature "Visiting #new page" do
     background do
       log_in(user)
-      visit new_app_commodity_specification_path(app, commodity)
+      visit new_app_commodity_reference_specification_path(app, commodity_reference)
     end
 
     feature "With valid details" do

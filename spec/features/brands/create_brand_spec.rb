@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 feature 'Creating a Brand' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
-  given!(:app) { create(:app, user_id: user.id) }
+  given!(:user) { create(:user) }
   given(:brand) { build(:brand) }
 
   background do
     log_in(user)
-    visit new_app_brand_path(app)
+    visit new_brand_path(brand)
   end
 
   context "With valid details" do

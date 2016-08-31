@@ -18,20 +18,9 @@ RSpec.describe Standard, :type => :model do
       standard.valid?
       expect(standard.errors[:description]).to include("can't be blank")
     end
-
-    it "is invalid without an app" do
-      standard = build(:standard, app: nil)
-      standard.valid?
-      expect(standard.errors[:app]).to include("can't be blank")
-    end
   end
 
   describe "Associations" do
-    it "belongs to an app" do
-      assoc = Standard.reflect_on_association(:app)
-      expect(assoc.macro).to eq :belongs_to
-    end
-
     it "has many users" do
       assoc = Standard.reflect_on_association(:users)
       expect(assoc.macro).to eq :has_many
@@ -42,8 +31,9 @@ RSpec.describe Standard, :type => :model do
       expect(assoc.macro).to eq :has_many
     end
 
-    it "has many commodities" do
-      assoc = Standard.reflect_on_association(:commodities)
+
+    it "has many commodity references" do
+      assoc = Standard.reflect_on_association(:commodity_references)
       expect(assoc.macro).to eq :has_many
     end
   end

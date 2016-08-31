@@ -1,33 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe CommoditiesController, :type => :controller do
+  let!(:user) { create(:user) }
+  let!(:commodity) { create(:commodity) }
+  let!(:brand) { create(:brand) }
+
   before(:each) do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = create(:user)
-    sign_in @user
+    sign_in user
   end
 
   describe "GET #index" do
     it "returns 200 http status code" do
-      app = create(:app, user_id: @user.id)
-      get :index, params: { app_id: app }
+      get :index
       expect(response.status).to eq 200
     end
   end
 
   describe "GET #show" do
     it "returns 200 http status code" do
-      app = create(:app, user_id: @user.id)
-      commodity =  create(:commodity, app_id: app.id)
-      get :show, params: { app_id: app.id, id: commodity.id }
+      get :show, params: { id: commodity.id }
       expect(response.status).to eq 200
     end
   end
 
   describe "GET #new" do
     it "returns 200 http status code" do
-      app = create(:app, user_id: @user.id)
-      get :new, params: { app_id: app.id }
+      get :new
       expect(response.status).to eq 200
     end
   end
@@ -35,28 +33,34 @@ RSpec.describe CommoditiesController, :type => :controller do
   describe "POST #create" do
     context "with valid attributes" do
       it "saves a generic commodity in the database" do
-        app = create(:app, user_id: @user.id)
         expect{
-          post :create, params: { app_id: app.id, commodity: attributes_for(:generic_commodity) }
+          post :create, params: { commodity: attributes_for(:generic_commodity) }
         }.to change(Commodity, :count).by(1)
       end
 
-      it "saves a non generic commodity in the database" do
-        app = create(:app, user_id: @user.id)
-        brand = create(:brand, app_id: app.id)
+      it "creates an app for the commodity reference" do
         expect{
-          post :create, params: { app_id: app.id, commodity: attributes_for(:commodity, brand_id: brand.id) }
+          post :create, params: { commodity: attributes_for(:generic_commodity) }
+        }.to change(App, :count).by(1)
+      end
+
+      it "creates a commodity reference" do
+        expect{
+          post :create, params: { commodity: attributes_for(:generic_commodity) }
+        }.to change(CommodityReference, :count).by(1)
+      end
+
+      it "saves a non generic commodity in the database" do
+        expect{
+          post :create, params: { commodity: attributes_for(:commodity, brand_id: brand.id) }
         }.to change(Commodity, :count).by(1)
       end
     end
 
     context "with invalid attributes" do
       it "does not save the new app in the database" do
-        app = create(:app, user_id: @user.id)
-        brand = create(:brand, app_id: app.id)
-
         expect{
-          post :create, params: { app_id: app.id, commodity: attributes_for(:invalid_commodity, brand_id: brand.id)}
+          post :create, params: { commodity: attributes_for(:invalid_commodity, brand_id: brand.id)}
         }.not_to change(Commodity, :count)
       end
     end
