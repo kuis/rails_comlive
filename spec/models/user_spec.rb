@@ -12,6 +12,7 @@ RSpec.describe User, :type => :model do
     it "has many invited apps" do
       assoc = User.reflect_on_association(:invited_apps)
       expect(assoc.macro).to eq :has_many
+      expect(assoc.options[:through]).to eq :memberships
     end
 
     it "has many brands" do

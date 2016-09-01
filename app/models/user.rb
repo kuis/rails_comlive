@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :brands, source: :member, source_type: "Brand", through: :memberships
   has_many :standards, source: :member, source_type: "Standard", through: :memberships
-  has_many :members
-  has_many :invited_apps, through: :members, source: :app
+  # has_many :members
+  has_many :invited_apps, source: :member, source_type: "App", through: :memberships
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
@@ -26,7 +26,12 @@ class User < ApplicationRecord
     end
   end
 
-  private
+  def accept_invite(token)
+    invitation = Invitation.find_by(token: token, accepted: false)
+    return if invitation.nil?
+    self.invited_apps << invitation.app
+    invitation.update(accepted: true)
+  end
 
   #def assign_token
   #  loop do
