@@ -53,6 +53,11 @@ RSpec.describe Packaging, :type => :model do
       assoc = Packaging.reflect_on_association(:specifications)
       expect(assoc.macro).to eq :has_many
     end
+
+    it "has many barcodes" do
+      assoc = Packaging.reflect_on_association(:barcodes)
+      expect(assoc.macro).to eq :has_many
+    end
   end
 end
 
