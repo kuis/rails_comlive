@@ -21,6 +21,7 @@ gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 gem 'searchkick'
 gem "faker", git: "https://github.com/stympy/faker"
+gem "pundit"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
