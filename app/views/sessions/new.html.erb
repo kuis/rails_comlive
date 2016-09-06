@@ -6,7 +6,8 @@
           redirectUrl: window.location.origin + '/auth/auth0/callback',
           responseType: 'code',
           params: {
-            scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+            scope: 'openid email offline_access', // Learn about scopes: https://auth0.com/docs/scopes,
+            device: 'api'
           }
         }
       });

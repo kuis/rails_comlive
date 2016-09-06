@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -15,7 +14,6 @@ ActiveRecord::Schema.define(version: 20160818153256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "apps", force: :cascade do |t|
     t.string   "name"
@@ -281,12 +279,13 @@ ActiveRecord::Schema.define(version: 20160818153256) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email",       null: false
-    t.string   "provider",    null: false
-    t.string   "uid",         null: false
+    t.string   "email",               null: false
+    t.string   "provider",            null: false
+    t.string   "uid",                 null: false
     t.string   "oauth_token"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "auth0_refresh_token"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["oauth_token"], name: "index_users_on_oauth_token", unique: true, using: :btree
   end

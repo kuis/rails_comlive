@@ -22,6 +22,7 @@ class User < ApplicationRecord
       user.first_name   = auth.info.first_name
       user.last_name    = auth.info.last_name
       user.oauth_token  = auth.credentials.token
+      user.auth0_refresh_token = auth.credentials.refresh_token
       user.save!
     end
   end
