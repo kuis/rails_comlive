@@ -22,7 +22,7 @@ class Commodity < ApplicationRecord
   before_create :set_uuid
 
   def create_reference(user)
-    app = user.apps.create!(name: "Untitled App")
+    app = user.default_app
     attributes = self.class.attribute_names.reject{|a|
       ["id","created_at","updated_at","uuid"].include?(a)
     }

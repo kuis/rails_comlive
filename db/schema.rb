@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 20160831133955) do
     t.string   "name"
     t.text     "description"
     t.string   "uuid"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "default",     default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["uuid"], name: "index_apps_on_uuid", unique: true, using: :btree
   end
 
