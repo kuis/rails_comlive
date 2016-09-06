@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReferencesController, :type => :controller do
   let!(:user) { create(:user) }
-  let!(:app) { create(:app, user: user) }
+  let!(:app) { create(:app) }
   let(:reference) { create(:reference, app: app) }
 
   before(:each) do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SpecificationsController, :type => :controller do
   let!(:user) { create(:user) }
-  let!(:app) { create(:app, user_id: user.id) }
+  let!(:app) { create(:app) }
   let!(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
 
   context "As an authenticated user" do

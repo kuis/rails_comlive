@@ -32,7 +32,7 @@ class LinksController < ApplicationController
   private
 
   def set_app
-    @app = current_user.apps.find(params[:app_id])
+    @app = App.find(params[:app_id])
   end
 
   def link_params

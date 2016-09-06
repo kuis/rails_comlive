@@ -27,7 +27,7 @@ class CommoditiesController < ApplicationController
   def create
     @commodity = Commodity.create(commodity_params)
     if @commodity.save
-      app = App.create!(name: "Untitled App", user: current_user)
+      app = current_user.apps.create!(name: "Untitled App")
       attributes = Commodity.attribute_names.reject{|a|
         ["id","created_at","updated_at","uuid"].include?(a)
       }

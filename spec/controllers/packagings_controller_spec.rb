@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PackagingsController, :type => :controller do
   let!(:user) { create(:user) }
-  let!(:app) { create(:app, user_id: user.id) }
+  let!(:app) { create(:app) }
   let!(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
   let(:packaging) { create(:packaging, commodity_reference_id: commodity_reference.id, name: "Milk Packaging", uom: "packets") }
   
