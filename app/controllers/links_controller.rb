@@ -36,6 +36,6 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:url,:description, :commodity_reference_id)
+    params.require(:link).permit(:url,:description, :commodity_reference_id, :visibility)
   end
 end

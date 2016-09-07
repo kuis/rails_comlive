@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -88,9 +87,10 @@ ActiveRecord::Schema.define(version: 20160818153256) do
   create_table "custom_units", force: :cascade do |t|
     t.string   "property"
     t.string   "uom"
+    t.integer  "visibility", default: 0
     t.integer  "app_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["app_id"], name: "index_custom_units_on_app_id", using: :btree
   end
 
@@ -136,10 +136,11 @@ ActiveRecord::Schema.define(version: 20160818153256) do
   create_table "links", force: :cascade do |t|
     t.string   "url"
     t.text     "description"
+    t.integer  "visibility",             default: 0
     t.integer  "app_id"
     t.integer  "commodity_reference_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["app_id"], name: "index_links_on_app_id", using: :btree
     t.index ["commodity_reference_id"], name: "index_links_on_commodity_reference_id", using: :btree
   end
@@ -180,9 +181,10 @@ ActiveRecord::Schema.define(version: 20160818153256) do
     t.string   "name"
     t.string   "description"
     t.string   "uuid"
+    t.integer  "visibility",             default: 0
     t.integer  "commodity_reference_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["commodity_reference_id"], name: "index_packagings_on_commodity_reference_id", using: :btree
   end
 
@@ -191,9 +193,10 @@ ActiveRecord::Schema.define(version: 20160818153256) do
     t.integer  "source_commodity_reference_id"
     t.integer  "target_commodity_reference_id"
     t.text     "description"
+    t.integer  "visibility",                    default: 0
     t.integer  "app_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.index ["app_id"], name: "index_references_on_app_id", using: :btree
   end
 
@@ -203,10 +206,11 @@ ActiveRecord::Schema.define(version: 20160818153256) do
     t.decimal  "min"
     t.decimal  "max"
     t.string   "uom"
-    t.integer  "parent_id",   null: false
-    t.string   "parent_type", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "visibility",  default: 0
+    t.integer  "parent_id",               null: false
+    t.string   "parent_type",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "standardizations", force: :cascade do |t|
@@ -234,9 +238,10 @@ ActiveRecord::Schema.define(version: 20160818153256) do
     t.string   "status"
     t.text     "info"
     t.string   "url"
+    t.integer  "visibility",             default: 0
     t.integer  "commodity_reference_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["commodity_reference_id"], name: "index_states_on_commodity_reference_id", using: :btree
   end
 

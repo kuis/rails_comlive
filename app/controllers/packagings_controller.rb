@@ -45,6 +45,6 @@ class PackagingsController < ApplicationController
   end
 
   def packaging_params
-    params.require(:packaging).permit(:name, :description, :uom, :quantity)
+    params.require(:packaging).permit(:name, :description, :uom, :quantity, :visibility)
   end
 end

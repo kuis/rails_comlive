@@ -63,6 +63,6 @@ class SpecificationsController < ApplicationController
   end
 
   def specification_params
-    params.require(:specification).permit(:property,:value, :uom, :min, :max)
+    params.require(:specification).permit(:property,:value, :uom, :min, :max, :visibility)
   end
 end

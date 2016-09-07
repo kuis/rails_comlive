@@ -18,12 +18,14 @@ feature 'Adding link to a commodity reference' do
       fill_in 'link[url]', with: link.url
       fill_in 'link[description]',with: link.description
       select commodity_reference.name, from: 'link[commodity_reference_id]'
+      select "Private", from: 'link[visibility]'
 
       click_button 'Submit'
     end
 
     expect(page).to have_link('Open Link', href: link.url)
     expect(page).to have_content(link.description)
+    expect(page).to have_content("Private")
     expect(page).to have_content("link successfully created")
   end
 
