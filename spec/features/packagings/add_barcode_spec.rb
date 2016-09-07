@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 feature 'Adding barcode to a packaging' do
-  given!(:user) { create(:user) }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity_reference) { create(:generic_commodity_reference, app_id: app.id) }
-  given!(:packaging) { create(:packaging, commodity_reference_id: commodity_reference.id) }
+  given(:user) { create(:user) }
+  given(:apps) { user.apps << create(:app) } # creates a membership record
+  given(:app) { apps.first }
+  given(:commodity_reference) { create(:generic_commodity_reference, app_id: app.id) }
+  given(:packaging) { create(:packaging, commodity_reference_id: commodity_reference.id) }
   given(:barcode) { build(:barcode, format: "ean_8", content: "1234567") }
 
   background do

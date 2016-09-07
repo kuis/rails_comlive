@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature 'Adding barcode to a packaging' do
-  given!(:user) { create(:user) }
-  given!(:commodity) { create(:commodity) }
+  given(:user) { create(:user) }
+  given(:commodity) { create(:commodity) }
   given(:barcode) { build(:barcode, format: "ean_8", content: "1234567") }
 
   background do
