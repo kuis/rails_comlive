@@ -38,12 +38,6 @@ RSpec.describe CommoditiesController, :type => :controller do
         }.to change(Commodity, :count).by(1)
       end
 
-      it "creates an app for the commodity reference" do
-        expect{
-          post :create, params: { commodity: attributes_for(:generic_commodity) }
-        }.to change(App, :count).by(1)
-      end
-
       it "creates a commodity reference" do
         expect{
           post :create, params: { commodity: attributes_for(:generic_commodity) }
