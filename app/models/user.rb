@@ -1,18 +1,8 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  #devise :invitable, :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable, :trackable, :validatable
-
-  #before_create :assign_token
-
-  #validates :token, uniqueness: true
-  has_many :apps
   has_many :memberships
+  has_many :apps, source: :member, source_type: "App", through: :memberships
   has_many :brands, source: :member, source_type: "Brand", through: :memberships
   has_many :standards, source: :member, source_type: "Standard", through: :memberships
-  has_many :members
-  has_many :invited_apps, through: :members, source: :app
 
   after_create :create_app
 
@@ -28,14 +18,23 @@ class User < ApplicationRecord
     end
   end
 
+  def accept_invite(token)
+    invitation = Invitation.find_by(token: token, accepted: false)
+    return if invitation.nil?
+    self.apps << invitation.app
+    invitation.update(accepted: true)
+    return invitation
+  end
+
   def default_app
-    App.where(user_id: self.id, default: true).first
+    self.apps.find_by(default: true)
   end
 
   private
 
   def create_app
-    self.apps.create(name: Faker::App.name, description: "App description", default: true)
+    app = self.apps.create(name: Faker::App.name, description: "App description", default: true)
+    self.memberships.find_by(member_type: "App", member_id: app.id).update(owner: true)
   end
 
   #def assign_token

@@ -21,6 +21,7 @@ gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 gem 'searchkick'
 gem "faker", git: "https://github.com/stympy/faker"
+gem "pundit"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
@@ -45,6 +46,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "better_errors"
   gem "binding_of_caller"
+  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

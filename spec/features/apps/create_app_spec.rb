@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'App Creation' do
-  given!(:user) { create(:user)  }
+  given(:user) { create(:user)  }
   given(:app) { build(:app) }
 
   background do

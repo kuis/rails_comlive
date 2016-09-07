@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 feature 'Listing Commodity References' do
-  let!(:user) { create(:user) }
-  let!(:app) { create(:app, user_id: user.id) }
+  given(:user) { create(:user) }
+  given(:apps) { user.apps << create(:app) } # creates a membership record
+  given(:app) { apps.first }
 
   background do
     log_in(user)

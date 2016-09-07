@@ -5,7 +5,6 @@ class CreateApps < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :uuid
       t.boolean :default, default: false
-      t.references :user, foreign_key: true
 
       t.timestamps
     end
