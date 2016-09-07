@@ -22,6 +22,11 @@ gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'searchkick'
 gem "faker", git: "https://github.com/stympy/faker"
 gem "pundit"
+gem 'carrierwave'
+gem 'barby'
+gem 'rqrcode' # dependency for barby
+
+# gem 'semacode', '~> 0.7.4' # dependency for barby
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
