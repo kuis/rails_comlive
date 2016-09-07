@@ -44,6 +44,7 @@ class ReferencesController < ApplicationController
   end
 
   def reference_params
-    params.require(:reference).permit(:kind, :source_commodity_reference_id, :target_commodity_reference_id, :description)
+    params.require(:reference).permit(:kind, :source_commodity_reference_id, :target_commodity_reference_id,
+                                      :description, :visibility)
   end
 end

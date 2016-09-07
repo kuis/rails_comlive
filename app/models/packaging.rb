@@ -1,4 +1,6 @@
 class Packaging < ApplicationRecord
+  include Visibility
+
   belongs_to :commodity_reference
   has_many :specifications, as: :parent
 

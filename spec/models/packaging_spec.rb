@@ -41,6 +41,11 @@ RSpec.describe Packaging, :type => :model do
       packaging = create(:packaging)
       expect(packaging.uuid).not_to be_nil
     end
+
+    it "is public by default" do
+      packaging = build(:packaging)
+      expect(packaging.visibility).to eq "publicized"
+    end
   end
 
   describe "Associations" do
