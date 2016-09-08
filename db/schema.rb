@@ -20,9 +20,8 @@ ActiveRecord::Schema.define(version: 20160902071041) do
     t.string   "name"
     t.text     "description"
     t.string   "uuid"
-    t.boolean  "default",     default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["uuid"], name: "index_apps_on_uuid", unique: true, using: :btree
   end
 
@@ -170,6 +169,7 @@ ActiveRecord::Schema.define(version: 20160902071041) do
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.boolean  "owner",       default: false
+    t.boolean  "default",     default: false
     t.string   "member_type"
     t.integer  "member_id"
     t.datetime "created_at",                  null: false

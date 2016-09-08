@@ -8,29 +8,6 @@ RSpec.describe User, :type => :model do
     end
   end
 
-  describe "Callbacks" do
-    it "creates a default app on create" do
-      expect{ create(:user) }.to change(App, :count).by(1)
-    end
-
-    it "create an app with default set to true" do
-      user = create(:user)
-      app = user.apps.first
-      expect(app.default).to eq true
-    end
-  end
-
-
-  describe "Instance Methods" do
-    describe "#default_app" do
-      it "returns the default app for the user" do
-        user = create(:user)
-        app = user.apps.where(default: true).first
-        expect(user.default_app).to eq app
-      end
-    end
-  end
-
   describe "Associations" do
     it "has many brands" do
       assoc = User.reflect_on_association(:brands)
@@ -49,8 +26,27 @@ RSpec.describe User, :type => :model do
   end
 
   describe "Instance Methods" do
+    let!(:user) { create(:user) }
+    let(:default_app) { user.create_default_app }
+
+    describe "#default_app" do
+      it "returns the default app for the user" do
+        expect(default_app).to be_an App
+      end
+
+      it "ensures the membership record is default" do
+        membership = default_app.memberships.first
+        expect(membership).to be_default
+      end
+    end
+
+    describe "#create_default_app" do
+      it "creates a default app for the user" do
+        expect{ user.create_default_app }.to change(App, :count).by(1)
+      end
+    end
+
     describe "#accept_invite" do
-      let!(:user) { create(:user) }
       let!(:invitation) { create(:invitation) }
 
       it "requires a token as an argument" do
