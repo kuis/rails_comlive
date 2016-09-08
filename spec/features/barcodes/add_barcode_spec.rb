@@ -1,20 +1,18 @@
 require 'rails_helper'
 
-feature 'Adding barcode to a packaging' do
+feature 'Adding barcode' do
   given(:user) { create(:user) }
-  given(:app) { user.default_app }
-  given(:commodity_reference) { create(:generic_commodity_reference, app_id: app.id) }
-  given(:packaging) { create(:packaging, commodity_reference_id: commodity_reference.id) }
+  given(:commodity) { create(:commodity) }
   given(:barcode) { build(:barcode) }
 
   background do
     log_in(user)
-    visit app_commodity_reference_packaging_path(app, commodity_reference, packaging)
+    visit commodity_path(commodity)
     click_link "Add Barcode"
   end
 
   context "With valid details" do
-    scenario "User can successfully add barcode to a package" do
+    scenario "User can successfully add barcode to a commodity" do
       select barcode.format.titleize.upcase, from: "barcode[format]"
       fill_in "barcode[content]", with: barcode.content
 
