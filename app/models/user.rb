@@ -4,8 +4,6 @@ class User < ApplicationRecord
   has_many :brands, source: :member, source_type: "Brand", through: :memberships
   has_many :standards, source: :member, source_type: "Standard", through: :memberships
 
-  after_create :create_app
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider     = auth.provider
@@ -22,26 +20,18 @@ class User < ApplicationRecord
     invitation = Invitation.find_by(token: token, accepted: false)
     return if invitation.nil?
     self.apps << invitation.app
+    memberships.find_by(member_type: "App", member_id: invitation.app.id).update(default: true)
     invitation.update(accepted: true)
     return invitation
   end
 
   def default_app
-    self.apps.find_by(default: true)
+    memberships.find_by(member_type: "App", default: true).member
   end
 
-  private
-
-  def create_app
-    app = self.apps.create(name: Faker::App.name, description: "App description", default: true)
-    self.memberships.find_by(member_type: "App", member_id: app.id).update(owner: true)
+  def create_default_app
+    app = apps.create(name: "Default App", description: "This is your default app")
+    memberships.find_by(member_type: "App", member_id: app.id).update(owner: true, default: true)
+    return app
   end
-
-  #def assign_token
-  #  loop do
-  #    self.token = SecureRandom.base64.tr('+/=', 'Qrt')
-  #    break unless User.exists?(token: token)
-  #  end
-  #end
-
 end
