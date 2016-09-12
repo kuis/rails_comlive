@@ -80,12 +80,10 @@ RSpec.describe StandardsController, :type => :controller do
   context "As an unauthenticated user" do
 
     describe "GET #index" do
-      it "redirects to the signin page" do
+      it "returns 200 http status code" do
         get :index
 
-        expect(response.status).to eq 302
-        expect(response).to redirect_to(login_path)
-        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
+        expect(response.status).to eq 200
       end
     end
 
@@ -110,12 +108,10 @@ RSpec.describe StandardsController, :type => :controller do
     end
 
     describe "GET #show" do
-      it "redirects to the signin page" do
-        get :show, params: { id: 1 }
+      it "returns 200 http status code" do
+        get :show, params: { uuid: standard.uuid, title: standard.name }
 
-        expect(response.status).to eq 302
-        expect(response).to redirect_to(login_path)
-        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
+        expect(response.status).to eq 200
       end
     end
 

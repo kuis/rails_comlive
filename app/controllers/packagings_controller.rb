@@ -1,9 +1,17 @@
 class PackagingsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_app
   before_action :set_commodity_reference
 
-  after_action :verify_authorized
+  after_action :verify_authorized, except: :index
+
+  def index
+    if @app.present?
+      @packagings = @commodity_reference.packagings.page(params[:page])
+    else
+      @packagings = Packaging.page(params[:page])
+    end
+  end
 
   def new
     authorize @app, :show?
@@ -22,8 +30,13 @@ class PackagingsController < ApplicationController
   end
 
   def show
-    authorize @app
-    @packaging = @commodity_reference.packagings.find(params[:id])
+    if @app.present?
+      authorize @app
+      @packaging = @commodity_reference.packagings.find(params[:id])
+    else
+      skip_authorization
+      @packaging = Packaging.find_by(uuid: params[:uuid])
+    end
   end
 
   def edit
@@ -44,10 +57,12 @@ class PackagingsController < ApplicationController
   private
 
   def set_app
+    return unless params[:app_id]
     @app = App.find(params[:app_id])
   end
 
   def set_commodity_reference
+    return unless params[:app_id]
     @commodity_reference = @app.commodity_references.find(params[:commodity_reference_id])
   end
 
