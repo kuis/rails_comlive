@@ -1,0 +1,9 @@
+%tr
+  %td
+    - if @commodity_reference
+      = link_to packaging.name, [@app, @commodity_reference, packaging]
+    - else
+      = link_to packaging.name, slugged_packaging_path(packaging.uuid, packaging.name.parameterize)
+  %td= packaging.quantity
+  %td= packaging.uom
+  %td= packaging.visibility_status

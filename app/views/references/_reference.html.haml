@@ -1,0 +1,12 @@
+%p
+  Source Commodity: #{reference.source_commodity_reference.name}
+%p
+  Kind: #{reference.kind}
+%p
+  Target Commodity: #{reference.target_commodity_reference.name}
+%p
+  Visibility: #{reference.visibility_status}
+%p
+  Description: #{reference.description}
+%p= link_to "View", [@app,reference]
+%hr/

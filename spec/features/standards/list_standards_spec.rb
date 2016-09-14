@@ -16,12 +16,13 @@ feature 'Listing Standards' do
       Standard.all.each do |standard|
         expect(page).to have_text(standard.name)
       end
+      expect(page).to have_text("2 Standards")
     end
 
     scenario "With no standards present, it should display no standards found" do
       visit standards_path
 
-      expect(page).to have_text("No standards found")
+      expect(page).to have_text("0 Standards")
     end
   end
 end

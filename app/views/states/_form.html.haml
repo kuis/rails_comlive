@@ -1,0 +1,12 @@
+= form_for [@app,@commodity_reference,@state], html: { id: "commodity-state"} do |f|
+  = errors_for @state
+  .form-group
+    = f.label :status
+    = f.select :status, options_for_states, {},  class: "form-control"
+  .form-group
+    = f.label :info
+    = f.text_area :info, class: "form-control", rows: 3
+  .form-group
+    = f.label :url
+    = f.text_field :url, class: "form-control"
+  = f.submit class: "btn btn-primary"

@@ -11,18 +11,16 @@ feature 'Adding packaging to a commodity' do
     visit app_commodity_reference_path(app, commodity_reference)
   end
 
-  scenario 'User can add packaging to a commodity reference', js: true do
+  scenario 'User can add packaging to a commodity reference' do
     click_link "Add Packaging"
 
-    within("div#sharedModal") do
-      fill_in 'packaging[name]', with: packaging.name
-      fill_in 'packaging[description]',with: packaging.description
-      fill_in 'packaging[quantity]', with: packaging.quantity
-      fill_in 'packaging[uom]', with: packaging.uom
-      select 'Private', from: 'packaging[visibility]'
+    fill_in 'packaging[name]', with: packaging.name
+    fill_in 'packaging[description]',with: packaging.description
+    fill_in 'packaging[quantity]', with: packaging.quantity
+    fill_in 'packaging[uom]', with: packaging.uom
+    select 'Private', from: 'packaging[visibility]'
 
-      click_button 'Submit'
-    end
+    click_button 'Create Packaging'
 
     expect(page).to have_link(packaging.name)
     expect(page).to have_content(packaging.quantity)

@@ -1,0 +1,28 @@
+/ navbar
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    / Brand and toggle get grouped for better mobile display
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to root_path, class: "navbar-brand visible-xs" do
+        = image_tag "logo.png", alt: "Logo"
+    / Collect the nav links, forms, and other content for toggling
+    #bs-navbar-collapse.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li.active
+          %a{:href => "#about"}
+            ABOUT
+            %span.sr-only (current)
+        %li
+          %a{:href => "#signup"} SIGN UP
+        %li
+          %a{:href => "#contact"} CONTACT
+      %ul.nav.navbar-nav.navbar-right
+        %li= button_to "LOGIN", login_path, class: "btn btn-brand", method: :get
+    / /.navbar-collapse
+  / /.container
+/ navbar

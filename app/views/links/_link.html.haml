@@ -1,0 +1,8 @@
+%tr
+  %td= link.description
+  %td= link_to "Open Link", link.url, target: "_blank"
+  %td= link.visibility_status
+  %td
+    = link_to edit_app_link_path(@app, link), class: "pull-right" do
+      %i.fa.fa-pencil
+      Edit
