@@ -1,18 +1,8 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  #devise :invitable, :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable, :trackable, :validatable
-
-  #before_create :assign_token
-
-  #validates :token, uniqueness: true
-  has_many :apps
   has_many :memberships
+  has_many :apps, source: :member, source_type: "App", through: :memberships
   has_many :brands, source: :member, source_type: "Brand", through: :memberships
   has_many :standards, source: :member, source_type: "Standard", through: :memberships
-  has_many :members
-  has_many :invited_apps, through: :members, source: :app
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
@@ -27,13 +17,22 @@ class User < ApplicationRecord
     end
   end
 
-  private
+  def accept_invite(token)
+    invitation = Invitation.find_by(token: token, accepted: false)
+    return if invitation.nil?
+    self.apps << invitation.app
+    memberships.find_by(member_type: "App", member_id: invitation.app.id).update(default: true)
+    invitation.update(accepted: true)
+    return invitation
+  end
 
-  #def assign_token
-  #  loop do
-  #    self.token = SecureRandom.base64.tr('+/=', 'Qrt')
-  #    break unless User.exists?(token: token)
-  #  end
-  #end
+  def default_app
+    memberships.find_by(member_type: "App", default: true).member
+  end
 
+  def create_default_app
+    app = apps.create(name: "Default App", description: "This is your default app")
+    memberships.find_by(member_type: "App", member_id: app.id).update(owner: true, default: true)
+    return app
+  end
 end

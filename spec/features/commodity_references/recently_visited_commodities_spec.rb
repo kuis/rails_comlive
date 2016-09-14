@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Recently Visited Commodity References' do
-  let!(:user) { create(:user) }
-  let!(:app) { create(:app, user_id: user.id) }
-  let!(:commodity_references){ create_list(:commodity_reference, 10, app_id: app.id) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
+  given(:commodity_references){ create_list(:commodity_reference, 10, app_id: app.id) }
 
   background do
     log_in(user)

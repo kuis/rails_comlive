@@ -5,6 +5,9 @@ class Auth0Controller < ApplicationController
     session[:userinfo] = request.env['omniauth.auth']
     session[:user_id] = user.id
 
+    user.accept_invite(params[:state]) if params[:state]
+    user.create_default_app unless params[:state]
+
     # Redirect to the URL you want after successfull auth
     redirect_to after_sign_in_path, notice: "Signed in successfully"
   end

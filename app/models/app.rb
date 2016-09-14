@@ -1,5 +1,4 @@
 class App < ApplicationRecord
-  belongs_to :user
   has_many :commodity_references
   has_many :links
   has_many :references
@@ -7,12 +6,13 @@ class App < ApplicationRecord
   has_many :custom_units
   has_many :brands
   has_many :standards
-  has_many :members
-  has_many :users, through: :members
+  has_many :invitations
+  has_many :memberships, as: :member
+  has_many :users, through: :memberships
 
   before_create :assign_uuid
 
-  validates_presence_of :user, :name
+  validates_presence_of :name
 
   private
 

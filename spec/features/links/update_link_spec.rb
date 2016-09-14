@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 feature 'Update Link' do
-  given!(:user) { create(:user) }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
-  given!(:link) { create(:link, app_id: app.id, commodity_reference: commodity_reference) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
+  given(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
+  given(:link) { create(:link, app_id: app.id, commodity_reference: commodity_reference) }
 
   background do
     log_in(user)

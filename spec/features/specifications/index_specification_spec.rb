@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Visiting #index page' do
-  given!(:user) { create(:user) }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
+  given(:commodity_reference) { create(:commodity_reference, app_id: app.id) }
 
   background do
     log_in(user)

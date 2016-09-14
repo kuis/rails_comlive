@@ -4,15 +4,20 @@ Rails.application.routes.draw do
   get "/auth/failure" => "auth0#failure"
 
   get "login" => "sessions#new", as: :login
+  get "invitations/:token" => "invitations#accept", as: :accept_invitation
   delete "logout" => "sessions#destroy", as: :logout
 
   root to: "apps#index", constraints: lambda { |request| request.session[:user_id].present? }
   root to: "welcome#landing"
 
-  resources :commodities, :brands, :standards
+  resources :commodities do
+    resources :barcodes
+  end
+
+  resources :brands, :standards
 
   resources :apps do
-    resources :invitations
+    resources :invitations, only: [:new, :create]
     resources :commodity_references, path: "commodities" do
       collection do
         get :autocomplete
@@ -21,6 +26,7 @@ Rails.application.routes.draw do
       resources :states, :specifications
       resources :packagings do
         resources :specifications
+        resources :barcodes
       end
     end
 
@@ -33,9 +39,6 @@ Rails.application.routes.draw do
   resources :unspsc_segments, :unspsc_families, :unspsc_classes, :unspsc_commodities
   resources :ownerships, :standardizations
   resources :uoms, only: [:index]
-
-  get "/", to: "welcome#landing", as: :landing
-
 
   # API STUFF
 

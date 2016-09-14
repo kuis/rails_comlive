@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Commodity Reference state' do
-  given!(:user) { create(:user) }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:commodity_reference) { create(:commodity_reference, app: app) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
+  given(:commodity_reference) { create(:commodity_reference, app: app) }
   given(:state) { build(:state) }
 
   background do

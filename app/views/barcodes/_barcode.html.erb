@@ -1,0 +1,5 @@
+<tr>
+  <td><%= barcode.format.titleize %></td>
+  <td><%= barcode.content %></td>
+  <td><%= barcode.format == "qr_code" ? image_tag(barcode.output) : barcode.output %></td>
+</tr>

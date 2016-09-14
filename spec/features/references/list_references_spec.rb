@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature "Visiting references#index page" do
-  given!(:user){ create(:user) }
-  given!(:app) { create(:app, user_id: user.id) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
   given!(:reference_x) { create(:reference, app: app) }
   given!(:reference_y) { create(:reference, app: app) }
 

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature 'Login with Omniauth' do
-  given!(:user) { create(:user) }
-  given(:app) { create(:app, user: user) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
 
   context "With valid credentials" do
     scenario 'Should successfully login user' do

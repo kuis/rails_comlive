@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Show Commodity Reference' do
-  given!(:user) { create(:user) }
-  given!(:app) { create(:app, user: user) }
-  given!(:commodity_reference) { create(:commodity_reference, app: app) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
+  given(:commodity_reference) { create(:commodity_reference, app: app) }
 
   background do
     log_in(user)

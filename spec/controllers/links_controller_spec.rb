@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe LinksController, :type => :controller do
-  let!(:user) { create(:user) }
-  let!(:app) { create(:app, user: user) }
-  let!(:commodity_reference) { create(:commodity_reference, app: app) }
-  let!(:link){  create(:link, app_id: app.id) }
+  let(:user) { create(:user) }
+  let(:app) { user.default_app }
+  let(:commodity_reference) { create(:commodity_reference, app: app) }
+  let(:link){  create(:link, app_id: app.id) }
 
   before(:each) do
     sign_in user

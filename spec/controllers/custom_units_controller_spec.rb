@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CustomUnitsController, :type => :controller do
-  let!(:user) { create(:user) }
-  let!(:app) { create(:app, user: user) }
+  let(:user) { create(:user) }
+  let(:app) { user.default_app }
 
   context "As an authenticated user" do
     before(:each) do
@@ -81,7 +81,7 @@ RSpec.describe CustomUnitsController, :type => :controller do
   context  "As an unauthenticated user" do
     before(:each) do
       user = create(:user)
-      app = create(:app, user_id: user.id)
+      app = create(:app)
     end
 
     describe "GET #index" do

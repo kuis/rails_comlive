@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 feature "Visiting reference#show page" do
-
-  given!(:user){ create(:user) }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:reference) { create(:reference, app: app) }
+  given(:user) { create(:user) }
+  given(:app) { user.default_app }
+  given(:reference) { create(:reference, app: app) }
 
   background do
     log_in(user)
