@@ -1,5 +1,5 @@
 class CommoditiesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show, :autocomplete, :prefetch]
 
   def index
     if params[:q]
@@ -15,9 +15,12 @@ class CommoditiesController < ApplicationController
   end
 
   def show
-    @commodity = Commodity.find(params[:id])
-    @packaging = Packaging.new
-    @standardization = Standardization.new
+    if user_signed_in?
+      @commodity = Commodity.find_by(id: params[:id])
+    else
+      authenticate_user! if params[:id]
+      @commodity = Commodity.find_by(uuid: params[:uuid])
+    end
   end
 
   def new

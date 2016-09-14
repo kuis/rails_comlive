@@ -24,7 +24,7 @@ class BarcodeGenerator
   def initialize(format, content)
     @format = format
     klass = normalize_class(format)
-    @barcode = format == "qr_code" ? klass.new(content, level: :q, size: 5) : klass.new(content)
+    @barcode = format == "qr_code" ? klass.new(content, level: :l, size: 10) : klass.new(content)
   end
 
   def generate

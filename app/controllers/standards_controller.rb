@@ -1,5 +1,5 @@
 class StandardsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @standards = Standard.all
@@ -10,7 +10,12 @@ class StandardsController < ApplicationController
   end
 
   def show
-    @standard = Standard.find(params[:id])
+    if user_signed_in?
+      @standard = Standard.where("id = ? or uuid =? ", params[:id], params[:uuid]).first
+    else
+      authenticate_user! if params[:id]
+      @standard = Standard.find_by(uuid: params[:uuid])
+    end
   end
 
   def create

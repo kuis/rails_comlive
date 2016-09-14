@@ -1,5 +1,5 @@
 class BrandsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index,:show]
 
   def index
     @brands = Brand.all
@@ -19,8 +19,13 @@ class BrandsController < ApplicationController
   end
 
   def show
-    @brand = Brand.find(params[:id])
-    @standardization = Standardization.new
+    if user_signed_in?
+      @brand = Brand.find_by(id: params[:id])
+      @standardization = Standardization.new
+    else
+      authenticate_user! if params[:id]
+      @brand = Brand.find_by(uuid: params[:uuid])
+    end
   end
 
   def edit

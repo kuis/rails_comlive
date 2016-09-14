@@ -1,4 +1,6 @@
 class Commodity < ApplicationRecord
+  include Uuideable
+
   belongs_to :brand, optional: true
   has_many :commodity_references
   has_many :barcodes, as: :barcodeable
@@ -20,8 +22,6 @@ class Commodity < ApplicationRecord
     where(:id => ids).order(order)
   }
 
-  before_create :set_uuid
-
   def create_reference(user)
     app = user.default_app
     attributes = self.class.attribute_names.reject{|a|
@@ -34,12 +34,6 @@ class Commodity < ApplicationRecord
   end
 
   def as_json(options={})
-    super(:only => [:id,:name]).merge(href:  Rails.application.routes.url_helpers.app_commodity_path(self.app,self))
-  end
-
-  private
-
-  def set_uuid
-    self.uuid = SecureRandom.uuid
+    super(:only => [:id,:name]).merge(href:  Rails.application.routes.url_helpers.slugged_commodity_path(self.uuid,self.name.parameterize))
   end
 end
