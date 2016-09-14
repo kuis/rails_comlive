@@ -31,6 +31,11 @@ RSpec.describe Brand, :type => :model do
       expect(assoc.macro).to eq :has_many
     end
 
+    it "has many commodities" do
+      assoc = Brand.reflect_on_association(:commodities)
+      expect(assoc.macro).to eq :has_many
+    end
+
     it "has many standards" do
       assoc = Brand.reflect_on_association(:standards)
       expect(assoc.macro).to eq :has_many

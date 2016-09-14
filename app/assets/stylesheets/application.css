@@ -19,7 +19,15 @@
  *= require typeahead
  *= require select2.min
  *= require app
+ *= require custom
  *= require commodities
  *= require barcodes
  *= require_self
  */
+
+.breadcrumb li:last-child {
+    color: #464441;
+}
+.alert{
+    border-radius: 0px;
+}

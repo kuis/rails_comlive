@@ -1,0 +1,37 @@
+%body
+  .row
+    .col-md-9
+      .widget.stats-widget
+        %header.widget-header
+          %h3.widget-title= @commodity.name
+          %small.text-color= @commodity.short_description
+        .widget-body.clearfix
+          %p.m-b-lg= @commodity.long_description
+        - if @commodity.generic
+          %footer.widget-footer.bg-warning
+            %h5 THIS IS A GENERIC COMMODITY
+      / .widget
+      .widget
+        %header.widget-header
+          %h4.widget-title.pull-left Commodity Barcodes
+          %span.pull-right= link_to "Add Barcode", new_commodity_barcode_path(@commodity)
+        %hr.widget-separator/
+        .widget-body
+          .table-responsive
+            %table.table.no-cellborder
+              %thead
+                %tr
+                  %th Format
+                  %th Data
+                  %th Barcode
+              %tbody
+                = render @commodity.barcodes
+      / .widget
+    .col-md-3
+      .widget
+        %header.widget-header
+          %h4.widget-title.pull-left Share Barcode
+        %hr.widget-separator/
+        .widget-body.text-center
+          = barcode_for(@commodity)
+      / .widget

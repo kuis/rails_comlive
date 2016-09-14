@@ -18,15 +18,14 @@ feature 'Adding specification to a commodity_reference' do
     end
 
     scenario "Providing only value" do
-      within("div#sharedModal") do
-        fill_in "specification[property]", with: specification.property
-        fill_in "specification[value]", with: specification.value
-        select specification.property, from: "type_of_measure"
-        select "Joule (J)", from: "specification[uom]"
-        select 'Private', from: 'specification[visibility]'
+      fill_in "specification[property]", with: specification.property
+      fill_in "specification[value]", with: specification.value
+      select specification.property, from: "type_of_measure"
+      select "Joule (J)", from: "specification[uom]"
+      select 'Private', from: 'specification[visibility]'
 
-        click_button "Submit"
-      end
+      click_button "Create Specification"
+
       expect(page).to have_text("Specification successfully created")
       expect(page).to have_text(specification.property)
       expect(page).to have_text(specification.value)
@@ -35,17 +34,17 @@ feature 'Adding specification to a commodity_reference' do
     end
 
     scenario "Providing either a min or a max" do
-      within("div#sharedModal") do
-        fill_in "specification[property]", with: specification.property
-        choose('Define Min / Max')
-        fill_in 'specification[min]', with: specification.min
-        fill_in 'specification[max]', with: specification.max
-        select specification.property, from: "type_of_measure"
-        select "Joule (J)", from: "specification[uom]"
-        select 'Public', from: 'specification[visibility]'
 
-        click_button "Submit"
-      end
+      fill_in "specification[property]", with: specification.property
+      find(:css, 'label[for="value-opts_min-max"]').click
+      fill_in 'specification[min]', with: specification.min
+      fill_in 'specification[max]', with: specification.max
+      select specification.property, from: "type_of_measure"
+      select "Joule (J)", from: "specification[uom]"
+      select 'Public', from: 'specification[visibility]'
+
+      click_button "Create Specification"
+
       expect(page).to have_text("Specification successfully created")
       expect(page).to have_text(specification.property)
       expect(page).to have_text(specification.min)

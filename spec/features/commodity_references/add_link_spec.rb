@@ -11,17 +11,15 @@ feature 'Adding link to a commodity reference' do
     visit app_commodity_reference_path(app, commodity_reference)
   end
 
-  scenario 'User can add a link to a commodity_reference', js: true do
+  scenario 'User can add a link to a commodity_reference' do
     click_link "Add Link"
 
-    within("div#sharedModal") do
-      fill_in 'link[url]', with: link.url
-      fill_in 'link[description]',with: link.description
-      select commodity_reference.name, from: 'link[commodity_reference_id]'
-      select "Private", from: 'link[visibility]'
+    fill_in 'link[url]', with: link.url
+    fill_in 'link[description]',with: link.description
+    select commodity_reference.name, from: 'link[commodity_reference_id]'
+    select "Private", from: 'link[visibility]'
 
-      click_button 'Submit'
-    end
+    click_button 'Create Link'
 
     expect(page).to have_link('Open Link', href: link.url)
     expect(page).to have_content(link.description)

@@ -1,0 +1,8 @@
+%tr
+  %td= specification.property
+  %td= specification.value ? specification.value : "Max: #{specification.max} Min: #{specification.min}"
+  %td
+    = specification.uom
+  %td
+    = specification.visibility_status
+  %td= link_to "View", object_url(specification.parent, specification)

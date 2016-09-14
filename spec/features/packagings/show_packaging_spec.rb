@@ -19,7 +19,16 @@ feature 'Packaging#show' do
   end
 
   context "When not logged in" do
-    scenario "Should show a qr code"
+    scenario "Should show a qr code" do
+      expect(page).to have_css("img.qr_code")
+    end
+
+    scenario "Should show packaging details" do
+      expect(page).to have_content(packaging.name)
+      expect(page).to have_content(packaging.quantity)
+      expect(page).to have_content(packaging.description)
+      expect(page).to have_content(packaging.uom)
+    end
   end
 
 end

@@ -1,0 +1,6 @@
+.media
+  .media-body
+    %h4.media-heading= link_to commodity.name, slugged_commodity_path(commodity.uuid, commodity.name.parameterize), class: "search-result"
+    %p
+      %small= commodity.short_description
+    %p= commodity.long_description

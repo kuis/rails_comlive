@@ -13,7 +13,6 @@ class SpecificationsController < ApplicationController
   def new
     authorize @app, :show?
     @specification = Specification.new
-    render layout: !request.xhr?
   end
 
   def create

@@ -1,0 +1,31 @@
+.row
+  .col-md-8
+    %h1= @standard.name
+    %p= @standard.description
+  .col-md-4
+    - if user_signed_in? && !@standard.official?
+      %h2 Is this your Standard
+      %p Claim it now and start interacting with your fans today!
+      = link_to "Claim This Standard", "#", class: "btn btn-primary", data: { toggle: "modal", target: "#claimModal" }
+/ Modal
+#claimModal.modal.fade{"aria-labelledby" => "claimModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#claimModalLabel.modal-title Claim Standard
+      .modal-body
+        %p
+          You have requested to claim
+          = succeed "." do
+            %b= @standard.name
+        = form_for Ownership.new do |f|
+          = f.hidden_field :child_id, value: @standard.id
+          = f.hidden_field :child_type, value: @standard.class.to_s
+          .form-group
+            = f.label :owning_standard
+            = f.select :parent_id, options_for_standards, {}, class: "form-control"
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        %button#claim-brand.btn.btn-primary{:type => "button"} Submit Claim
