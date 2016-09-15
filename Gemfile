@@ -66,4 +66,3 @@ gem 'knock', '~> 1.4.2'
 
 # API
 gem 'active_model_serializers'
-gem 'versionist'
