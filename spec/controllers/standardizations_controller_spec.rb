@@ -13,7 +13,7 @@ RSpec.describe StandardizationsController, :type => :controller do
     describe "POST #create" do
       context "with valid attributes" do
         it "saves the new standardization in the database" do
-          attrs = { standard_id: standard.id, referable_type: commodity_reference.class.to_s, referable_id: commodity_reference.id }
+          attrs = { standard_id: standard.id, referable_type: "CommodityReference", referable_id: commodity_reference.id }
           expect{
             post :create, params: { standardization: attrs }
           }.to change(Standardization, :count).by(1)

@@ -1,8 +1,15 @@
-%tr
-  %td= link.description
-  %td= link_to "Open Link", link.url, target: "_blank"
-  %td= link.visibility_status
-  %td
-    = link_to edit_app_link_path(@app, link), class: "pull-right" do
-      %i.fa.fa-pencil
-      Edit
+- if policy(link).show?
+  %tr.segment.segment-edit
+    %td
+      = link_to link.url, target: "_blank" do
+        = link.url
+        %i.fa.fa-external-link.fz-sm
+    %td= link.description
+    %td.segment-actions
+      %span.hidden 2
+      - if policy(link).edit?
+        = link_to "#", class: "btn-edit" do
+          %i.fa.fa-pencil
+          Edit
+      .segment-state.dropdown
+        = render 'shared/pubmode', mode: link.visibility_status

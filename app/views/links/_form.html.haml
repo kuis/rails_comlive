@@ -1,4 +1,4 @@
-= form_for [@app,@link], html: { class: "form-horizontal" } do |f|
+= form_for [@app, @commodity_reference, @link], html: { class: "form-horizontal" } do |f|
   = errors_for @link
   .form-group
     = f.label :url, class: "col-sm-4 control-label"

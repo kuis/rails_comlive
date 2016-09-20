@@ -9,7 +9,7 @@
           %span.menu-caret.foldable
             %i.zmdi.zmdi-hc-sm.zmdi-chevron-right
         %ul.submenu
-          %li= link_to "All Commodities", current_app ? app_commodity_references_path(current_app) : commodities_path
+          %li= link_to "All Commodities", commodities_path
           %li= link_to "Add Commodity", new_commodity_path
       / .menu-item
       %li.menu-item.has-submenu
@@ -34,7 +34,7 @@
           %li= link_to "All Standards", standards_path
           %li= link_to "Add Standard", new_standard_path
       / .menu-item
-      - if current_app
+      - if user_signed_in?
         - if policy(current_app).invite?
           %li.menu-item
             = link_to new_app_invitation_path(current_app), class: "menu-link" do

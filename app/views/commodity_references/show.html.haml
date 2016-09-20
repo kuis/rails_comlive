@@ -54,7 +54,7 @@
       .widget
         %header.widget-header
           %h4.widget-title.pull-left References
-          %span.pull-right= link_to "Add Reference", new_app_reference_path(@app)
+          %span.pull-right= link_to "Add Reference", new_app_commodity_reference_reference_path(@app, @commodity_reference)
         %hr.widget-separator/
         .widget-body
           - if @app.references.any?

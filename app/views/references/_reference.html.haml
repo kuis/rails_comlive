@@ -1,12 +1,14 @@
-%p
-  Source Commodity: #{reference.source_commodity_reference.name}
-%p
-  Kind: #{reference.kind}
-%p
-  Target Commodity: #{reference.target_commodity_reference.name}
-%p
-  Visibility: #{reference.visibility_status}
-%p
-  Description: #{reference.description}
-%p= link_to "View", [@app,reference]
-%hr/
+- if policy(reference).show?
+  %tr.segment.segment-edit
+    %td= reference.source_commodity.name
+    %td= reference.kind
+    %td= reference.target_commodity.name
+    %td= truncate reference.description, length: 50
+    %td.segment-actions
+      %span.hidden 2
+      - if policy(reference).edit?
+        = link_to "#", class: "btn-edit" do
+          %i.fa.fa-pencil
+          Edit
+      .segment-state.dropdown
+        = render 'shared/pubmode', mode: reference.visibility_status

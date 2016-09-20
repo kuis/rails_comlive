@@ -1,0 +1,15 @@
+#tab-4.tab-pane.fade{ role: "tabpanel" }
+  .row
+    .col-md-12
+      %h4.segment-name References
+  .table-responsive.box.p-t-md
+    %table.table.table-striped.no-cellborder.dataTable{ cellspacing: 0}
+      %thead
+        %tr
+          %th Source Commodity
+          %th Kind
+          %th Target Commodity
+          %th Description
+          %th
+      %tbody
+        = render @references

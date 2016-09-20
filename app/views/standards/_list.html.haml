@@ -5,8 +5,8 @@
     %span.fz-sm= standard.description
   %td.segment-actions
     %span.hidden 2
-    %a.btn-edit{:href => "commodity_edit-standard.html"}
+    %a.btn-edit{:href => "#"}
       %i.fa.fa-pencil
       Edit
     .segment-state.dropdown.inline-block
-      = render 'shared/pubmode', mode: "Official"
+      = render 'shared/pubmode', mode: standard.visibility_status

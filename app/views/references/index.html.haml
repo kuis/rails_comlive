@@ -1,8 +1,8 @@
 %h1
   References
-  %small= link_to "Add", new_app_reference_path(@app)
+  %small= link_to "Add", "#"
 - if @references.any?
   = render @references
 - else
   %p
-    No references found. #{link_to "Add Reference", new_app_reference_path(@app)}
+    No references found. #{link_to "Add Reference", "#" }

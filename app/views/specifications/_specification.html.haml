@@ -1,8 +1,15 @@
-%tr
-  %td= specification.property
-  %td= specification.value ? specification.value : "Max: #{specification.max} Min: #{specification.min}"
-  %td
-    = specification.uom
-  %td
-    = specification.visibility_status
-  %td= link_to "View", object_url(specification.parent, specification)
+- if policy(specification).show?
+  %tr.segment.segment-edit
+    %td= specification.property
+    %td= specification.uom
+    %td= specification.value
+    %td= specification.min
+    %td= specification.max
+    %td.segment-actions
+      %span.hidden 2
+      - if policy(specification).edit?
+        = link_to edit_polymorphic_url(object_url(specification.parent, specification)), class: "btn-edit" do
+          %i.fa.fa-pencil
+          Edit
+      .segment-state.dropdown
+        = render 'shared/pubmode', mode: specification.visibility_status
