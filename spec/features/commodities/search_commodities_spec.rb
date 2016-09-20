@@ -1,16 +1,19 @@
 require 'rails_helper'
 
-feature 'Searching commodity References' do
+feature 'Searching commodities' do
   given(:user) { create(:user) }
   given(:app) { user.default_app }
-  given!(:samsung){ create(:commodity_reference, app_id: app.id, name: "Samsung Tvs") }
-  given!(:sony){ create(:commodity_reference,  app_id: app.id, name: "Sony home theatre") }
-  given!(:hotpoint){ create(:commodity_reference,  app_id: app.id, name: "Hotpoint electronics") }
+  given!(:samsung){ create(:commodity, name: "Samsung Tvs") }
+  given!(:sony){ create(:commodity,  name: "Sony home theatre") }
+  given!(:hotpoint){ create(:commodity, name: "Hotpoint electronics") }
 
   background do
     log_in(user)
-    CommodityReference.reindex
-    visit app_commodity_references_path(app)
+    Commodity.reindex
+    Commodity.all.each{|c|
+      c.create_reference(user)
+    }
+    visit commodities_path(app)
   end
 
   scenario "returns a list of matching commodity references" do
@@ -28,17 +31,20 @@ feature 'Searching commodity References' do
   scenario "renders a type ahead suggestion", js: true do
     type_ahead("commodity-search", { with: "sony"} )
 
-    expect(page).to have_link(sony.name, href: app_commodity_reference_path(app, sony) )
+    expect(page).to have_link(sony.name, href: commodity_path(sony) )
   end
 
-  scenario "clicking suggestion redirects to commodity reference", js: true do
+  scenario "clicking suggestion redirects to the commodity", js: true do
     type_ahead("commodity-search", { with: "hotpoint"} )
 
     within("div.tt-dataset") do
       click_link hotpoint.name
     end
 
-    expect(page.current_path).to eq app_commodity_reference_path(app, hotpoint)
+    expect(page.current_path).to eq commodity_path(hotpoint)
+  end
+
+  scenario "When user not logged in", skip: "Address case when user is not logged in" do
   end
 end
 

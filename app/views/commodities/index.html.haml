@@ -21,7 +21,7 @@
         .widget
           %header.widget-header
             %h4.widget-title.pull-left Search Results
-            %span.pull-right= link_to "Clear", app_commodities_path(@app)
+            %span.pull-right= link_to "Clear", commodities_path
           %hr.widget-separator/
           .widget-body
             - if @commodities.any?

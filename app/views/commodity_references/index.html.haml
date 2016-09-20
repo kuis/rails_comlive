@@ -10,7 +10,7 @@
           = form_tag app_commodity_references_path(@app), method: :get do
             .input-group.stylish-input-group
               = text_field_tag :query, params[:query], id: "commodity-search", class: "form-control", placeholder: "Search Commodities",                                      |
-                autocomplete: "off", data: { prefetch_url: prefetch_app_commodity_references_path(@app), autocomplete_url: autocomplete_app_commodity_references_path(@app) } |
+                autocomplete: "off", data: { prefetch_url: "#", autocomplete_url: "#" } |
               %span.input-group-addon
                 = button_tag type: "submit", name: nil, id: "search-btn" do
                   %span.fa.fa-search

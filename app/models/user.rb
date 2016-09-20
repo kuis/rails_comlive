@@ -28,7 +28,9 @@ class User < ApplicationRecord
   end
 
   def default_app
-    memberships.find_by(member_type: "App", default: true).member
+    membership = memberships.find_by(member_type: "App", default: true)
+    return nil unless membership
+    membership.member
   end
 
   def create_default_app

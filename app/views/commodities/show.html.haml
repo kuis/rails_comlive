@@ -1,37 +1,105 @@
-%body
+%section.app-content
+  - if @brand
+    .box.commodity-brand.p-sm
+      .row.no-gutter
+        .row-sm-height
+          .col-md-6.col-sm-height.col-sm-middle
+            = link_to @brand, class: "brand-logo" do
+              = image_tag "http://placehold.it/100x100"
+            = link_to @brand.name, @brand, class: "fz-lg p-l-sm brand-title"
+
+          .hidden-xs.col-md-6.col-sm-height.col-sm-middle.text-right
+            - (0..3).each do
+              .hidden-sm.avatar.avatar-md.avatar-circle.m-r-sm
+                = link_to "#" do
+                  = image_tag "http://placehold.it/60x60"
+
+            .pull-right.text-center
+              = link_to "#", class: "m-b-0" do
+                %span.fz-xl.fw-500.lh-1.block= @brand.commodities.count
+                = "Commodity".pluralize(@brand.commodities.count)
+
+  .box.m-0
+    .row
+      .col-md-12
+        .commodity-heading
+          %h1.p-md.pull-left= @commodity.name
+
+          - if @commodity.generic?
+            .pull-right.m-sm
+              .text-center
+                %p.m-b-xs.fz-sm Is it your commodity?
+                = link_to "#", class: "btn btn-outline rounded btn-primary" do
+                  %i.fa.fa-gavel.fa-md
+                  Claim This Commodity
+
+    .row
+      .col-md-12
+        .alert.alert-warning.m-md.m-t-0{ role: "alert" }
+          %strong State: "Early stage/prototype
+          %span Info: Descriptive text
+          = link_to "Link: link to further info page", "#", class: "alert-link"
+
+    .row.no-gutter
+      .col-sm-6.col-md-5
+        .col-sm-12
+          %h4.p-sm.p-l-md.p-b-0.fz-md.pull-left.m-0 Image Gallery
+        .col-sm-12.segment.segment-edit.segment-image
+          .segment-actions
+            = link_to "#", class: "btn-edit" do
+              %i.fa.fa-pencil
+              Edit
+            .segment-state.dropdown
+              = render 'shared/pubmode', mode: "Official"
+
+          #widget-gallery.m-md.m-r-lg
+            %ul#image-gallery.gallery.list-unstyled.cS-hidden
+              - (0..5).each do
+                %li{ data: { thumb: "http://placehold.it/50x35" } }
+                  = image_tag "http://placehold.it/500x350"
+
+
+      .col-sm-6.col-md-7
+        .col-sm-12
+          %h4.p-smp-l-md.p-b-0.fz-md.m-0.inline-block Description
+        .row.no-gutter
+          .col-md-12
+            .segment.segment-edit.segment-description
+              .segment-actions
+                = link_to "#", class: "btn-edit" do
+                  %i.fa.fa-pencil
+                  Edit
+                .segment-state.dropdown
+                  = render 'shared/pubmode', mode: "Official"
+
+              %article.p-md
+                = @commodity.short_description
+
+              %article.p-md
+                = @commodity.long_description
+
+        .row.no-gutter
+          .col-md-12
+            .segment.segment-edit.segment-description
+              .segment-actions
+
   .row
-    .col-md-9
-      .widget.stats-widget
-        %header.widget-header
-          %h3.widget-title= @commodity.name
-          %small.text-color= @commodity.short_description
-        .widget-body.clearfix
-          %p.m-b-lg= @commodity.long_description
-        - if @commodity.generic
-          %footer.widget-footer.bg-warning
-            %h5 THIS IS A GENERIC COMMODITY
-      / .widget
-      .widget
-        %header.widget-header
-          %h4.widget-title.pull-left Commodity Barcodes
-          %span.pull-right= link_to "Add Barcode", new_commodity_barcode_path(@commodity)
-        %hr.widget-separator/
-        .widget-body
-          .table-responsive
-            %table.table.no-cellborder
-              %thead
-                %tr
-                  %th Format
-                  %th Data
-                  %th Barcode
-              %tbody
-                = render @commodity.barcodes
-      / .widget
-    .col-md-3
-      .widget
-        %header.widget-header
-          %h4.widget-title.pull-left Share Barcode
-        %hr.widget-separator/
-        .widget-body.text-center
-          = barcode_for(@commodity)
-      / .widget
+    .col-md-12
+      %hr.m-0/
+      .m-b-lg.nav-tabs-horizontal
+        .segment-add
+          = render :partial => 'tab_menu'
+          .segment-actions
+            = link_to "#", class: "btn-add icon icon-circle icon-md", data: { toggle: "modal", target: "#modalAdd" } do
+              %i.fa.fa-plus
+        .tab-content
+          = render 'specifications_tab'
+          = render 'packagings_tab'
+          = render 'standards_tab'
+          = render 'references_tab'
+          = render 'classifications_tab'
+          = render 'links_tab'
+
+  = render 'add_items' if user_signed_in?
+
+

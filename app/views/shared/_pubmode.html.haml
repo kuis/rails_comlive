@@ -10,7 +10,7 @@
   %li.dropdown-header
     Publishing of the data
   %li.divider.m-0
-  %li
+  %li{ class: mode == "Public" ? "selected" : "" }
     %strong.public Public
     %small
       This information will be publicly available and published under
@@ -18,9 +18,9 @@
         %a{:href => "http://choosealicense.com/licenses/cc-by-4.0/", :target => "_blank"}
           "Creative Commons Attribution 4.0
           International Public License"
-  %li.selected
+  %li{ class: mode == "Official" ? "selected" : "" }
     %strong.official Official
     %small Approved data by the actual maker of commodity
-  %li
+  %li{ class: mode == "Private" ? "selected" : "" }
     %strong.private Private
     %small This information will only be visible to yourself and other users in your app/team.

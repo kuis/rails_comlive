@@ -1,0 +1,16 @@
+#tab-1.tab-pane.in.active.fade{ role: "tabpanel" }
+  .row
+    .col-md-12
+      %h4.segment-name Specifications
+  .table-responsive.box.p-t-md
+    %table.table.table-striped.no-cellborder.dataTable{ cellspacing: 0}
+      %thead
+        %tr
+          %th Property
+          %th Unit of Measure
+          %th Value
+          %th Minimum
+          %th Maximum
+          %th
+      %tbody
+        = render @specifications
