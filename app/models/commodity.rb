@@ -3,6 +3,11 @@ class Commodity < ApplicationRecord
 
   belongs_to :brand, optional: true
   has_many :commodity_references
+  has_many :specifications, through: :commodity_references
+  has_many :packagings, through: :commodity_references
+  has_many :standards, through: :commodity_references
+  has_many :references, through: :commodity_references
+  has_many :links, through: :commodity_references
   has_many :barcodes, as: :barcodeable
 
   validates_presence_of :name, :measured_in
@@ -31,9 +36,5 @@ class Commodity < ApplicationRecord
       hash[attribute] = self.send(attribute)
     end
     self.commodity_references.create!(attributes.merge(app_id: app.id))
-  end
-
-  def as_json(options={})
-    super(:only => [:id,:name]).merge(href:  Rails.application.routes.url_helpers.slugged_commodity_path(self.uuid,self.name.parameterize))
   end
 end

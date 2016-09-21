@@ -1,0 +1,11 @@
+= form_for [@app, @standard] do |f|
+  = errors_for @standard
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: "form-control"
+  .form-group
+    = f.select :visibility, options_for_visibility(@standard), {}, class: "form-control"
+  = f.submit class: "btn btn-primary"

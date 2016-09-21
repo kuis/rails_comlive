@@ -7,4 +7,8 @@ class Packaging < ApplicationRecord
   has_many :barcodes, as: :barcodeable
 
   validates_presence_of :uom, :quantity, :name, :description, :commodity_reference
+
+  def app
+    @app ||= commodity_reference.app
+  end
 end

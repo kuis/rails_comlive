@@ -40,6 +40,22 @@ RSpec.describe User, :type => :model do
       end
     end
 
+    describe "#name" do
+      context "With first and last name" do
+        it "returns full name" do
+          user = create(:user, first_name: "John", last_name: "Doe")
+          expect(user.name).to eq "John Doe"
+        end
+      end
+
+      context "Without first and last name" do
+        it "returns username from email" do
+          user = create(:user, first_name: nil, last_name: nil, email: "johndoe@email.com")
+          expect(user.name).to eq "johndoe"
+        end
+      end
+    end
+
     describe "#create_default_app" do
       it "creates a default app for the user" do
         expect{ user.create_default_app }.to change(App, :count).by(1)

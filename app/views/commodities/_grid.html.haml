@@ -1,0 +1,23 @@
+.grid-item.grid-item-20
+  .box.segment.segment-edit
+    .row
+      .col-md-12
+        = link_to "", "#"
+      .col-md-12
+        %h5.p-md.p-l-sm.m-0.m-r-lg.fw-600.fz-md
+          = link_to commodity.name, commodity
+      .col-md-12
+        .standard-row.standard-links
+          %small Standards
+          %p.m-0 ISO 9001:2008, ISO 50001, OK Kosher, DE-ÖKO-024
+      .col-md-12
+        .standard-row.standard-links
+          %small
+            %i.fa.fa-check.text-success
+            Specifications, Packaging, Classification, References
+    .segment-actions
+      = link_to edit_commodity_path(commodity), class: "btn-edit" do
+        %i.fa.fa-pencil
+        Edit
+      .segment-state.dropdown
+        = render 'shared/pubmode', mode: "Official"

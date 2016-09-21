@@ -1,0 +1,30 @@
+.grid-item.grid-item-20
+  .box.standard.segment.segment-edit
+    .row
+      .col-md-12
+        %h5.segment-title
+          = link_to standard do
+            %span= standard.name
+        %p.standard-description
+          = standard.description
+      .col-md-12
+        = link_to "#", class: "standard-row row-link" do
+          %p
+            %span.fz-lg= standard.brands.count
+            = "brand".pluralize(standard.brands.count)
+      .col-md-12
+        = link_to "#", class: "standard-row row-link" do
+          %p
+            %span.fz-lg 32k
+            commodities
+      .col-md-12
+        = link_to "#", class: "standard-row row-link" do
+          %p
+            %span.fz-lg 72
+            certifiers
+    .segment-actions
+      = link_to edit_standard_path(standard), class: "btn-edit" do
+        %i.fa.fa-pencil
+        Edit
+      .segment-state.dropdown.inline-block
+        = render 'shared/pubmode', mode: "Public"

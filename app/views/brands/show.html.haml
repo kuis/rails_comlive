@@ -1,0 +1,98 @@
+%section.app-content
+  .box.segment.segment-brand.segment-edit.p-sm.m-b-0
+    .row.no-gutter
+      .col-sm-6.col-md-8
+        .table-cell
+          %span.brand-logo{:title => "About Bestmalz"}
+            = image_tag "http://placehold.it/100x100"
+        .table-cell.col-sm-middle
+          %h1.m-t-0= @brand.name
+          .col-md-12
+            %i.fa.fa-map-marker.fz-md{"aria-hidden" => "true"}
+            Germany
+        .m-t-sm
+          %article
+            %p.m-0= @brand.description
+      .col-sm-6.col-md-4.brand-info.m-t-sm
+        .m-l-md.m-r-md.p-r-lg
+          %a.m-b-sm{:href => "http://www.bestmalz.de/", :target => "_blank"}
+            Official website
+            %i.fa.fa-external-link.fz-sm{"aria-hidden" => "true"}
+          .col-md-12.contact-item.m-b-sm
+            .contact-links.m-t-xs
+              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "javascript:void(0)", :title => "Phone"}
+                %i.fa.fa-phone
+              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "javascript:void(0)", :title => "Mobile"}
+                %i.fa.fa-mobile
+              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "mailto:example@rathemes.com", :title => "example@rathemes.com"}
+                %i.fa.fa-envelope-o
+              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "javascript:void(0)", :title => "rathemes"}
+                %i.fa.fa-skype
+              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "https://facebook.com/rathemes", :title => "Facebook"}
+                %i.fa.fa-facebook
+              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "https://twitter.com/rathemes", :title => "Twitter"}
+                %i.fa.fa-twitter
+          %dl.m-0
+            %dt.fw-400.m-b-xs.fz-sm Recognized in
+            %dd.m-b-xs
+              %a{:href => "http://www.", :target => "_blank"}
+                %i.icon-custom.icon-ocs.m-r-xs{"data-original-title" => "Open Corporate site description", "data-placement" => "bottom", :rel => "tooltip"}
+                %span Open corporate site
+            %dd.m-b-xs
+              %a{:href => "http://www.", :target => "_blank"}
+                %i.icon-custom.icon-wipo.m-r-xs{"data-original-title" => "WIPO description", "data-placement" => "bottom", :rel => "tooltip"}
+                %span WIPO
+    .segment-actions
+      - if user_signed_in?
+        = link_to edit_brand_path(@brand), class: "btn-edit" do
+          %i.fa.fa-pencil
+          Edit
+      .segment-state.dropdown
+        = render 'shared/pubmode', mode: "official"
+  .row
+    .col-md-12
+      %hr.m-0/
+      .m-b-lg.nav-tabs-horizontal
+        / tabs list
+        .segment-add
+          %ul.nav.nav-tabs.box.m-0{:role => "tablist"}
+            %li.active{:role => "presentation"}
+              %a{"aria-controls" => "tab-1", "data-toggle" => "tab", :href => "#tab-1", :role => "tab"} Commodities
+            %li{:role => "presentation"}
+              %a{"aria-controls" => "tab-2", "data-toggle" => "tab", :href => "#tab-2", :role => "tab"} Standards
+            %li{:role => "presentation"}
+              %a{"aria-controls" => "tab-3", "data-toggle" => "tab", :href => "#tab-3", :role => "tab"} Classification
+          / .nav-tabs
+          .segment-actions
+            - if user_signed_in?
+              = link_to new_standardization_path(referable_id: @brand.id, referable_type: @brand.class.to_s), class: "btn-add icon icon-circle icon-md load-in-modal" do
+                %i.fa.fa-plus
+                %span.hidden Assign Standard
+        / Tab panes
+        .tab-content
+          #tab-1.tab-pane.in.active.fade{:role => "tabpanel"}
+            .row
+              .col-md-12
+                .row
+                  .col-md-12
+                    %h4.segment-name
+                      = @brand.name
+                      Commodities
+                    %a.btn.btn-sm.btn-view-type{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "javascript:;", :title => "Change view"}
+                      %i.fa.fa-th-list
+                = render 'commodities/gridview', commodities: @brand.commodities
+                = render 'commodities/listview', commodities: @brand.commodities
+          / .tab-pane
+          #tab-2.tab-pane.fade{:role => "tabpanel"}
+            .row
+              .col-md-12
+                %h4.segment-name
+                  = @brand.name
+                  Standards
+                %a.btn.btn-sm.btn-view-type{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "javascript:;", :title => "Change view"}
+                  %i.fa.fa-th-list
+            = render 'standards/gridview', standards: @brand.standards
+            = render 'standards/listview', standards: @brand.standards
+          / .tab-pane
+        / .tab-content
+      / .nav-tabs-horizontal

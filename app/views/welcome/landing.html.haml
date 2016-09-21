@@ -1,0 +1,107 @@
+- title "Commodity Live"
+/ header
+.header.clearfix
+  .container
+    .header-content
+      = image_tag "commodity.live.png", alt: "image"
+      %p= t('landing.pitch') 
+      %form
+        %input.form-control{:placeholder => t('landing.searchfor').upcase, :type => "text"}/
+        %button.btn.btn-brand{:type => "submit"}= t('landing.search').upcase
+      %ul.list-inline
+        %li
+          %a{:href => "#"}
+            %i.fa.fa-twitter
+        %li
+          %a{:href => "#"}
+            %i.fa.fa-google-plus
+        %li
+          %a{:href => "#"}
+            %i.fa.fa-facebook
+        %li
+          %a{:href => "#"}
+            %i.fa.fa-linkedin
+    / header-content
+  / container
+/ header
+= render 'shared/flash'
+/ about
+#about.container
+  .row
+    .col-sm-6
+      .img-wrapper
+        = image_tag "circle-1.png", alt: "image", class: "img-responsive"
+        %p.img-heading= t('landing.why').upcase
+      / img-wrapper
+    / col
+    .col-sm-6
+      %p.desc-1= t('landing.whytext')
+    / col
+  / row
+  .row
+    .col-sm-6
+      %p.desc-1= t('landing.howtext')
+    / col
+    .col-sm-6
+      .img-wrapper
+        = image_tag "circle-2.png", alt: "image", class: "img-responsive"
+        %p.img-heading= t('landing.how').upcase
+      / img-wrapper
+    / col
+  / row
+  .row
+    .col-sm-6
+      .img-wrapper
+        = image_tag "circle-3.png", alt: "image", class: "img-responsive"
+        %p.img-heading= t('landing.whom').upcase
+      / img-wrapper
+    / col
+    .col-sm-6
+      %p.desc-1= t('landing.whomtext')
+    / col
+  / row
+/ about
+/ signup
+#signup
+  .container
+    %h1 GET STARTED
+    %h2 Sign up to add commodities
+    %form
+      .input-group
+        %input.form-control{:placeholder => "ENTER YOUR EMAIL", :type => "text"}/
+        %span.input-group-btn
+          %button.btn.btn-brand{:type => "button"}
+            CREATE
+            %span.hidden-xs FREE
+            ACCOUNT
+      / /input-group
+  / container
+/ signup
+/ contact
+#contact
+  .container
+    %h1 CONTACT
+    %h3
+      Do you have questions, feedback or need support?
+      %br/
+      We are here to help you!
+    .row
+      .col-sm-6
+        %form
+          %input.form-control{:placeholder => "YOUR NAME", :type => "text"}/
+          %input.form-control{:placeholder => "YOUR EMAIL", :type => "text"}/
+          %textarea.form-control{:placeholder => "YOUR MESSAGE"}
+          %button.btn.btn-brand{:type => "submit"} SUBMIT
+      / col
+      .col-sm-6
+        %ul.list-unstyled
+          %li NTTY AS
+          %li Grensen 12
+          %li 0159 Oslo
+          %li info@ntty.com
+          %li
+            %a{:href => "#"} www.ntty.com
+      / col
+    / row
+  / container
+/ contact

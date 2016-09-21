@@ -1,0 +1,6 @@
+= form_for [@app, @invitation] do |f|
+  = errors_for @invitation
+  .form-group
+    = f.label :email
+    = f.email_field :recipient_email, class: "form-control", placeholder: "user@example.com"
+  = f.submit "Send Invitation", class: "btn btn-default"

@@ -1,9 +1,0 @@
-<%= form_for @standardization do |f| %>
-    <%= errors_for @standardization %>
-    <%= f.hidden_field :referable_type, value: referable.class.to_s %>
-    <%= f.hidden_field :referable_id, value: referable.id %>
-    <div class="form-group">
-      <%= f.label :standard %>
-      <%= f.select :standard_id, Standard.all.map{|s| [s.name, s.id]}, {}, class: "form-control" %>
-    </div>
-<% end %>

@@ -21,11 +21,15 @@
 //= require jquery.slimscroll
 //= require select2.min
 //= require perfect-scrollbar.jquery
-//= require library
 //= require plugins
 //= require typeahead.bundle
+//= require masonry.min
+//= require lightslider 
+//= require imagesloaded.min 
 //= require app
 //= require unitwise_atoms
 //= require uoms
 //= require commodities
 //= require brands
+//= require standards
+//= require references

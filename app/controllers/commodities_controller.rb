@@ -2,6 +2,8 @@ class CommoditiesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :autocomplete, :prefetch]
 
   def index
+    add_breadcrumb "Commodities", :commodities_path
+
     if params[:q]
       generic = params[:generic] == "true"
       @commodities = Commodity.search params[:q], where: { generic: generic }, page: params[:page], per_page: 10
@@ -17,21 +19,34 @@ class CommoditiesController < ApplicationController
   def show
     if user_signed_in?
       @commodity = Commodity.find_by(id: params[:id])
+      @com_ref = CommodityReference.find_by(app_id: current_app.id, commodity_id: @commodity.id)
     else
       authenticate_user! if params[:id]
       @commodity = Commodity.find_by(uuid: params[:uuid])
     end
+    @brand = @commodity.brand
+    @specifications = policy_scope(@commodity.specifications)
+    @packagings = policy_scope(@commodity.packagings)
+    @standards = @commodity.standards # policy_scope(@commodity.standards)
+    @references = policy_scope(@commodity.references)
+    @links = policy_scope(@commodity.links)
+
+    add_breadcrumb "Commodities", :commodities_path
+    add_breadcrumb @commodity.name, @commodity
   end
 
   def new
     @commodity = Commodity.new
+
+    add_breadcrumb "Commodities", :commodities_path
+    add_breadcrumb "New", new_commodity_path
   end
 
   def create
     @commodity = Commodity.create(commodity_params)
     if @commodity.save
-      commodity_ref = @commodity.create_reference(current_user)
-      redirect_to [commodity_ref.app,commodity_ref], notice: "commodity successfully created"
+      @commodity.create_reference(current_user)
+      redirect_to @commodity, notice: "commodity successfully created"
     else
       render :new
     end
@@ -44,18 +59,26 @@ class CommoditiesController < ApplicationController
   def update
     @commodity = Commodity.find(params[:id])
     if @commodity.update(commodity_params)
-      redirect_to [@app,@commodity], notice: "commodity successfully updated"
+      redirect_to @commodity, notice: "commodity successfully updated"
     else
       render :edit
     end
   end
 
   def autocomplete
-    render json: Commodity.search(params[:query], limit: 10)
+    @commodities =  Commodity.search(params[:query], limit: 10)
+    response = @commodities.each_with_object([]) do |commodity,arr|
+      arr << { id: commodity.id, name: commodity.name, href: commodity_url(commodity) }
+    end
+    render json: response
   end
 
   def prefetch
-    render json: Commodity.page(params[:page])
+    @commodities =  Commodity.page(params[:page])
+    response = @commodities.each_with_object([]) do |commodity,arr|
+      arr << { id: commodity.id, name: commodity.name, href: commodity_url(commodity) }
+    end
+    render json: response
   end
 
   private
