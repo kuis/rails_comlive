@@ -52,7 +52,7 @@ class User < ApplicationRecord
   private
 
   def refresh!
-    data = TokenRefresher.new(refresh_token)
+    data = TokenRefresher.new(refresh_token).request
     update_attributes(access_token: data['id_token'], expires_at: Time.now + (data['expires_in'].to_i).seconds)
   end
 
