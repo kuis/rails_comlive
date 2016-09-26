@@ -66,6 +66,11 @@ ready = function(){
         select2For(source_commodity);
         select2For(target_commodity);
     }
+
+    var standardization_select = $("#standardization_standard_id");
+    if(standardization_select.length){
+        select2For(standardization_select);
+    }
 }
 
 $(document).ready(ready);

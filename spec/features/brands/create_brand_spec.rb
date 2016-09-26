@@ -25,12 +25,10 @@ feature 'Creating a Brand' do
   context "With invalid details" do
     scenario 'should not create the brand' do
       fill_in 'brand[name]', with: ''
-      fill_in 'brand[description]', with: ''
 
       click_button 'Create Brand'
 
       expect(page).to have_content("Name can't be blank")
-      expect(page).to have_content("Description can't be blank")
     end
   end
 end

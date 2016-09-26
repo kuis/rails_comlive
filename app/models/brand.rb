@@ -10,7 +10,8 @@ class Brand < ApplicationRecord
   has_many :standardizations, as: :referable
   has_many :standards, through: :standardizations
 
-  validates_presence_of :name, :description
+  validates_presence_of :name
+  validates :url, :facebook_address, :open_corporate_url, :wipo_url, url: true, allow_blank: true
 
   scope :official, -> { where(official: true) }
 

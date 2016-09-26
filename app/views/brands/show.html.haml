@@ -8,47 +8,48 @@
         .table-cell.col-sm-middle
           %h1.m-t-0= @brand.name
           .col-md-12
-            %i.fa.fa-map-marker.fz-md{"aria-hidden" => "true"}
-            Germany
+            - if @brand.location
+              %i.fa.fa-map-marker.fz-md{"aria-hidden" => "true"}
+              = @brand.location
         .m-t-sm
           %article
             %p.m-0= @brand.description
       .col-sm-6.col-md-4.brand-info.m-t-sm
-        .m-l-md.m-r-md.p-r-lg
-          %a.m-b-sm{:href => "http://www.bestmalz.de/", :target => "_blank"}
-            Official website
-            %i.fa.fa-external-link.fz-sm{"aria-hidden" => "true"}
-          .col-md-12.contact-item.m-b-sm
-            .contact-links.m-t-xs
-              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "javascript:void(0)", :title => "Phone"}
-                %i.fa.fa-phone
-              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "javascript:void(0)", :title => "Mobile"}
-                %i.fa.fa-mobile
-              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "mailto:example@rathemes.com", :title => "example@rathemes.com"}
-                %i.fa.fa-envelope-o
-              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "javascript:void(0)", :title => "rathemes"}
-                %i.fa.fa-skype
-              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "https://facebook.com/rathemes", :title => "Facebook"}
-                %i.fa.fa-facebook
-              %a.icon.icon-circle.icon-sm.m-b-0{"data-placement" => "top", "data-toggle" => "tooltip", :href => "https://twitter.com/rathemes", :title => "Twitter"}
-                %i.fa.fa-twitter
-          %dl.m-0
-            %dt.fw-400.m-b-xs.fz-sm Recognized in
-            %dd.m-b-xs
-              %a{:href => "http://www.", :target => "_blank"}
-                %i.icon-custom.icon-ocs.m-r-xs{"data-original-title" => "Open Corporate site description", "data-placement" => "bottom", :rel => "tooltip"}
-                %span Open corporate site
-            %dd.m-b-xs
-              %a{:href => "http://www.", :target => "_blank"}
-                %i.icon-custom.icon-wipo.m-r-xs{"data-original-title" => "WIPO description", "data-placement" => "bottom", :rel => "tooltip"}
-                %span WIPO
+        - if @brand.official?
+          .m-l-md.m-r-md.p-r-lg
+            = link_to @brand.url, target: "_blank", class: "m-b-sm" do
+              Official website
+              %i.fa.fa-external-link.fz-sm{"aria-hidden" => "true"}
+            .col-md-12.contact-item.m-b-sm
+              .contact-links.m-t-xs
+                = link_to @brand.phone, class: "icon icon-circle icon-sm m-b-0", title: "Phone", data: { placement: "top", toggle: "tooltip" } do
+                  %i.fa.fa-phone
+                = link_to @brand.email, class: "icon icon-circle icon-sm m-b-0", title: "Email Address",  data: { placement: "top", toggle: "tooltip" } do
+                  %i.fa.fa-envelope-o
+                = link_to @brand.skype, class: "icon icon-circle icon-sm m-b-0", title: "Skype", data: { placement: "top", toggle: "tooltip" } do
+                  %i.fa.fa-skype
+                = link_to @brand.facebook, class: "icon icon-circle icon-sm m-b-0", target: "_blank", title: "Facebook", data: { placement: "top", toggle: "tooltip" } do
+                  %i.fa.fa-facebook
+                = link_to @brand.twitter, class: "icon icon-circle icon-sm m-b-0", target: "_blank", title: "Twitter", data: { placement: "top", toggle: "tooltip" } do
+                  %i.fa.fa-twitter
+            %dl.m-0
+              - if @brand.open_corporate_url || @brand.wipo_url
+                %dt.fw-400.m-b-xs.fz-sm Recognized in
+                %dd.m-b-xs
+                  = link_to @brand.open_corp_url, target: "_blank" do
+                    %i.icon-custom.icon-ocs.m-r-xs{"data-original-title" => "Open Corporate site description", "data-placement" => "bottom", :rel => "tooltip"}
+                    %span Open corporate site
+                %dd.m-b-xs
+                  = link_to @brand.wipo_url, target: "_blank" do
+                    %i.icon-custom.icon-wipo.m-r-xs{"data-original-title" => "WIPO description", "data-placement" => "bottom", :rel => "tooltip"}
+                    %span WIPO
     .segment-actions
       - if user_signed_in?
         = link_to edit_brand_path(@brand), class: "btn-edit" do
           %i.fa.fa-pencil
           Edit
       .segment-state.dropdown
-        = render 'shared/pubmode', mode: "official"
+        = render 'shared/pubmode', mode: "Public"
   .row
     .col-md-12
       %hr.m-0/
@@ -65,7 +66,7 @@
           / .nav-tabs
           .segment-actions
             - if user_signed_in?
-              = link_to new_standardization_path(referable_id: @brand.id, referable_type: @brand.class.to_s), class: "btn-add icon icon-circle icon-md load-in-modal" do
+              = link_to new_standardization_path(referable_id: @brand.id, referable_type: "Brand"), class: "btn-add icon icon-circle icon-md" do
                 %i.fa.fa-plus
                 %span.hidden Assign Standard
         / Tab panes

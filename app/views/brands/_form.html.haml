@@ -1,3 +1,6 @@
+- content_for :js do
+  = javascript_include_tag "//api.filestackapi.com/filestack.js"
+
 = form_for [@app, @brand] do |f|
   = errors_for @brand
   .form-group
@@ -6,4 +9,34 @@
   .form-group
     = f.label :description
     = f.text_area :description, class: "form-control"
+
+  - if @brand.official
+    .form-group
+      = f.label :location
+      = f.text_field :location, class: "form-control"
+    .form-group
+      = f.label :phone
+      = f.text_field :phone, class: "form-control"
+    .form-group
+      = f.label :email
+      = f.email_field :email, class: "form-control"
+    .form-group
+      = f.label :url
+      = f.text_field :url, class: "form-control"
+    .form-group
+      = f.label :skype_username
+      = f.text_field :skype_username, class: "form-control"
+    .form-group
+      = f.label :twitter_handle
+      = f.text_field :twitter_handle, class: "form-control"
+    .form-group
+      = f.label :facebook_url
+      = f.text_field :facebook_address, class: "form-control"
+    .form-group
+      = f.label :open_corporate_url
+      = f.text_field :open_corporate_url, class: "form-control"
+    .form-group
+      = f.label :wipo_url
+      = f.text_field :wipo_url, class: "form-control"
+
   = f.submit class: "btn btn-primary"

@@ -46,6 +46,10 @@ RSpec.describe BrandsController, :type => :controller do
         }.not_to change(Brand, :count)
       end
     end
+
+    context "With optional fields" do
+      skip "Add specs for facebook_url url etc"
+    end
   end
 
   describe "PATCH #update" do
