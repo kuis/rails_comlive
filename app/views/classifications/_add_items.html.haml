@@ -1,0 +1,10 @@
+#modalAdd.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h3.pull-left.m-0 Add
+        %a.pull-right.fz-lg.text-muted{"data-dismiss" => "modal", :href => "#"}
+          %i.fa.fa-times
+      .modal-body
+        .list-group
+          = link_to "Level", new_app_classification_level_path(@app, @classification), class: "list-group-item"
