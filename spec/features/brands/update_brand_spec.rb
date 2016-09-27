@@ -31,4 +31,8 @@ feature 'Updating a Brand' do
       expect(page).to have_content("Name can't be blank")
     end
   end
+
+  context "When brand is official" do
+    scenario "should be able to set additional fields", pending: "fields such as logo,wipo_url etc"
+  end
 end

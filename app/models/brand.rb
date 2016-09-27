@@ -12,6 +12,7 @@ class Brand < ApplicationRecord
 
   validates_presence_of :name
   validates :url, :facebook_address, :open_corporate_url, :wipo_url, url: true, allow_blank: true
+  validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/, allow_blank: true
 
   scope :official, -> { where(official: true) }
 

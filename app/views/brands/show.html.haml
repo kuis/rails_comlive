@@ -3,8 +3,8 @@
     .row.no-gutter
       .col-sm-6.col-md-8
         .table-cell
-          %span.brand-logo{:title => "About Bestmalz"}
-            = image_tag "http://placehold.it/100x100"
+          %span.brand-logo
+            = image_tag @brand.logo
         .table-cell.col-sm-middle
           %h1.m-t-0= @brand.name
           .col-md-12

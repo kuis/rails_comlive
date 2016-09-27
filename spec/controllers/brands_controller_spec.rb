@@ -48,7 +48,7 @@ RSpec.describe BrandsController, :type => :controller do
     end
 
     context "With optional fields" do
-      skip "Add specs for facebook_url url etc"
+      skip "Add specs for facebook_url url logo etc"
     end
   end
 

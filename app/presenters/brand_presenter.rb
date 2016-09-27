@@ -30,4 +30,8 @@ class BrandPresenter < BasePresenter
   def wipo_url
     @model.wipo_url ? @model.wipo_url : "#"
   end
+
+  def logo
+    @model.logo ? @model.logo : "http://placehold.it/100x100"
+  end
 end

@@ -34,6 +34,11 @@ RSpec.describe Brand, :type => :model do
         brand.valid?
         expect(brand.errors[:wipo_url]).to include("is invalid")
       end
+      it "is invalid with an invalid url" do
+        brand = build(:brand, email: "invalid.email")
+        brand.valid?
+        expect(brand.errors[:email]).to include("is invalid")
+      end
     end
   end
 
