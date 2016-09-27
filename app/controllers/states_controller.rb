@@ -15,7 +15,7 @@ class StatesController < ApplicationController
     authorize @app, :show?
     @state = @commodity_reference.create_state(state_params)
     if @state.save
-      redirect_to [@app,@commodity_reference], notice: "State successfully created"
+      redirect_to @commodity_reference.commodity, notice: "State successfully created"
     else
       render :new
     end
@@ -30,10 +30,17 @@ class StatesController < ApplicationController
     authorize @app
     @state = @commodity_reference.state
     if @state.update(state_params)
-      redirect_to [@app,@commodity_reference], notice: "State successfully updated"
+      redirect_to  @commodity_reference.commodity, notice: "State successfully updated"
     else
       render :edit
     end
+  end
+
+  def destroy
+    authorize @app
+    @state = @commodity_reference.state
+    @state.destroy
+    redirect_to  @commodity_reference.commodity, notice: "State successfully deleted"
   end
 
   private

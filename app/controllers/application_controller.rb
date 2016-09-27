@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_app
+    return nil unless current_user
     return current_user.default_app unless cookies[:last_app_id]
     App.find(cookies[:last_app_id])
     # return @current_app if defined?(@current_app)

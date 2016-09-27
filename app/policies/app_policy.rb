@@ -27,7 +27,7 @@ class AppPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    is_member?
   end
 
   def invite?

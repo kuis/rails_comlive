@@ -30,6 +30,7 @@ class CommoditiesController < ApplicationController
     @standards = @commodity.standards # policy_scope(@commodity.standards)
     @references = policy_scope(@commodity.references)
     @links = policy_scope(@commodity.links)
+    @state = @commodity.state(current_app)
 
     add_breadcrumb "Commodities", :commodities_path
     add_breadcrumb @commodity.name, @commodity

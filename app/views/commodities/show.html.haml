@@ -5,7 +5,7 @@
         .row-sm-height
           .col-md-6.col-sm-height.col-sm-middle
             = link_to @brand, class: "brand-logo" do
-              = image_tag "http://placehold.it/100x100"
+              = image_tag @brand.logo
             = link_to @brand.name, @brand, class: "fz-lg p-l-sm brand-title"
 
           .hidden-xs.col-md-6.col-sm-height.col-sm-middle.text-right
@@ -33,12 +33,20 @@
                   %i.fa.fa-gavel.fa-md
                   Claim This Commodity
 
-    .row
-      .col-md-12
-        .alert.alert-warning.m-md.m-t-0{ role: "alert" }
-          %strong State: "Early stage/prototype
-          %span Info: Descriptive text
-          = link_to "Link: link to further info page", "#", class: "alert-link"
+    - if @state
+      .row
+        .col-md-12
+          .alert.alert-warning.m-md.m-t-0.alert-dismissible.fade.in{:role => "alert"}
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              -#%span{"aria-hidden" => "true"} ×
+            %h4 State: #{@state.status.titleize}
+            %p= @state.info
+            %p= link_to "Read More", @state.url, target: "_blank"
+            - if current_app
+              - if policy(current_app).edit?
+                %p
+                  = link_to "Edit", edit_app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), class: "btn btn-default"
+                  = link_to "Delete", app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), method: :delete, class: "btn btn-warning"
 
     .row.no-gutter
       .col-sm-6.col-md-5

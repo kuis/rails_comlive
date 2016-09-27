@@ -27,6 +27,13 @@ class Commodity < ApplicationRecord
     where(:id => ids).order(order)
   }
 
+  def state(app)
+    return commodity_references.first.state if app.nil?
+    cr = commodity_references.find_by(app_id: app.id)
+    return nil unless cr
+    cr.state
+  end
+
   def create_reference(user)
     app = user.default_app
     attributes = self.class.attribute_names.reject{|a|

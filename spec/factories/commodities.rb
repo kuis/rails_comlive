@@ -20,5 +20,11 @@ FactoryGirl.define do
     factory :non_generic_commodity do
       generic false
     end
+
+    trait :with_reference do
+      after(:create) do |commodity|
+        create(:commodity_reference, commodity: commodity)
+      end
+    end
   end
 end
