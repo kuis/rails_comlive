@@ -21,8 +21,9 @@ class CommoditiesController < ApplicationController
       @commodity = Commodity.find_by(id: params[:id])
       @com_ref = CommodityReference.find_by(app_id: current_app.id, commodity_id: @commodity.id)
     else
-      authenticate_user! if params[:id]
       @commodity = Commodity.find_by(uuid: params[:uuid])
+      authenticate_user! if params[:id]
+      return if @commodity.nil?
     end
     @brand = @commodity.brand
     @specifications = policy_scope(@commodity.specifications)

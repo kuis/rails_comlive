@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
     return unless request.path.match(/\/commodities\/(\d+)/)
     commodities = cookies.permanent[:recent_commodities] || []
     commodity_id = request.path.match(/\/commodities\/(\d+)/)[1]
+    return if commodity_id.length.eql?(10)
     if commodities.empty?
       commodities << commodity_id
     else

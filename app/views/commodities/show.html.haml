@@ -1,3 +1,8 @@
+- content_for :share do
+  = link_to "#", class: "btn-share", data: { toggle: "modal", target: "#modalShare" }, title: "Share" do
+    %i.fa.fa-share-alt
+    Share
+
 %section.app-content
   - if @brand
     .box.commodity-brand.p-sm
@@ -109,5 +114,5 @@
           = render 'links_tab'
 
   = render 'add_items' if user_signed_in?
-
+  = render 'shared/social_share', share_url: slugged_commodity_url(@commodity.uuid,@commodity.name.parameterize)
 

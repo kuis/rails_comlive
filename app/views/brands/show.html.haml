@@ -1,3 +1,8 @@
+- content_for :share do
+  = link_to "#", class: "btn-share", data: { toggle: "modal", target: "#modalShare" }, title: "Share" do
+    %i.fa.fa-share-alt
+    Share
+
 %section.app-content
   .box.segment.segment-brand.segment-edit.p-sm.m-b-0
     .row.no-gutter
@@ -97,3 +102,5 @@
           / .tab-pane
         / .tab-content
       / .nav-tabs-horizontal
+
+= render 'shared/social_share', share_url: slugged_brand_url(@brand.uuid,@brand.name.parameterize)

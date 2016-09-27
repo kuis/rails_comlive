@@ -27,9 +27,11 @@ class BrandsController < ApplicationController
       brand = Brand.find_by(id: params[:id])
       @standardization = Standardization.new
     else
-      authenticate_user! if params[:id]
       brand = Brand.find_by(uuid: params[:uuid])
+      authenticate_user! if params[:id]
+      return if brand.nil?
     end
+
     @brand = BrandPresenter.new(brand, view_context)
     add_breadcrumb @brand.name, @brand
   end

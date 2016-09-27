@@ -1,3 +1,8 @@
+- content_for :share do
+  = link_to "#", class: "btn-share", data: { toggle: "modal", target: "#modalShare" }, title: "Share" do
+    %i.fa.fa-share-alt
+    Share
+
 %body
   .row
     .col-md-9
@@ -61,3 +66,4 @@
               - else
                 %p No barcodes found.
       / .widget
+= render 'shared/social_share', share_url: slugged_packaging_url(@packaging.uuid,@packaging.name.parameterize)
