@@ -23,7 +23,7 @@ feature 'Adding barcode to a packaging' do
       expect(page).to have_text("Barcode successfully created")
       expect(page).to have_text(barcode.format.titleize)
       expect(page).to have_text(barcode.content)
-      expect(page).to have_css("table.barby-barcode")
+      expect(page).to have_css('img[src*="png"]')
     end
   end
 

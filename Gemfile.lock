@@ -283,6 +283,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    rmagick (2.16.0)
     roo (2.0.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
@@ -401,6 +402,7 @@ DEPENDENCIES
   pundit
   rails (>= 5.0.0.beta4, < 5.1)
   rails-controller-testing
+  rmagick
   roo (~> 2.0.0)
   rqrcode
   rspec-rails (~> 3.1.0)

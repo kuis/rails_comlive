@@ -10,20 +10,14 @@ RSpec.describe BarcodeGenerator do
   end
 
   describe "#generate" do
-    context "If format is of qr type" do
-      it "returns html png string for the barcode" do
-        generator = BarcodeGenerator.new("qr_code", "https://codeship.com")
-        expect(generator.generate).to be_a String
-        expect(generator.generate).to match(/png/)
-      end
-    end
+    it "returns html png string for the barcode" do
+      qr_code = BarcodeGenerator.new("qr_code", "https://codeship.com")
+      bookland = BarcodeGenerator.new("bookland","978-82-92526-14-9")
 
-    context "If format is not of qr type" do
-      it "returns html table string for the barcode" do
-        generator = BarcodeGenerator.new("ean_8", "1234567")
-        expect(generator.generate).to be_a String
-        expect(generator.generate).to match(/table/)
-      end
+      expect(qr_code.generate).to be_a String
+      expect(qr_code.generate).to match(/png/)
+      expect(bookland.generate).to be_a String
+      expect(bookland.generate).to match(/png/)
     end
   end
 end

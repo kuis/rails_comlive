@@ -14,9 +14,9 @@
             = link_to @brand.name, @brand, class: "fz-lg p-l-sm brand-title"
 
           .hidden-xs.col-md-6.col-sm-height.col-sm-middle.text-right
-            - (0..3).each do
+            - @brand.commodities.limit(3).each do |commodity|
               .hidden-sm.avatar.avatar-md.avatar-circle.m-r-sm
-                = link_to "#" do
+                = link_to commodity do
                   = image_tag "http://placehold.it/60x60"
 
             .pull-right.text-center
@@ -53,62 +53,21 @@
                   = link_to "Edit", edit_app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), class: "btn btn-default"
                   = link_to "Delete", app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), method: :delete, class: "btn btn-warning"
 
-    .row.no-gutter
-      .col-sm-6.col-md-5
-        .col-sm-12
-          %h4.p-sm.p-l-md.p-b-0.fz-md.pull-left.m-0 Image Gallery
-        .col-sm-12.segment.segment-edit.segment-image
-          .segment-actions
-            = link_to "#", class: "btn-edit" do
-              %i.fa.fa-pencil
-              Edit
-            .segment-state.dropdown
-              = render 'shared/pubmode', mode: "Official"
-
-          #widget-gallery.m-md.m-r-lg
-            %ul#image-gallery.gallery.list-unstyled.cS-hidden
-              - (0..5).each do
-                %li{ data: { thumb: "http://placehold.it/50x35" } }
-                  = image_tag "http://placehold.it/500x350"
-
-
-      .col-sm-6.col-md-7
-        .col-sm-12
-          %h4.p-smp-l-md.p-b-0.fz-md.m-0.inline-block Description
-        .row.no-gutter
-          .col-md-12
-            .segment.segment-edit.segment-description
-              .segment-actions
-                = link_to "#", class: "btn-edit" do
-                  %i.fa.fa-pencil
-                  Edit
-                .segment-state.dropdown
-                  = render 'shared/pubmode', mode: "Official"
-
-              %article.p-md
-                = @commodity.short_description
-
-              %article.p-md
-                = @commodity.long_description
-
-        .row.no-gutter
-          .col-md-12
-            .segment.segment-edit.segment-description
-              .segment-actions
-
   .row
     .col-md-12
       %hr.m-0/
       .m-b-lg.nav-tabs-horizontal
         .segment-add
-          = render :partial => 'tab_menu'
+          = render 'tab_menu'
           .segment-actions
             = link_to "#", class: "btn-add icon icon-circle icon-md", data: { toggle: "modal", target: "#modalAdd" } do
               %i.fa.fa-plus
         .tab-content
+          = render 'summary_tab'
           = render 'specifications_tab'
           = render 'packagings_tab'
           = render 'standards_tab'
+          = render 'barcodes_tab'
           = render 'references_tab'
           = render 'classifications_tab'
           = render 'links_tab'

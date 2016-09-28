@@ -29,10 +29,11 @@ ActiveRecord::Schema.define(version: 20160902071041) do
     t.string   "format"
     t.string   "content"
     t.string   "image"
+    t.integer  "visibility",       default: 0
     t.string   "barcodeable_type"
     t.integer  "barcodeable_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["barcodeable_type", "barcodeable_id"], name: "index_barcodes_on_barcodeable_type_and_barcodeable_id", using: :btree
   end
 
