@@ -41,17 +41,19 @@
     - if @state
       .row
         .col-md-12
-          .alert.alert-warning.m-md.m-t-0.alert-dismissible.fade.in{:role => "alert"}
+          .alert.alert-warning.commodity-alert{:role => "alert"}
             %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
               -#%span{"aria-hidden" => "true"} ×
             %h4 State: #{@state.status.titleize}
             %p= @state.info
-            %p= link_to "Read More", @state.url, target: "_blank"
+            %p= link_to "Read More", @state.url, target: "_blank", class: "alert-link"
             - if current_app
               - if policy(current_app).edit?
-                %p
-                  = link_to "Edit", edit_app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), class: "btn btn-default"
-                  = link_to "Delete", app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), method: :delete, class: "btn btn-warning"
+                .actions
+                  = link_to edit_app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), class: "icon icon-circle icon-sm", title: "Edit" do
+                    %i.fa.fa-pencil
+                  = link_to app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), method: :delete, class: "icon icon-circle icon-sm", title: "Delete" do
+                    %i.fa.fa-trash
 
   .row
     .col-md-12
