@@ -34,7 +34,7 @@ feature 'Adding a reference to commodity reference' do
 
     click_button 'Create Reference'
 
-    page.execute_script("$('a[href=\"#tab-4\"]').tab('show')")
+    page.execute_script("$('a[href=\"#tab-5\"]').tab('show')")
 
     expect(page).to have_content(generic_commodity.name)
     expect(page).to have_content(reference.kind)

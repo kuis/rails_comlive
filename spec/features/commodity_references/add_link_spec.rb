@@ -25,7 +25,7 @@ feature 'Adding link to a commodity reference' do
 
     click_button 'Create Link'
 
-    page.execute_script("$('a[href=\"#tab-6\"]').tab('show')")
+    page.execute_script("$('a[href=\"#tab-7\"]').tab('show')")
 
     expect(page).to have_link(link.url, href: link.url)
     expect(page).to have_content(link.description)

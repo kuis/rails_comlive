@@ -14,11 +14,13 @@ feature 'Adding barcode to a packaging' do
   end
 
   context "With valid details" do
-    scenario "User can successfully add barcode to a package" do
+    scenario "User can successfully add barcode to a package", js: true do
       select barcode.format.titleize.upcase, from: "barcode[format]"
       fill_in "barcode[content]", with: barcode.content
 
       click_button "Create Barcode"
+
+      page.execute_script("$('a[href=\"#tab-4\"]').tab('show')")
 
       expect(page).to have_text("Barcode successfully created")
       expect(page).to have_text(barcode.format.titleize)

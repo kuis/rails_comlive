@@ -33,6 +33,8 @@ feature 'Updating a specification' do
 
         click_button "Update Specification"
 
+        page.execute_script("$('a[href=\"#tab-1\"]').tab('show')")
+
         expect(page).to have_text("Specification updated successfully")
         expect(page).to have_text(property)
         expect(page).to have_text("30.87")

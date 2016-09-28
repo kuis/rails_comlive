@@ -25,6 +25,8 @@ feature 'Creating a specification' do
 
           click_button "Create Specification"
 
+          page.execute_script("$('a[href=\"#tab-1\"]').tab('show')")
+
           expect(page).to have_text("Specification successfully created")
           expect(page).to have_text(custom_unit.property)
           expect(page).to have_text("10.56")
@@ -43,6 +45,8 @@ feature 'Creating a specification' do
           select unit_of_measure[0], from: "specification[uom]"
 
           click_button "Create Specification"
+
+          page.execute_script("$('a[href=\"#tab-1\"]').tab('show')")
 
           expect(page).to have_text("Specification successfully created")
           expect(page).to have_text(property)

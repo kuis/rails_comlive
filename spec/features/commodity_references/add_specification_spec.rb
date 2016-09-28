@@ -30,6 +30,8 @@ feature 'Adding specification to a commodity_reference' do
 
       click_button "Create Specification"
 
+      page.execute_script("$('a[href=\"#tab-1\"]').tab('show')")
+
       expect(page).to have_text("Specification successfully created")
       expect(page).to have_text(specification.property)
       expect(page).to have_text(specification.value)
@@ -48,6 +50,8 @@ feature 'Adding specification to a commodity_reference' do
       select 'Public', from: 'specification[visibility]'
 
       click_button "Create Specification"
+
+      page.execute_script("$('a[href=\"#tab-1\"]').tab('show')")
 
       expect(page).to have_text("Specification successfully created")
       expect(page).to have_text(specification.property)
