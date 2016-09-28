@@ -38,7 +38,7 @@ feature 'Showing a Commodity' do
         expect(page).to have_content commodity.long_description
       end
 
-      scenario "Should show a qr code"
+      scenario "Should show a qr code", skip: "Add this when UI ready"
       # scenario "Should show a qr code" do
       #   expect(page).to have_css('img.qr_code')
       # end

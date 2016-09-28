@@ -1,4 +1,4 @@
 %tr
   %td= barcode.format.titleize
   %td= barcode.content
-  %td= barcode.format == "qr_code" ? image_tag(barcode.output) : barcode.output
+  %td= image_tag(barcode.output, class: "img-responsive")

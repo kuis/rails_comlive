@@ -24,8 +24,10 @@ gem "pundit"
 gem 'carrierwave'
 gem 'barby'
 gem 'rqrcode' # dependency for barby
+gem 'rmagick' # dependency for barby
 gem "haml-rails", "~> 0.9"
 gem "breadcrumbs_on_rails"
+gem 'aws-sdk', '~> 2'
 
 # gem 'semacode', '~> 0.7.4' # dependency for barby
 

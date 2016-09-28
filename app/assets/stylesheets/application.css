@@ -33,3 +33,7 @@
 .alert{
     border-radius: 0px;
 }
+
+#global-alert{
+    margin: 0px !important;
+}

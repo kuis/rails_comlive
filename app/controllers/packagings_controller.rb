@@ -33,9 +33,13 @@ class PackagingsController < ApplicationController
     if @app.present?
       authorize @app
       @packaging = @commodity_reference.packagings.find(params[:id])
+      add_breadcrumb "Packagings", packagings_path
+      add_breadcrumb @packaging.name, "#"
     else
       skip_authorization
       @packaging = Packaging.find_by(uuid: params[:uuid])
+      add_breadcrumb "Packagings", packagings_path
+      add_breadcrumb @packaging.name, "#"
     end
   end
 

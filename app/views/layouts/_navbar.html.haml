@@ -83,6 +83,7 @@
     / END navbar search
     %ol.breadcrumb
       = render_breadcrumbs :tag => :li, :separator => ""
+    = yield :share
   / /navbar-header
   %ul#top-nav.pull-right
     %li.nav-item

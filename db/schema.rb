@@ -41,21 +41,31 @@ ActiveRecord::Schema.define(version: 20160922081409) do
     t.string   "format"
     t.string   "content"
     t.string   "image"
+    t.integer  "visibility",       default: 0
     t.string   "barcodeable_type"
     t.integer  "barcodeable_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["barcodeable_type", "barcodeable_id"], name: "index_barcodes_on_barcodeable_type_and_barcodeable_id", using: :btree
   end
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "official",    default: false
+    t.boolean  "official",           default: false
     t.string   "logo"
     t.string   "description"
+    t.string   "phone"
+    t.string   "location"
+    t.string   "email"
+    t.string   "url"
+    t.string   "skype_username"
+    t.string   "facebook_address"
+    t.string   "twitter_handle"
+    t.string   "open_corporate_url"
+    t.string   "wipo_url"
     t.string   "uuid"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["uuid"], name: "index_brands_on_uuid", unique: true, using: :btree
   end
 

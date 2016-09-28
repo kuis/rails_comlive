@@ -14,9 +14,7 @@ require 'barby/barcode/upc_supplemental'
 # require 'barby/barcode/data_matrix' => unable to install dependency semacode
 # require 'barby/barcode/gs1_128' => looks like its dropped in favour of code 128
 
-
-require 'barby/outputter/html_outputter'
-require 'barby/outputter/png_outputter'
+require 'barby/outputter/rmagick_outputter'
 
 class BarcodeGenerator
   attr_reader :barcode, :format
@@ -28,7 +26,6 @@ class BarcodeGenerator
   end
 
   def generate
-    return barcode.to_html unless format.eql?("qr_code")
     base64_output = Base64.encode64(barcode.to_png({ xdim: 5 }))
     "data:image/png;base64,#{base64_output}"
   end

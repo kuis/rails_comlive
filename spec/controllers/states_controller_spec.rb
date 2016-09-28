@@ -4,7 +4,7 @@ RSpec.describe StatesController, :type => :controller do
   let(:user) { create(:user) }
   let(:app) { user.default_app }
   let(:commodity_reference){ create(:commodity_reference, app: app) }
-  let(:state) { create(:state, commodity_reference: commodity_reference, status: "recall", url: "https://www.youtube.com/watch?v=lhkslaPN-4") }
+  let!(:state) { create(:state, commodity_reference: commodity_reference, status: "recall", url: "https://www.youtube.com/watch?v=lhkslaPN-4") }
 
   context "As an authenticated user" do
     before(:each) do
@@ -48,6 +48,14 @@ RSpec.describe StatesController, :type => :controller do
           state.reload
           expect(state.status).to eq "recall"
         end
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "deletes the state" do
+        expect {
+          delete :destroy, params: {  app_id: app.id, commodity_reference_id: commodity_reference.id, id: state }
+        }.to change(State, :count).by(-1)
       end
     end
   end

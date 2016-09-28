@@ -4,7 +4,12 @@ class StandardsController < ApplicationController
   add_breadcrumb "Standards", :standards_path
 
   def index
-    @standards = Standard.all
+    if params[:q]
+      @standards = Standard.search params[:q], page: params[:page], per_page: 10
+      render json: response_for(@standards)
+    else
+      @standards = Standard.all
+    end
   end
 
   def new
@@ -52,5 +57,16 @@ class StandardsController < ApplicationController
 
   def standard_params
     params.require(:standard).permit(:name, :description, :logo)
+  end
+
+
+  def response_for(standards)
+    response = {}
+    response[:total_count]  = standards.total_entries
+    response[:current_page] = standards.current_page.to_i
+    response[:last_page]    = standards.total_pages == standards.current_page
+    response[:items]        = []
+    standards.each {|c| response[:items] << c }
+    return response
   end
 end

@@ -4,4 +4,6 @@
   = f.hidden_field :referable_id
   .form-group
     = f.label :standard
-    = f.select :standard_id, Standard.all.map{|s| [s.name, s.id]}, {}, class: "form-control"
+    = f.select :standard_id, [], {}, class: "form-control",  data: { url: standards_path }
+
+  = f.submit "Assign Standard", class: "btn btn-primary"

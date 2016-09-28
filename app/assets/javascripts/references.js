@@ -66,7 +66,6 @@ ready = function(){
         select2For(source_commodity);
         select2For(target_commodity);
     }
-
     // Textarea auto resize
     $('textarea.autoresize').each(function () {
         this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
@@ -74,6 +73,10 @@ ready = function(){
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
+    var standardization_select = $("#standardization_standard_id");
+    if(standardization_select.length){
+        select2For(standardization_select);
+    }
 }
 
 $(document).ready(ready);

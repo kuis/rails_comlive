@@ -1,0 +1,47 @@
+#tab-0.tab-pane.in.active.fade{:role => "tabpanel"}
+  .row
+    .col-md-12
+      %h4.segment-name Summary
+  .box.p-t-md
+    .row.no-gutter
+      .col-sm-6.col-md-5
+        .col-sm-12
+          %h4.p-sm.p-l-md.p-b-0.fz-md.pull-left.m-0 Image Gallery
+        .col-sm-12.segment.segment-edit.segment-image
+          .segment-actions
+            = link_to "#", class: "btn-edit" do
+              %i.fa.fa-pencil
+              Edit
+            .segment-state.dropdown
+              = render 'shared/pubmode', mode: "Official"
+
+          #widget-gallery.m-md.m-r-lg
+            %ul#image-gallery.gallery.list-unstyled.cS-hidden
+              - (0..5).each do
+                %li{ data: { thumb: "http://placehold.it/50x35" } }
+                  = image_tag "http://placehold.it/500x350"
+
+
+      .col-sm-6.col-md-7
+        .col-sm-12
+          %h4.p-smp-l-md.p-b-0.fz-md.m-0.inline-block Description
+        .row.no-gutter
+          .col-md-12
+            .segment.segment-edit.segment-description
+              .segment-actions
+                = link_to "#", class: "btn-edit" do
+                  %i.fa.fa-pencil
+                  Edit
+                .segment-state.dropdown
+                  = render 'shared/pubmode', mode: "Official"
+
+              %article.p-md
+                = @commodity.short_description
+
+              %article.p-md
+                = @commodity.long_description
+
+        .row.no-gutter
+          .col-md-12
+            .segment.segment-edit.segment-description
+              .segment-actions

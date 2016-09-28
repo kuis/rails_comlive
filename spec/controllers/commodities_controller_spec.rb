@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CommoditiesController, :type => :controller do
   let(:user) { create(:user) }
-  let(:commodity) { create(:commodity) }
+  let(:commodity) { create(:commodity, :with_reference) }
   let(:brand) { create(:brand) }
 
   context "When user signed in" do

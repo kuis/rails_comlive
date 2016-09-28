@@ -1,4 +1,6 @@
 class Barcode < ApplicationRecord
+  include Visibility
+
   belongs_to :barcodeable, polymorphic: true
 
   validates_presence_of :format, :content, :barcodeable

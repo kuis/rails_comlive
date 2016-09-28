@@ -14,6 +14,8 @@ class Standard < ApplicationRecord
 
   validates_presence_of :name, :description
 
+  searchkick word_start: [:name, :description]
+
   scope :official, -> { where(official: true) }
 
   def parent

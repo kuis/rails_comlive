@@ -24,13 +24,15 @@ class BrandsController < ApplicationController
 
   def show
     if user_signed_in?
-      @brand = Brand.find_by(id: params[:id])
+      brand = Brand.find_by(id: params[:id])
       @standardization = Standardization.new
     else
+      brand = Brand.find_by(uuid: params[:uuid])
       authenticate_user! if params[:id]
-      @brand = Brand.find_by(uuid: params[:uuid])
+      return if brand.nil?
     end
 
+    @brand = BrandPresenter.new(brand, view_context)
     add_breadcrumb @brand.name, @brand
   end
 
@@ -53,6 +55,7 @@ class BrandsController < ApplicationController
   private
 
   def brand_params
-    params.require(:brand).permit(:name, :logo, :description)
+    params.require(:brand).permit(:name, :logo, :description, :phone, :location, :email, :url,:skype_username,
+                                  :facebook_address, :twitter_handle,:open_corporate_url, :wipo_url)
   end
 end

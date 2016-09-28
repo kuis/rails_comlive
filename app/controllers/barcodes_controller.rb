@@ -65,6 +65,6 @@ class BarcodesController < ApplicationController
   end
 
   def barcode_params
-    params.require(:barcode).permit(:format, :content)
+    params.require(:barcode).permit(:format, :content, :visibility)
   end
 end
