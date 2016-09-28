@@ -34,4 +34,8 @@ class BrandPresenter < BasePresenter
   def logo
     @model.logo ? @model.logo : "http://placehold.it/100x100"
   end
+
+  def location
+    @model.location ? @model.location : "N/A"
+  end
 end

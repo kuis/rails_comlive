@@ -13,7 +13,7 @@ feature 'Viewing a Brand' do
     scenario "User should see the brands details" do
       expect(page).to have_content(brand.name)
       expect(page).to have_content(brand.description)
-      within(".segment-brand div.segment-actions") do
+      within(".box.segment-edit .segment-actions") do
         expect(page).to have_link("Edit", href: edit_brand_path(brand))
       end
       expect(page).to have_link("Assign Standard")
@@ -28,7 +28,7 @@ feature 'Viewing a Brand' do
     scenario "User should see only the public brands details" do
       expect(page).to have_content(brand.name)
       expect(page).to have_content(brand.description)
-      within(".segment-brand div.segment-actions") do
+      within(".box.segment-edit .segment-actions") do
         expect(page).not_to have_link("Edit", href: edit_brand_path(brand))
       end
       expect(page).not_to have_link("Assign Standard")

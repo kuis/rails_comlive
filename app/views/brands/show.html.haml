@@ -6,68 +6,29 @@
 %section.app-content
   .box.segment.segment-brand.segment-edit.p-sm.m-b-0
     .row.no-gutter
-      .col-sm-6.col-md-8
+      .col-sm-12
         .table-cell
           %span.brand-logo
             = image_tag @brand.logo
         .table-cell.col-sm-middle
           %h1.m-t-0= @brand.name
-          .col-md-12
-            - if @brand.location
+          - if @brand.official?
+            .col-md-12
               %i.fa.fa-map-marker.fz-md{"aria-hidden" => "true"}
               = @brand.location
-        .m-t-sm
-          %article
-            %p.m-0= @brand.description
-      .col-sm-6.col-md-4.brand-info.m-t-sm
-        - if @brand.official?
-          .m-l-md.m-r-md.p-r-lg
-            = link_to @brand.url, target: "_blank", class: "m-b-sm" do
-              Official website
-              %i.fa.fa-external-link.fz-sm{"aria-hidden" => "true"}
-            .col-md-12.contact-item.m-b-sm
-              .contact-links.m-t-xs
-                = link_to @brand.phone, class: "icon icon-circle icon-sm m-b-0", title: "Phone", data: { placement: "top", toggle: "tooltip" } do
-                  %i.fa.fa-phone
-                = link_to @brand.email, class: "icon icon-circle icon-sm m-b-0", title: "Email Address",  data: { placement: "top", toggle: "tooltip" } do
-                  %i.fa.fa-envelope-o
-                = link_to @brand.skype, class: "icon icon-circle icon-sm m-b-0", title: "Skype", data: { placement: "top", toggle: "tooltip" } do
-                  %i.fa.fa-skype
-                = link_to @brand.facebook, class: "icon icon-circle icon-sm m-b-0", target: "_blank", title: "Facebook", data: { placement: "top", toggle: "tooltip" } do
-                  %i.fa.fa-facebook
-                = link_to @brand.twitter, class: "icon icon-circle icon-sm m-b-0", target: "_blank", title: "Twitter", data: { placement: "top", toggle: "tooltip" } do
-                  %i.fa.fa-twitter
-            %dl.m-0
-              - if @brand.open_corporate_url || @brand.wipo_url
-                %dt.fw-400.m-b-xs.fz-sm Recognized in
-                %dd.m-b-xs
-                  = link_to @brand.open_corp_url, target: "_blank" do
-                    %i.icon-custom.icon-ocs.m-r-xs{"data-original-title" => "Open Corporate site description", "data-placement" => "bottom", :rel => "tooltip"}
-                    %span Open corporate site
-                %dd.m-b-xs
-                  = link_to @brand.wipo_url, target: "_blank" do
-                    %i.icon-custom.icon-wipo.m-r-xs{"data-original-title" => "WIPO description", "data-placement" => "bottom", :rel => "tooltip"}
-                    %span WIPO
-    .segment-actions
-      - if user_signed_in?
-        = link_to edit_brand_path(@brand), class: "btn-edit" do
-          %i.fa.fa-pencil
-          Edit
-      .segment-state.dropdown
-        = render 'shared/pubmode', mode: "Public"
+          - else
+            .m-t-sm
+              = link_to "#", class: "btn btn-outline btn-secondary" do
+                %i.fa.fa-gavel.fa-md
+                Claim this brand
+
   .row
     .col-md-12
       %hr.m-0/
       .m-b-lg.nav-tabs-horizontal
         / tabs list
         .segment-add
-          %ul.nav.nav-tabs.box.m-0{:role => "tablist"}
-            %li.active{:role => "presentation"}
-              %a{"aria-controls" => "tab-1", "data-toggle" => "tab", :href => "#tab-1", :role => "tab"} Commodities
-            %li{:role => "presentation"}
-              %a{"aria-controls" => "tab-2", "data-toggle" => "tab", :href => "#tab-2", :role => "tab"} Standards
-            %li{:role => "presentation"}
-              %a{"aria-controls" => "tab-3", "data-toggle" => "tab", :href => "#tab-3", :role => "tab"} Classification
+          = render 'tab_menu'
           / .nav-tabs
           .segment-actions
             - if user_signed_in?
@@ -76,31 +37,8 @@
                 %span.hidden Assign Standard
         / Tab panes
         .tab-content
-          #tab-1.tab-pane.in.active.fade{:role => "tabpanel"}
-            .row
-              .col-md-12
-                .row
-                  .col-md-12
-                    %h4.segment-name
-                      = @brand.name
-                      Commodities
-                    %a.btn.btn-sm.btn-view-type{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "javascript:;", :title => "Change view"}
-                      %i.fa.fa-th-list
-                = render 'commodities/gridview', commodities: @brand.commodities
-                = render 'commodities/listview', commodities: @brand.commodities
-          / .tab-pane
-          #tab-2.tab-pane.fade{:role => "tabpanel"}
-            .row
-              .col-md-12
-                %h4.segment-name
-                  = @brand.name
-                  Standards
-                %a.btn.btn-sm.btn-view-type{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "javascript:;", :title => "Change view"}
-                  %i.fa.fa-th-list
-            = render 'standards/gridview', standards: @brand.standards
-            = render 'standards/listview', standards: @brand.standards
-          / .tab-pane
-        / .tab-content
-      / .nav-tabs-horizontal
+          = render 'summary_tab'
+          = render 'commodities_tab'
+          = render 'standards_tab'
 
 = render 'shared/social_share', share_url: slugged_brand_url(@brand.uuid,@brand.name.parameterize)
