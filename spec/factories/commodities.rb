@@ -21,9 +21,13 @@ FactoryGirl.define do
       generic false
     end
 
+    ignore do
+      ref_app_id nil
+    end
+
     trait :with_reference do
-      after(:create) do |commodity|
-        create(:commodity_reference, commodity: commodity)
+      after(:create) do |commodity, evaluator|
+        create(:commodity_reference, commodity: commodity, app_id: evaluator.ref_app_id)
       end
     end
   end

@@ -1,5 +1,19 @@
 ---
 en:
+  activerecord:
+    attributes:
+      commodity:
+        name: "Name"
+        measured_in: "Measured in"
+        short_description: "Short Description"
+        long_description: "Long Description"
+        generic: "Generic"
+        brand: "Brand"
+
+  buttons:
+    comm
+
+
   sitename: "commodity.live"
 
   functions:
