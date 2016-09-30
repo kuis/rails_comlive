@@ -14,5 +14,11 @@ module CommodityLive
 
     # autoload lib files
     config.autoload_paths << Rails.root.join('lib')
+
+    # available languages
+    I18n.available_locales = [:en, :nb]
+
+    # default localse
+    config.i18n.default_locale = :en
   end
 end

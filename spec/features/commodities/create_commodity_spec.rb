@@ -21,7 +21,7 @@ feature 'Commodity creation' do
 
       click_button "Create Commodity"
 
-      expect(page).to have_text("commodity successfully created")
+      expect(page).to have_text(I18n.t("commodities.messages.created"))
       expect(page).to have_text(commodity.name)
       expect(page).to have_text(/Claim This Commodity/i)
       expect(page).to have_text("Is it your commodity?")
@@ -38,7 +38,7 @@ feature 'Commodity creation' do
 
       click_button "Create Commodity"
 
-      expect(page).to have_text("commodity successfully created")
+      expect(page).to have_text(I18n.t("commodities.messages.created"))
       expect(page).to have_text(/Claim This Commodity/i)
       expect(page).to have_text("Is it your commodity?")
       expect(page).to have_text(commodity.name)
@@ -57,7 +57,7 @@ feature 'Commodity creation' do
       click_button "Create Commodity"
 
       expect(page).to have_text(commodity.name)
-      expect(page).to have_text("commodity successfully created")
+      expect(page).to have_text(I18n.t("commodities.messages.created"))
       expect(page).not_to have_text(/Claim This Commodity/i)
       expect(page).not_to have_text("Is it your commodity?")
     end
@@ -69,7 +69,7 @@ feature 'Commodity creation' do
 
       click_button "Create Commodity"
 
-      expect(page).to have_text("New Commodity")
+      expect(page).to have_text(I18n.t("commodities.new.title"))
       expect(page).to have_content("Name can't be blank")
       expect(page).to have_content("Brand can't be blank")
       expect(page).to have_content("Measured in can't be blank")

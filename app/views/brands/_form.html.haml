@@ -13,7 +13,7 @@
     = f.hidden_field :logo, class: "form-control"
     %input{ "data-fp-apikey" => ENV["FILEPICKER_API_KEY"], "data-fp-container" => "modal", "data-fp-mimetypes" => "image/*",
     "data-fp-store-location" => "s3", "data-fp-crop-ratio" => "1/1", :onchange => "setLogo(event.fpfile.url,'brand_logo')",
-    "data-fp-button-text" => "Upload Logo", :type => "filepicker"}/
+    "data-fp-button-text" => t(".upload_logo"), :type => "filepicker"}/
 
   - if @brand.official
     .form-group

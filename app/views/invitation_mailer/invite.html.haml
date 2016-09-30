@@ -5,4 +5,4 @@
   has invited you to be an administrator of
   the #{@app.name} dashboard on Commodity Live.
 %p
-  To accept this invitation, go to #{link_to accept_invitation_url(@token), accept_invitation_url(@token)}
+  To accept this invitation, go to #{link_to accept_invitation_url(@token, locale: I18n.locale), accept_invitation_url(@token, I18n.locale)}

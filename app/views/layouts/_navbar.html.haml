@@ -136,10 +136,10 @@
     %li.nav-item
       .dropdown.p-sm.p-l-0
         %a.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
-          English
+          = t('menu.languages.lang')
           %span.caret
         %ul.dropdown-menu.dropdown-menu-right
-          %li.selected
-            %a{:href => "#"} English
-          %li
-            %a{:href => "#"} Norwegian
+          %li{ class: I18n.locale == :en ? "selected" : "" }
+            = link_to t('menu.languages.en'), url_for(locale: 'en')
+          %li{ class: I18n.locale == :nb ? "selected" : "" }
+            = link_to t('menu.languages.nb'), url_for(locale: 'nb')

@@ -16,7 +16,7 @@ feature 'Creating a Brand' do
 
       click_button 'Create Brand'
 
-      expect(page).to have_content("Brand Successfully created")
+      expect(page).to have_content(I18n.t("brands.messages.created"))
       expect(page).to have_content(brand.name)
       expect(page).to have_content(brand.description)
     end

@@ -125,6 +125,11 @@ RSpec.configure do |config|
     page.driver.browser.url_blacklist = ["https://fonts.gstatic.com"]
   end
 
+  # set default locale
+  config.before(:each, type: :feature) do
+    default_url_options[:locale] = I18n.default_locale
+  end
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

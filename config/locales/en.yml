@@ -9,9 +9,56 @@ en:
         long_description: "Long Description"
         generic: "Generic"
         brand: "Brand"
+      brand:
+        name: "Name"
+        Description: "Description"
+        logo: "Logo"
 
-  buttons:
-    comm
+
+  helpers:
+    submit:
+      commodity:
+        create: "Create %{model}"
+        update: "Update %{model}"
+      brand:
+        create: "Create %{model}"
+        update: "Update %{model}"
+
+  menu:
+    languages:
+      lang: "Language"
+      en: "English"
+      nb: "Norwegian"
+
+  commodities:
+    new:
+      title: "Add Commodity"
+    edit:
+      title: "Edit Commodity"
+    messages:
+      created: "Commodity successfully created"
+      updated: "Commodity successfully updated"
+    count:
+      one: "%{count} Commodity"
+      other: "%{count} Commodities"
+    form:
+      unit_prompt: "Select Unit"
+      brand_prompt: "Select Brand"
+
+  brands:
+    new:
+      title: "Create Brand"
+    edit:
+      title: "Edit Brand"
+    messages:
+      created: "Brand Successfully created"
+      updated: "Brand successfully updated"
+    count:
+      one: "%{count} Brand"
+      other: "%{count} Brands"
+    form:
+      upload_logo: "Upload Logo"
+
 
 
   sitename: "commodity.live"

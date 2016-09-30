@@ -8,7 +8,7 @@
     .col-md-6
       .form-group
         = f.label :measured_in
-        = f.select :measured_in, unitwise_atoms, { prompt: "Select Unit" }, class: "form-control select2"
+        = f.select :measured_in, unitwise_atoms, { prompt: t(".unit_prompt") }, class: "form-control select2"
   .form-group
     = f.label :short_description
     = f.text_field :short_description, class: "form-control"
@@ -20,5 +20,5 @@
     = f.label :generic
   #commodity-brand.form-group
     = f.label :brand
-    = f.select :brand_id, Brand.all.map{|b| [b.name, b.id]}, { prompt: "Select Brand" },  class: "form-control select2"
+    = f.select :brand_id, Brand.all.map{|b| [b.name, b.id]}, { prompt: t(".brand_prompt") },  class: "form-control select2"
   = f.submit class: "btn btn-primary"

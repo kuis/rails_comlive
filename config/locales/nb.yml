@@ -1,0 +1,58 @@
+---
+nb:
+  activerecord:
+    attributes:
+      commodity:
+        name: "Navn"
+        measured_in: "målt i"
+        short_description: "Kort beskrivelse"
+        long_description: "Lang beskrivelse"
+        generic: "Generisk"
+        brand: "Merke"
+      brand:
+        name: "Navn"
+        Description: "Beskrivelse"
+        logo: "Logo"
+
+  helpers:
+    submit:
+      commodity:
+        create: "Skape %{model}"
+        update: "Oppdatering %{model}"
+      brand:
+          create: "Skape %{model}"
+          update: "Oppdatering %{model}"
+  menu:
+    languages:
+      lang: "Språk"
+      en: "Engelsk"
+      nb: "Norsk"
+
+  commodities:
+    new:
+      title: "Legg Commodity"
+    edit:
+      title: "Rediger  Commodity"
+    messages:
+      created: "Commodity opprettet"
+      updated: "Commodity oppdatert"
+    count:
+      one: "%{count} Commodity"
+      other: "%{count} Commodities"
+    form:
+      unit_prompt: "Velg Unit"
+      brand_prompt: "Velg merke"
+
+  brands:
+    new:
+      title: "Lag Brand"
+    edit:
+      title: "Rediger Brand"
+    messages:
+      created: "Brand opprettet"
+      updated: "Brand er oppdatert"
+    count:
+      one: "%{count} Brand"
+      other: "%{count} Brands"
+    form:
+      upload_logo: "Last opp logo"

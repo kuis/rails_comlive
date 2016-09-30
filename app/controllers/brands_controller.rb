@@ -16,7 +16,7 @@ class BrandsController < ApplicationController
   def create
     @brand = Brand.create(brand_params)
     if @brand.save
-      redirect_to @brand, notice: "Brand Successfully created"
+      redirect_to @brand, notice: t("brands.messages.created")
     else
       render :new
     end
@@ -46,7 +46,7 @@ class BrandsController < ApplicationController
   def update
     @brand = Brand.find(params[:id])
     if @brand.update(brand_params)
-      redirect_to @brand, notice: "brand successfully updated"
+      redirect_to @brand, notice: t("brands.messages.updated")
     else
       render :edit
     end

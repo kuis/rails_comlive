@@ -49,7 +49,7 @@ class CommoditiesController < ApplicationController
     @commodity = Commodity.create(commodity_params)
     if @commodity.save
       @commodity.create_reference(current_user)
-      redirect_to @commodity, notice: "commodity successfully created"
+      redirect_to @commodity, notice: t("commodities.messages.created")
     else
       render :new
     end
@@ -62,7 +62,7 @@ class CommoditiesController < ApplicationController
   def update
     @commodity = Commodity.find(params[:id])
     if @commodity.update(commodity_params)
-      redirect_to @commodity, notice: "commodity successfully updated"
+      redirect_to @commodity, notice: t("commodities.messages.updated")
     else
       render :edit
     end

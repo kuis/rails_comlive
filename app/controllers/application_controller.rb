@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   after_action :last_accessed_app, :record_recent_commodity
+  before_action :set_locale
 
   helper_method :current_user, :current_app, :user_signed_in?, :commodity_url
 
@@ -63,6 +64,19 @@ class ApplicationController < ActionController::Base
   def commodity_url(commodity)
     return commodity_path(commodity) if user_signed_in?
     slugged_commodity_path(commodity.uuid, commodity.name.parameterize)
+  end
+
+  def set_locale
+    if params[:locale]
+      return I18n.default_locale unless I18n.available_locales.include?(params[:locale].to_sym)
+      I18n.locale = params[:locale].to_sym
+    else
+      I18n.default_locale
+    end
+  end
+
+  def default_url_options(options = {})
+    { locale: I18n.locale }
   end
 
   def authenticate_user!

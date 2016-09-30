@@ -11,9 +11,9 @@ module CommoditiesHelper
 
   def barcode_for(model)
     if model.is_a? Commodity
-      url = slugged_commodity_url(model.uuid,model.name.parameterize)
+      url = slugged_commodity_url(model.uuid,model.name.parameterize, locale: I18n.locale)
     elsif model.is_a? Packaging
-      url = slugged_packaging_url(model.uuid,model.name.parameterize)
+      url = slugged_packaging_url(model.uuid,model.name.parameterize, locale: I18n.locale)
     end
     png_string = BarcodeGenerator.new("qr_code", url).generate
     image_tag png_string, class: "qr_code"
