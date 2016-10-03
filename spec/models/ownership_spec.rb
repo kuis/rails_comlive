@@ -26,21 +26,21 @@ RSpec.describe Ownership, :type => :model do
       expect(ownership.errors[:child_id]).to include("has already been taken")
     end
 
-    it "restricts ownership to official brands only" do
-      parent_brand = create(:brand)
-      child_brand = create(:brand)
-      ownership = build(:ownership, parent: parent_brand, child: child_brand)
-      ownership.valid?
-      expect(ownership.errors[:parent]).to include(" brand must be the official brand")
-    end
-
-    it "restricts ownership of official brands" do
-      nike = create(:official_brand)
-      addidas = create(:official_brand)
-      ownership = build(:ownership, parent: nike, child: addidas)
-      ownership.valid?
-      expect(ownership.errors[:child]).to include(" brand is official and cannot be owned")
-    end
+    # it "restricts ownership to official brands only" do
+    #   parent_brand = create(:brand)
+    #   child_brand = create(:brand)
+    #   ownership = build(:ownership, parent: parent_brand, child: child_brand)
+    #   ownership.valid?
+    #   expect(ownership.errors[:parent]).to include(" brand must be the official brand")
+    # end
+    #
+    # it "restricts ownership of official brands" do
+    #   nike = create(:official_brand)
+    #   addidas = create(:official_brand)
+    #   ownership = build(:ownership, parent: nike, child: addidas)
+    #   ownership.valid?
+    #   expect(ownership.errors[:child]).to include(" brand is official and cannot be owned")
+    # end
   end
 
   describe "Associations" do

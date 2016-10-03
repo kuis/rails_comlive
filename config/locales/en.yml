@@ -23,6 +23,8 @@ en:
       brand:
         create: "Create %{model}"
         update: "Update %{model}"
+      ownership:
+        create: "Submit Claim"
 
   menu:
     languages:
@@ -35,6 +37,31 @@ en:
       title: "Add Commodity"
     edit:
       title: "Edit Commodity"
+    show:
+      no_summary:
+        title: "There's no summary added yet."
+        description: "Adding images and description will increase the authenticity of the commodity/product."
+      no_specifications:
+        title: "There's no specifications added yet."
+        description: "-"
+      no_classifications:
+        title: "There's no classification added yet."
+        description: "-"
+      no_packagings:
+        title: "There's no packaging added yet."
+        description: "-"
+      no_standards:
+        title: "There's no standard added yet."
+        description:
+      no_barcodes:
+        title: "There's no barcode added yet."
+        description: "-"
+      no_references:
+        title: "There's no reference added yet."
+        description: "-"
+      no_links:
+        title: "There's no links added yet."
+        description: "-"
     messages:
       created: "Commodity successfully created"
       updated: "Commodity successfully updated"
@@ -50,6 +77,20 @@ en:
       title: "Create Brand"
     edit:
       title: "Edit Brand"
+    show:
+      tabs:
+        summary:
+          title: "There's no summary added yet."
+          description: "Adding logo, description, official website and social information will increase the authenticity of the brand."
+          button: "Add Summary"
+        commodities:
+          title: "There're no products added yet."
+          description: "Adding products increase the authenticity of the brand."
+          button: "Add Product"
+        standards:
+          title: "There're no standards added yet."
+          description: "Adding standards increase the authenticity of the brand."
+          button: "Add Standard"
     messages:
       created: "Brand Successfully created"
       updated: "Brand successfully updated"
@@ -59,8 +100,12 @@ en:
     form:
       upload_logo: "Upload Logo"
 
-
-
+  ownerships:
+    new:
+      title: "Claim Ownership"
+      prompt: "You have requested to claim <b>%{name}</b>. In order to claim this %{type}, you must work for or be working on behalf of the %{type}. You must be also be authorized to claim this %{type}"
+    messages:
+      created: "Ownership claimed, we will contact you for verification shortly"
   sitename: "commodity.live"
 
   functions:

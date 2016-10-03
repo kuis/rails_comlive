@@ -1,8 +1,3 @@
-- content_for :share do
-  = link_to "#", class: "btn-share", data: { toggle: "modal", target: "#modalShare" }, title: "Share" do
-    %i.fa.fa-share-alt
-    Share
-
 %section.app-content
   - if @brand
     .box.commodity-brand.p-sm
@@ -39,21 +34,7 @@
                   Claim This Commodity
 
     - if @state
-      .row
-        .col-md-12
-          .alert.alert-warning.commodity-alert{:role => "alert"}
-            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-              -#%span{"aria-hidden" => "true"} ×
-            %h4 State: #{@state.status.titleize}
-            %p= @state.info
-            %p= link_to "Read More", @state.url, target: "_blank", class: "alert-link"
-            - if current_app
-              - if policy(current_app).edit?
-                .actions
-                  = link_to edit_app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), class: "icon icon-circle icon-sm", title: "Edit" do
-                    %i.fa.fa-pencil
-                  = link_to app_commodity_reference_state_path(current_app,@state.commodity_reference,@state), method: :delete, class: "icon icon-circle icon-sm", title: "Delete" do
-                    %i.fa.fa-trash
+      = render @state
 
   .row
     .col-md-12

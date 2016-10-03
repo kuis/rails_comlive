@@ -18,6 +18,12 @@ feature 'Packaging#show' do
     expect(page).to have_content(packaging.uom)
   end
 
+  scenario "User should see share link" do
+    expect(page).to have_text("Share")
+    expect(page).to have_field("share_url")
+    expect(find_field('share_url').value).to eq slugged_packaging_url(uuid: packaging.uuid, title: packaging.name.parameterize)
+  end
+
   context "When not logged in" do
     scenario "Should show a qr code" do
       expect(page).to have_css("img.qr_code")

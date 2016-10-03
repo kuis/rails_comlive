@@ -18,6 +18,12 @@ feature 'Showing a Commodity' do
         expect(page).to have_content commodity.long_description
       end
 
+      scenario "User should see share link" do
+        expect(page).to have_text("Share")
+        expect(page).to have_field("share_url")
+        expect(find_field('share_url').value).to eq slugged_commodity_url(uuid: commodity.uuid, title: commodity.name.parameterize)
+      end
+
       scenario "Should show a qr code"
       # scenario "Should show a qr code" do
       #   expect(page).to have_css('img.qr_code')

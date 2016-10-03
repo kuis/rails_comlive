@@ -50,6 +50,7 @@ RSpec.describe App, :type => :model do
     it "has many brands" do
       assoc = subject.reflect_on_association(:brands)
       expect(assoc.macro).to eq :has_many
+      expect(assoc.options[:through]).to eq :ownerships
     end
 
     it "has many standards" do

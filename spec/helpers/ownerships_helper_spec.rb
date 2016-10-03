@@ -11,4 +11,12 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe OwnershipsHelper, :type => :helper do
+  describe ".options_for_apps" do
+    it "returns a list of apps belonging to the user" do
+      user = create(:user)
+      app = user.default_app
+
+      expect(helper.options_for_apps(user)).to eq [[app.name, "App-#{app.id}"]]
+    end
+  end
 end

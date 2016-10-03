@@ -1,0 +1,14 @@
+#modalAddBrand.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h3.pull-left.m-0 Add info to this brand
+        %a.pull-right.fz-lg.text-muted{"data-dismiss" => "modal", :href => "#"}
+          %i.fa.fa-times
+      .modal-body
+        .list-group
+          = link_to "Standard", new_standardization_path(referable_id: @brand.id, referable_type: "Brand"), class: "list-group-item"
+          %a.list-group-item{:href => "#"}
+            Commodity
+          %a.list-group-item{:href => "#"}
+            Classification

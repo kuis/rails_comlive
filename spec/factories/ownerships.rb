@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :ownership do
-    association :parent, factory: :official_brand
+    association :parent, factory: :app
     association :child, factory: :brand
 
     factory :invalid_ownership do

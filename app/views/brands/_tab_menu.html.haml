@@ -1,4 +1,5 @@
-- tabs = %w(summary commodities standards classifications)
+- tabs = %w(summary products standards classifications)
+- tabs = tabs - %w(standards classifications) unless @brand.official?
 
 %ul.nav.nav-tabs.box.m-0{:role => "tablist"}
   - tabs.each_with_index do |tab,index|
