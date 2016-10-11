@@ -1,31 +1,34 @@
+.box.segment.segment-edit.p-sm.m-0
+  .row.no-gutter
+    .col-sm-12
+      - if @standard.logo.present?
+        .table-cell
+          %span.standard-logo{:title => ""}
+            = image_tag @standard.logo, class: "img-responsive"
+      .table-cell.col-sm-middle
+        %h1.m-t-0= @standard.name
+        %h2.fz-lg.fw-500.m-t-0
+  .segment-actions
+    - if user_signed_in?
+      = link_to edit_standard_path, class: "btn-edit" do
+        %i.fa.fa-pencil
+        Edit
+    .segment-state.dropdown.inline-block
+      = render 'shared/pubmode', mode: @standard.visibility_status
+
 .row
-  .col-md-8
-    %h1= @standard.name
-    %p= @standard.description
-  .col-md-4
-    - if user_signed_in? && !@standard.official?
-      %h2 Is this your Standard
-      %p Claim it now and start interacting with your fans today!
-      = link_to "Claim This Standard", "#", class: "btn btn-primary", data: { toggle: "modal", target: "#claimModal" }
-/ Modal
-#claimModal.modal.fade{"aria-labelledby" => "claimModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4#claimModalLabel.modal-title Claim Standard
-      .modal-body
-        %p
-          You have requested to claim
-          = succeed "." do
-            %b= @standard.name
-        = form_for Ownership.new do |f|
-          = f.hidden_field :child_id, value: @standard.id
-          = f.hidden_field :child_type, value: @standard.class.to_s
-          .form-group
-            = f.label :owning_standard
-            = f.select :parent_id, options_for_standards, {}, class: "form-control"
-      .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-        %button#claim-brand.btn.btn-primary{:type => "button"} Submit Claim
+  .col-md-12
+    %hr.m-0
+    .m-b-lg.nav-tabs-horizontal
+      .segment-add
+        = render 'tabs_menu'
+
+        .segment-actions
+          %a.btn-add.icon.icon-circle.icon-md{"data-target" => "#modalAddStandard", "data-toggle" => "modal", :href => "standard.html", :title => "Add"}
+            %i.fa.fa-plus
+
+
+      .tab-content
+        = render 'summary_tab'
+        = render 'brands_tab'
+        = render 'products_tab'

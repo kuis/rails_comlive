@@ -1,24 +1,47 @@
-= form_for @commodity do |f|
-  = errors_for @commodity
-  .row
-    .col-md-6
-      .form-group
-        = f.label :name
-        = f.text_field :name, class: "form-control"
-    .col-md-6
-      .form-group
-        = f.label :measured_in
-        = f.select :measured_in, unitwise_atoms, { prompt: t(".unit_prompt") }, class: "form-control select2"
+= form_for @commodity, html: { class: "form-horizontal" } do |f|
+  = errors_for(@commodity)
+
   .form-group
-    = f.label :short_description
-    = f.text_field :short_description, class: "form-control"
+    = f.label :name, class: "control-label col-sm-4"
+    .col-sm-6
+      = f.text_field :name, class: "form-control"
+      = errors_for_field(@commodity,:name)
+  / .form-group
   .form-group
-    = f.label :long_description
-    = f.text_area :long_description, rows: 5, class: "form-control"
-  .checkbox.checkbox-success
+    = f.label :short_description, class: "control-label col-sm-4"
+    .col-sm-6
+      = f.text_field :short_description, class: "form-control"
+      = errors_for_field(@commodity,:short_description)
+  / .form-group
+  #commodity-brand.form-group{ class: @commodity.generic? ? "hidden" : "" }
+    = f.label :brand, class: "control-label col-sm-4"
+    .col-sm-6
+      = f.select :brand_id, Brand.all.map{|b| [b.name, b.id]}, { prompt: t(".brand_prompt") },  class: "form-control select2"
+      = errors_for_field(@commodity,:brand_id)
+  / .form-group
+  .form-group
+    = f.label :measured_in, class: "control-label col-sm-4"
+    .col-sm-6
+      .dropdown-unit
+        = f.select :measured_in, options_for_measures, { prompt: t(".unit_prompt") }, class: "selectpicker show-tick", data: { header: "Units of Measure", width: "fit"}, title: "Select Unit...."
+        = errors_for_field(@commodity,:measured_in)
+      %p.showmore.help-block
+        %a{:href => "javascript:void(0)"} Are you missing a unit?
+      %p.hidden.m-0
+        %a.btn-link{:href => "javascript:void(0)"} Let us know
+        and we will go through your request and add it ASAP if we agree.
+  / .form-group
+  .checkbox.checkbox-success.hidden
     = f.check_box :generic, {}, "true", "false"
     = f.label :generic
-  #commodity-brand.form-group
-    = f.label :brand
-    = f.select :brand_id, Brand.all.map{|b| [b.name, b.id]}, { prompt: t(".brand_prompt") },  class: "form-control select2"
-  = f.submit class: "btn btn-primary"
+  .form-group
+    %label.col-sm-4.control-label.required{:for => ""} Publishing
+    .col-sm-6
+      .dropdown-state
+        = f.select :visibility, options_for_visibility(@commodity), {}, class: "selectpicker show-tick", data: { header: "Publishing of the data", width: "fit" }
+
+  .row
+    .col-sm-8.col-sm-offset-4
+      = f.submit class: "btn btn-primary"
+      = link_to "Cancel", :back, class: "btn btn-default btn-md m-l-sm"
+

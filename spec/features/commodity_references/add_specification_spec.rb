@@ -26,7 +26,7 @@ feature 'Adding specification to a commodity_reference' do
       fill_in "specification[value]", with: specification.value
       select specification.property, from: "type_of_measure"
       select "Joule (J)", from: "specification[uom]"
-      select 'Private', from: 'specification[visibility]'
+      page.execute_script("$('#specification_visibility').selectpicker('val','privatized')")
 
       click_button "Create Specification"
 
@@ -47,7 +47,7 @@ feature 'Adding specification to a commodity_reference' do
       fill_in 'specification[max]', with: specification.max
       select specification.property, from: "type_of_measure"
       select "Joule (J)", from: "specification[uom]"
-      select 'Public', from: 'specification[visibility]'
+      page.execute_script("$('#specification_visibility').selectpicker('val','privatized')")
 
       click_button "Create Specification"
 
@@ -58,7 +58,7 @@ feature 'Adding specification to a commodity_reference' do
       expect(page).to have_text(specification.min)
       expect(page).to have_text(specification.max)
       expect(page).to have_text(specification.uom)
-      expect(page).to have_text(/Public/i)
+      expect(page).to have_text(/Private/i)
     end
   end
 end

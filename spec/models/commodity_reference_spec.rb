@@ -1,16 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe CommodityReference, :type => :model do
+  subject { described_class }
+
   describe "Validations" do
     it "has a valid factory" do
       commodity_ref = build(:commodity_reference)
       expect(commodity_ref).to be_valid
-    end
-
-    it "is invalid without a name" do
-      commodity_ref = build(:commodity_reference, name: nil)
-      commodity_ref.valid?
-      expect(commodity_ref.errors[:name]).to include("can't be blank")
     end
 
     it "is generic field is false by default" do
@@ -43,77 +39,82 @@ RSpec.describe CommodityReference, :type => :model do
 
   describe "Associations" do
     it "belongs to a brand" do
-      assoc = CommodityReference.reflect_on_association(:brand)
+      assoc = subject.reflect_on_association(:brand)
       expect(assoc.macro).to eq :belongs_to
     end
 
     it "belongs to a commodity" do
-      assoc = CommodityReference.reflect_on_association(:commodity)
+      assoc = subject.reflect_on_association(:commodity)
       expect(assoc.macro).to eq :belongs_to
     end
 
     it "belongs to an app" do
-      assoc = CommodityReference.reflect_on_association(:app)
+      assoc = subject.reflect_on_association(:app)
       expect(assoc.macro).to eq :belongs_to
     end
 
     it "belongs to hscode section" do
-      assoc = CommodityReference.reflect_on_association(:hscode_section)
+      assoc = subject.reflect_on_association(:hscode_section)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to hscode chapter" do
-      assoc = CommodityReference.reflect_on_association(:hscode_chapter)
+      assoc = subject.reflect_on_association(:hscode_chapter)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to hscode heading" do
-      assoc = CommodityReference.reflect_on_association(:hscode_heading)
+      assoc = subject.reflect_on_association(:hscode_heading)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to hscode sub-heading" do
-      assoc = CommodityReference.reflect_on_association(:hscode_subheading)
+      assoc = subject.reflect_on_association(:hscode_subheading)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to unspsc family" do
-      assoc = CommodityReference.reflect_on_association(:unspsc_family)
+      assoc = subject.reflect_on_association(:unspsc_family)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to unspsc segment" do
-      assoc = CommodityReference.reflect_on_association(:unspsc_segment)
+      assoc = subject.reflect_on_association(:unspsc_segment)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to unspsc class" do
-      assoc = CommodityReference.reflect_on_association(:unspsc_class)
+      assoc = subject.reflect_on_association(:unspsc_class)
       expect(assoc.macro).to eq :belongs_to
     end
     it "belongs to unspsc commodity" do
-      assoc = CommodityReference.reflect_on_association(:unspsc_commodity)
+      assoc = subject.reflect_on_association(:unspsc_commodity)
       expect(assoc.macro).to eq :belongs_to
     end
     it "has many links" do
-      assoc = CommodityReference.reflect_on_association(:links)
+      assoc = subject.reflect_on_association(:links)
       expect(assoc.macro).to eq :has_many
     end
     it "has many references" do
-      assoc = CommodityReference.reflect_on_association(:references)
+      assoc = subject.reflect_on_association(:references)
       expect(assoc.macro).to eq :has_many
     end
     it "has one state" do
-      assoc = CommodityReference.reflect_on_association(:state)
+      assoc = subject.reflect_on_association(:state)
       expect(assoc.macro).to eq :has_one
     end
 
     it "has many packagings" do
-      assoc = CommodityReference.reflect_on_association(:packagings)
+      assoc = subject.reflect_on_association(:packagings)
       expect(assoc.macro).to eq :has_many
     end
 
     it "has many standards" do
-      assoc = CommodityReference.reflect_on_association(:standards)
+      assoc = subject.reflect_on_association(:standards)
       expect(assoc.macro).to eq :has_many
     end
 
     it "has many specifications" do
-      assoc = CommodityReference.reflect_on_association(:specifications)
+      assoc = subject.reflect_on_association(:specifications)
+      expect(assoc.macro).to eq :has_many
+    end
+
+    it "has many images" do
+      assoc = subject.reflect_on_association(:images)
       expect(assoc.macro).to eq :has_many
     end
   end

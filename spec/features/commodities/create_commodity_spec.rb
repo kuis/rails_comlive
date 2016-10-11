@@ -14,65 +14,63 @@ feature 'Commodity creation' do
   context "Creating a generic commodity" do
     scenario "With the minimum required details", js: true do
       fill_in "commodity[name]", with: commodity.name
-      select "area", from: "commodity[measured_in]"
+      page.execute_script("$('#commodity_measured_in').selectpicker('val','number')")
 
-      find('label[for="commodity_generic"]').click
+      # find('label[for="commodity_generic"]').click
       # check('commodity[generic]')
 
       click_button "Create Commodity"
 
       expect(page).to have_text(I18n.t("commodities.messages.created"))
       expect(page).to have_text(commodity.name)
-      expect(page).to have_text(/Claim This Commodity/i)
-      expect(page).to have_text("Is it your commodity?")
     end
 
     scenario "With all possible details", js: true do
       fill_in "commodity[name]", with: commodity.name
-      select "mass", from: "commodity[measured_in]"
+      # select "Mass", from: "commodity[measured_in]"
+      page.execute_script("$('#commodity_measured_in').selectpicker('val','mass')")
       fill_in "commodity[short_description]", with: commodity.short_description
-      fill_in "commodity[long_description]", with: commodity.long_description
+      # fill_in "commodity[long_description]", with: commodity.long_description
 
       # check('commodity[generic]')
-      find('label[for="commodity_generic"]').click
+      # find('label[for="commodity_generic"]').click
 
       click_button "Create Commodity"
 
       expect(page).to have_text(I18n.t("commodities.messages.created"))
-      expect(page).to have_text(/Claim This Commodity/i)
-      expect(page).to have_text("Is it your commodity?")
       expect(page).to have_text(commodity.name)
       expect(page).to have_text(commodity.short_description)
-      expect(page).to have_text(commodity.long_description)
     end
   end
 
   context "Creating a non generic commodity" do
-    scenario "it should successfully create the commodity" do
+    scenario "it should successfully create the commodity", js: true do
+      page.execute_script("$('input#product').click()")
+
       fill_in "commodity[name]", with: commodity.name
-      select "time", from: "commodity[measured_in]"
+      fill_in "commodity[short_description]", with: commodity.short_description
       select brand.name, from: "commodity[brand_id]"
 
+      page.execute_script("$('#commodity_measured_in').selectpicker('val','length')")
 
       click_button "Create Commodity"
 
       expect(page).to have_text(commodity.name)
+      expect(page).to have_text(commodity.short_description)
       expect(page).to have_text(I18n.t("commodities.messages.created"))
-      expect(page).not_to have_text(/Claim This Commodity/i)
-      expect(page).not_to have_text("Is it your commodity?")
     end
   end
 
   context "With invalid details" do
-    scenario "Commodity should not be created" do
+    scenario "Commodity should not be created", js: true do
+      page.execute_script("$('input#product').click()")
+
       fill_in 'commodity[name]', with: ''
 
       click_button "Create Commodity"
 
       expect(page).to have_text(I18n.t("commodities.new.title"))
-      expect(page).to have_content("Name can't be blank")
-      expect(page).to have_content("Brand can't be blank")
-      expect(page).to have_content("Measured in can't be blank")
+      expect(page).to have_content("can't be blank", count: 3)
     end
   end
 end

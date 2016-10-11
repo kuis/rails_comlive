@@ -11,6 +11,7 @@ class Standard < ApplicationRecord
   has_many :standardizations
   has_many :brands, through: :standardizations, source: :referable, source_type: "Brand"
   has_many :commodity_references, through: :standardizations, source: :referable, source_type: "CommodityReference"
+  has_many :commodities, through: :commodity_references
 
   validates_presence_of :name, :description
 

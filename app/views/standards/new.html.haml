@@ -1,4 +1,7 @@
-%h1 New Standard
-.row
-  .col-md-12
+.widget.widget-form
+  %header.widget-header
+    %h4= t(".title")
+    %p.subheading
+
+  .widget-body
     = render 'form'

@@ -14,12 +14,13 @@ class CommodityReference < ApplicationRecord
   has_many :links
   has_many :references
   has_many :packagings
+  has_many :images
   has_many :standardizations, as: :referable
   has_many :standards, through: :standardizations
   has_many :specifications, as: :parent
   has_one :state
 
-  validates_presence_of :app, :commodity, :name, :measured_in
+  validates_presence_of :app, :commodity, :measured_in
   validates_presence_of :brand_id, unless: "generic?"
 
   before_create :set_uuid

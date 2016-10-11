@@ -1,12 +1,7 @@
-%body
-  %section.app-content
-    .widget
-      %header.widget-header
-        %h4.widget-title.pull-left New Packaging
-        %span.pull-right
-          .dropdown.inline-block
-            Publishing
-            = render 'shared/pubmode', mode: "Public", version: 1
-      %hr.widget-separator/
-      .widget-body
-        = render 'form'
+.widget.widget-form
+  %header.widget-header
+    %h4= t(".title")
+    %p.subheading= @commodity_reference.name
+
+  .widget-body
+    = render 'form'

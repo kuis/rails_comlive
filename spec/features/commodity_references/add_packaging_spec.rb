@@ -22,7 +22,9 @@ feature 'Adding packaging to a commodity' do
     fill_in 'packaging[description]',with: packaging.description
     fill_in 'packaging[quantity]', with: packaging.quantity
     fill_in 'packaging[uom]', with: packaging.uom
-    select 'Private', from: 'packaging[visibility]'
+
+    page.execute_script("$('.selectpicker').selectpicker('val','privatized');")
+    # select 'Private', from: 'packaging[visibility]'
 
     click_button 'Create Packaging'
 

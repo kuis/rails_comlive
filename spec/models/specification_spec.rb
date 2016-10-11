@@ -34,7 +34,7 @@ RSpec.describe Specification, :type => :model do
     it "validates min or max if value is not set" do
       specification = build(:spec_with_min_max, min: nil, max: nil)
       specification.valid?
-      expect(specification.errors[:base]).to include("You must set either a minimum or a maximum value")
+      expect(specification.errors[:min]).to include("You must set either a minimum or a maximum value")
     end
 
     it "is public by default" do

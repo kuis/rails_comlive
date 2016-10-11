@@ -30,6 +30,8 @@ feature 'Adding a reference to commodity reference' do
     select2("reference_source_commodity_id",generic_search_term, generic_commodity.id,generic_commodity.name)
     select2("reference_target_commodity_id",non_generic_search_term, non_generic_commodity.id,non_generic_commodity.name)
     select 'Private', from: 'reference[visibility]'
+    # page.execute_script("$('#reference_visibility').selectpicker('val','privatized')")
+
     fill_in 'reference[description]', with: reference.description
 
     click_button 'Create Reference'

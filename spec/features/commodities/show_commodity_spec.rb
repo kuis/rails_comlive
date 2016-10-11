@@ -24,6 +24,16 @@ feature 'Showing a Commodity' do
         expect(find_field('share_url').value).to eq slugged_commodity_url(uuid: commodity.uuid, title: commodity.name.parameterize)
       end
 
+      scenario "It should prompt user to add the various items" do
+        expect(page).to have_text(I18n.t("commodities.show.tabs.summary.title"))
+        expect(page).to have_text(I18n.t("commodities.show.tabs.specifications.title"))
+        expect(page).to have_text(I18n.t("commodities.show.tabs.packagings.title"))
+        expect(page).to have_text(I18n.t("commodities.show.tabs.standards.title"))
+        expect(page).to have_text(I18n.t("commodities.show.tabs.barcodes.title"))
+        expect(page).to have_text(I18n.t("commodities.show.tabs.references.title"))
+        expect(page).to have_text(I18n.t("commodities.show.tabs.links.title"))
+      end
+
       scenario "Should show a qr code"
       # scenario "Should show a qr code" do
       #   expect(page).to have_css('img.qr_code')

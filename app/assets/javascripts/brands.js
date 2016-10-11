@@ -10,6 +10,17 @@ setLogo = function(url,input){
 ready = function(){
     $("[data-toggle='tooltip'], [rel='tooltip']").tooltip();
     
-    
+    $("form span.help-block").each(function(){
+        $(this).parents(".form-group").addClass("has-error");
+    });
+
+    $("#navbar-search .form-control").on('focus blur', function(){
+        $(this).parents("#navbar-search").toggleClass('is_focused');
+    })
+
+    $("#navbar-search .btn").on('click', function(){
+        $(this).parents("#navbar-search").addClass('is_focused');
+    })
+
 }
 $(document).ready(ready);

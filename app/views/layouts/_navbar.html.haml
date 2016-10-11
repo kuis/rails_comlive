@@ -1,145 +1,116 @@
-%nav#app-navbar.app-navbar
-  / navbar-header
-  #navbar-header.pull-left
-    %button#aside-fold.hamburger.visible-lg-inline-block.is-active.js-hamburger{:type => "button"}
-      %span.hamburger-box
-        %span.hamburger-inner
-    %button#aside-toggle.hamburger.hidden-lg.hamburger--spin.js-hamburger{:type => "button"}
-      %span.hamburger-box
-        %span.hamburger-inner
-    / navbar search
-    #navbar-search
-      %form.form-horizontal{:action => "#"}
-        .col-sm-8.col-md-6
-          #adv-search.input-group
-            .input-group-addon
-              %i.fa.fa-search
-            %input.form-control.b-l-0{:placeholder => "What are you looking for", :type => "search"}/
-            .input-group-addon.p-0.b-0
-              .input-group-btn
-                .btn-group{:role => "group"}
-                  .dropdown
-                    %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
-                      %span.caret
-                    #adv-search-dropdown.dropdown-menu.dropdown-menu-right{:role => "menu"}
-                      .p-md.p-t-xl
-                        .form-group
-                          %label.col-sm-4.control-label{:for => ""} Item name
-                          .col-sm-7
-                            %input.form-control{:id => "", :name => "", :placeholder => "Enter a term that matches part of name", :type => "text"}/
-                        / .form-group
-                        .form-group
-                          %label.col-sm-4.control-label{:for => ""} Has the words
-                          .col-sm-7
-                            %input.form-control{:id => "", :name => "", :placeholder => "Enter words found in the page", :type => "text"}/
-                        / .form-group
-                        .form-group
-                          %label.col-sm-4.control-label{:for => ""} Publishing of the data
-                          .col-sm-7
-                            .dropdown.inline-block
-                              %a.btn.btn-outline.btn-default.p-xs.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
-                                Any
-                                %b.caret
-                              %ul.dropdown-menu.dropdown-menu-right.dropdown-publishing
-                                %li
-                                  %strong.public Public
-                                  %small
-                                    This information will be publicly available and published under
-                                    = succeed "." do
-                                      %a{:href => "http://choosealicense.com/licenses/cc-by-4.0/", :target => "_blank"} "Creative Commons Attribution 4.0 International Public License"
-                                %li
-                                  %strong.official Official
-                                  %small Approved data by the actual maker of commodity
-                                %li
-                                  %strong.private Private
-                                  %small This information will only be visible to yourself and other users in your app/team.
-                        / .form-group
-                        .form-group
-                          %label.col-sm-4.control-label{:for => ""} Located in
-                          .col-sm-7
-                            .dropdown.inline-block
-                              %a.btn.btn-outline.btn-default.p-xs.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
-                                Any
-                                %b.caret
-                              %ul.dropdown-menu.dropdown-menu-right
-                                %li
-                                  Commodities
-                                %li
-                                  Brands
-                                %li
-                                  Standards
-                        / .form-group
-                        .row
-                          .col-sm-7.col-sm-push-4
-                            %input.btn.btn-primary{:type => "submit", :value => "Search"}/
-                            %a.btn.btn-default.m-l-sm{:href => ""} Reset
-                        %a#btn-close-dropdown.btn-close{:href => ""}
-                          %i.fa.fa-times
-        / input type="submit" class="btn btn-primary" value="Search"
-        %a.btn.btn-primary{:href => "#"}
-          Search
-        %a.btn.search-close{:href => ""}
-          %i.fa.fa-close
-    / END navbar search
-    %ol.breadcrumb
-      = render_breadcrumbs :tag => :li, :separator => ""
-    = yield :share
-  / /navbar-header
-  %ul#top-nav.pull-right
-    %li.nav-item
-      %a.btn-search{:href => "#"}
-        %i.fa.fa-search
-    %li.nav-item.dropdown
-      %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "javascript:void(0)", :role => "button"}
-        %i.fa.fa-bell
-      .media-group.dropdown-menu.animated.flipInY
-        %a.media-group-item{:href => "javascript:void(0)"}
-          .media
-            .media-left
-              .avatar.avatar-xs.avatar-circle
-                %img{:alt => "", :src => "http://placehold.it/30x30"}/
-                %i.status.status-online
-            .media-body
-              %h5.media-heading John Doe
-              %small.media-meta Active now
-        / .media-group-item
-        %a.media-group-item{:href => "javascript:void(0)"}
-          .media
-            .media-left
-              .avatar.avatar-xs.avatar-circle
-                %img{:alt => "", :src => "http://placehold.it/30x30"}/
-                %i.status.status-offline
-            .media-body
-              %h5.media-heading John Doe
-              %small.media-meta 2 hours ago
-        / .media-group-item
-        %a.media-group-item{:href => "javascript:void(0)"}
-          .media
-            .media-left
-              .avatar.avatar-xs.avatar-circle
-                %img{:alt => "", :src => "http://placehold.it/30x30"}/
-                %i.status.status-away
-            .media-body
-              %h5.media-heading Sara Smith
-              %small.media-meta idle 5 min ago
-        / .media-group-item
-        %a.media-group-item{:href => "javascript:void(0)"}
-          .media
-            .media-left
-              .avatar.avatar-xs.avatar-circle
-                %img{:alt => "", :src => "http://placehold.it/30x30"}/
-                %i.status.status-away
-            .media-body
-              %h5.media-heading Donia Dyab
-              %small.media-meta idle 5 min ago
-        / .media-group-item
-    %li.nav-item
-      .dropdown.p-sm.p-l-0
-        %a.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
-          = t('menu.languages.lang')
-          %span.caret
-        %ul.dropdown-menu.dropdown-menu-right
-          %li{ class: I18n.locale == :en ? "selected" : "" }
-            = link_to t('menu.languages.en'), url_for(locale: 'en')
-          %li{ class: I18n.locale == :nb ? "selected" : "" }
-            = link_to t('menu.languages.nb'), url_for(locale: 'nb')
+%nav#app-navbar.app-navbar.navbar-fixed-top
+  .container
+    / navbar-header
+    #navbar-header.pull-left
+      = link_to root_path, class: "app-brand", id: "app-brand" do
+        %span#brand-icon.brand-icon
+          = image_tag "logo.png"
+        %span#brand-name.hidden-xs.hidden-sm commodity.live
+
+      / navbar search
+      = render 'layouts/search'
+
+      / test this in rspec
+      - if user_signed_in?
+        #navbar-add
+          = link_to add_items_path, class: "btn btn-add-entity" do
+            %i.fa.fa-plus
+          .dropdown.inline-block
+            %a.btn.btn-add-entity{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
+              %i.fa.fa-ellipsis-h
+            %ul.dropdown-menu.animated.flipInY
+              %li.dropdown-header
+                Add New...
+              %li.divider.m-0
+              %li
+                = link_to "Commodity", new_commodity_path
+              %li
+                = link_to "Brand", new_brand_path
+              %li
+                = link_to "Standard", new_standard_path
+              %li
+                = link_to "Classification", "#"
+              %li.dropdown-header
+                Send Invitation
+              %li.divider.m-0
+                %li
+                  = link_to "Invite Users", new_app_invitation_path(current_app)
+    / /navbar-header
+    %ul#top-nav.pull-right
+      %li.nav-item.dropdown
+        %a.btn-notification.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "javascript:void(0)", :role => "button"}
+          %i.fa.fa-bell-o
+          %i.status.status-unread
+        .list-group.dropdown-menu.animated.flipInY
+          %a.list-group-item.unread{:href => "javascript:void(0)"}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis fringilla congue.
+          / .list-group-item
+          %a.list-group-item{:href => "javascript:void(0)"}
+            This is another notification...Lorem
+      / .list-group-item
+      %li.nav-item
+        - if user_signed_in?
+          .avatar.avatar-circle.avatar-user.dropdown
+            %a{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
+              = gravatar_for(current_user.email, 50, "img-responsive")
+            %ul.dropdown-menu.animated.flipInY
+              %li
+                %a.text-color{:href => "#"}
+                  %span.m-r-xs
+                    %i.fa.fa-user
+                  %span Profile
+              %li
+                %a.text-color{:href => "#"}
+                  %span.m-r-xs
+                    %i.fa.fa-gear
+                  %span Settings
+              %li
+                %a.text-color{:href => "#"}
+                  %span.m-r-xs
+                    %i.zmdi.zmdi-hc-lg.zmdi-graphic-eq
+                  %span Custom Units
+              %li.divider{:role => "separator"}
+              %li
+                %a.text-color{:href => "#"}
+                  %span.m-r-xs
+                    %i.zmdi.zmdi-hc-lg.zmdi-pages
+                  %span My App
+              %li
+                %a.text-color{:href => "#"}
+                  %span.m-r-xs
+                    %i.zmdi.zmdi-hc-lg.zmdi-collection-add
+                  %span New App
+              %li.divider{:role => "separator"}
+              %li
+                = link_to logout_path, method: :delete, class: "text-color" do
+                  %span.m-r-xs
+                    %i.fa.fa-power-off
+                  %span Logout
+        %li.nav-item
+          .avatar.avatar-circle.avatar-team.dropdown
+            %a{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
+              %img{:alt => "", :src => "#"}/
+            .media-group.dropdown-menu.animated.flipInY
+              %a.media-group-item.selected{:href => "javascript:void(0)"}
+                .media
+                  .media-left
+                    .avatar.avatar-xs.avatar-circle
+                      %img{:alt => "", :src => "#"}/
+                  .media-body
+                    %h5.media-heading Team A
+              / .media-group-item
+              %a.media-group-item{:href => "javascript:void(0)"}
+                .media
+                  .media-left
+                    .avatar.avatar-xs.avatar-circle
+                      %img{:alt => "", :src => "#"}/
+                  .media-body
+                    %h5.media-heading Team B
+              / .media-group-item
+              %a.media-group-item{:href => "javascript:void(0)"}
+                .media
+                  .media-left
+                    .icon.icon-sm.icon-circle.m-r-md
+                      %i.fa.fa-plus
+                  .media-body
+                    %h5.media-heading Add Team

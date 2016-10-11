@@ -43,9 +43,7 @@ feature 'Creating a Reference' do
 
       click_button "Create Reference"
 
-      expect(page).to have_content("Description can't be blank")
-      expect(page).to have_content("Target commodity can't be blank")
-      expect(page).to have_content("Source commodity can't be blank")
+      expect(page).to have_content("can't be blank", count: 3)
     end
   end
 end

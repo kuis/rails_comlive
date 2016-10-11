@@ -18,4 +18,8 @@ module CommoditiesHelper
     png_string = BarcodeGenerator.new("qr_code", url).generate
     image_tag png_string, class: "qr_code"
   end
+
+  def options_for_measures
+    %w(number mass length volume time).map{|m| [m.titleize,m, data: { subtext: "Description" }]}
+  end
 end

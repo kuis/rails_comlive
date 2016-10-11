@@ -20,6 +20,7 @@ class CommoditiesController < ApplicationController
     if user_signed_in?
       @commodity = Commodity.find_by(id: params[:id])
       @com_ref = CommodityReference.find_by(app_id: current_app.id, commodity_id: @commodity.id)
+      @com_ref = @commodity.create_reference(current_user) if @com_ref.nil?
     else
       @commodity = Commodity.find_by(uuid: params[:uuid])
       authenticate_user! if params[:id]
@@ -99,6 +100,6 @@ class CommoditiesController < ApplicationController
   def commodity_params
     params.require(:commodity).permit(:name, :short_description, :long_description, :generic, :brand_id, :measured_in,
                                       :hscode_section_id, :hscode_chapter_id, :hscode_heading_id, :hscode_subheading_id,
-                                      :unspsc_commodity_id)
+                                      :unspsc_commodity_id, :visibility)
   end
 end

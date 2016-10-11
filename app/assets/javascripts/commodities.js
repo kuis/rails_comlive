@@ -178,6 +178,26 @@ ready = function(){
                 }
             }
         });
+    
+    $("input[name='commodity-product']").change(function(){
+        var selected = $(this).val();
+        var select = $("select#commodity_brand_id");
+        var div = $("div#commodity-brand");
+        var checkbox =  $("input#commodity_generic");
+
+        if(selected == "commodity"){
+            select.prop("selectedIndex", 0);
+            checkbox.prop("checked",true);
+            div.addClass("hidden");
+            $("p.commodity-desc").removeClass("hidden");
+            $("p.product-desc").addClass("hidden");
+        } else if(selected == "product"){
+            checkbox.prop("checked",false);
+            div.removeClass('hidden');
+            $("p.commodity-desc").addClass("hidden");
+            $("p.product-desc").removeClass("hidden");
+        }
+    });
 
 
 }

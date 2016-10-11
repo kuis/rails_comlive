@@ -2,10 +2,17 @@ module Visibility
   extend ActiveSupport::Concern
 
   included do
-    enum visibility: [:publicized, :privatized]
+    enum visibility: [:publicized, :privatized, :official]
   end
 
   def visibility_status
-    visibility == "publicized" ? "Public" : "Private"
+    case visibility
+      when "publicized"
+        "Public"
+      when "privatized"
+        "Private"
+      else
+        "Official"
+    end
   end
 end

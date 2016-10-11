@@ -16,7 +16,7 @@ class Specification < ApplicationRecord
 
   def min_or_max_present
     if !min.present? && !max.present?
-      errors[:base] << "You must set either a minimum or a maximum value"
+      errors[:min] << "You must set either a minimum or a maximum value"
     end
   end
 end

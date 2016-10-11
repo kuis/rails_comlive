@@ -1,0 +1,56 @@
+.text-center.m-b-lg
+  .row
+    .col-sm-8.col-sm-push-2
+      %h5.widget-title= t(".title")
+.row
+  .row-md-height
+    .col-md-2.col-md-height.col-top
+      .box.box-add
+        = link_to new_commodity_path do
+          .box-front
+            %h3= t(".commodity.title")
+          .box-back
+            %p= t(".commodity.description")
+          .box-footer
+            .btn-wrapper
+              %span.btn.btn-primary= t(".button_text")
+    .col-md-2.col-md-height.col-top
+      .box.box-add
+        = link_to new_commodity_path do
+          .box-front
+            %h3= t(".product.title")
+          .box-back
+            %p= t(".product.description")
+          .box-footer
+            .btn-wrapper
+              %span.btn.btn-primary= t(".button_text")
+    .col-md-2.col-md-height.col-top
+      .box.box-add
+        = link_to new_brand_path do
+          .box-front
+            %h3= t(".brand.title")
+          .box-back
+            %p= t(".brand.description")
+          .box-footer
+            .btn-wrapper
+              %span.btn.btn-primary= t(".button_text")
+    .col-md-2.col-md-height.col-top
+      .box.box-add
+        = link_to new_standard_path do
+          .box-front
+            %h3= t(".standard.title")
+          .box-back
+            %p= t(".standard.description")
+          .box-footer
+            .btn-wrapper
+              %span.btn.btn-primary= t(".button_text")
+    .col-md-2.col-md-height.col-top
+      .box.box-add
+        = link_to "#" do
+          .box-front
+            %h3= t(".classification.title")
+          .box-back
+            %p= t(".classification.description")
+          .box-footer
+            .btn-wrapper
+              %span.btn.btn-primary= t(".button_text")

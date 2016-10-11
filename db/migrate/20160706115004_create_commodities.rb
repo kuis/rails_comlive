@@ -5,9 +5,10 @@ class CreateCommodities < ActiveRecord::Migration[5.0]
       t.string :short_description
       t.text :long_description
       t.string :measured_in
-      t.boolean :generic, default: false
+      t.boolean :generic, default: true
       t.boolean :moderated, default: false
       t.string :uuid
+      t.integer :visibility, default: 0
       t.references :brand, foreign_key: true
 
       t.timestamps

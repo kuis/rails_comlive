@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922081409) do
+ActiveRecord::Schema.define(version: 20161007051535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,9 +109,10 @@ ActiveRecord::Schema.define(version: 20160922081409) do
     t.string   "short_description"
     t.text     "long_description"
     t.string   "measured_in"
-    t.boolean  "generic",           default: false
+    t.boolean  "generic",           default: true
     t.boolean  "moderated",         default: false
     t.string   "uuid"
+    t.integer  "visibility",        default: 0
     t.integer  "brand_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
@@ -200,6 +201,14 @@ ActiveRecord::Schema.define(version: 20160922081409) do
     t.datetime "updated_at",        null: false
     t.index ["category"], name: "index_hscode_subheadings_on_category", unique: true, using: :btree
     t.index ["hscode_heading_id"], name: "index_hscode_subheadings_on_hscode_heading_id", using: :btree
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "url"
+    t.integer  "commodity_reference_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["commodity_reference_id"], name: "index_images_on_commodity_reference_id", using: :btree
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -427,6 +436,7 @@ ActiveRecord::Schema.define(version: 20160922081409) do
   add_foreign_key "hscode_chapters", "hscode_sections"
   add_foreign_key "hscode_headings", "hscode_chapters"
   add_foreign_key "hscode_subheadings", "hscode_headings"
+  add_foreign_key "images", "commodity_references"
   add_foreign_key "invitations", "apps"
   add_foreign_key "levels", "classifications"
   add_foreign_key "links", "apps"

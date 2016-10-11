@@ -16,6 +16,7 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery-ui.min
 //= require bootstrap
+//= require bootstrap-select.min
 //= require hoverIntent
 //= require superfish
 //= require jquery.slimscroll
@@ -35,3 +36,4 @@
 //= require standards
 //= require references
 //= require classifications
+//= require searches 

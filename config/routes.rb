@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get "login" => "sessions#new", as: :login
     get "invitations/:token" => "invitations#accept", as: :accept_invitation
     delete "logout" => "sessions#destroy", as: :logout
+    get "add-item" => "welcome#add_items", as: :add_items
 
     root to: "apps#index", constraints: Authenticated
     root to: "welcome#landing"
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
 
     resources :packagings, only: [:index]
 
-    resources :brands, :standards
+    resources :brands, :standards, :searches
 
     resources :apps do
       resources :classifications do
@@ -44,7 +45,7 @@ Rails.application.routes.draw do
 
       resources :invitations, only: [:new, :create]
       resources :commodity_references, path: "commodities" do
-        resources :states, :specifications, :references
+        resources :states, :specifications, :references, :images
         resources :links, except: [:index, :show]
 
         resources :packagings do

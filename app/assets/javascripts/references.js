@@ -41,23 +41,23 @@ select2For = function(select){
 }
 
 ready = function(){
-    $("input#commodity_generic").change(function(){
-        var checkbox = $(this);
-        var checked = checkbox.is(":checked");
-        var ref_select = $("select#commodity_reference_brand_id");
-        var com_select = $("select#commodity_brand_id");
-        var div = $("div#commodity-brand");
-
-        if(checked){
-            ref_select.prop("selectedIndex", 0);
-            com_select.prop("selectedIndex", 0);
-            div.hide();
-            checkbox.parent().css("margin-bottom","40px");
-        } else {
-            checkbox.parent().css("margin-bottom","10px");
-            div.show();
-        }
-    });
+    // $("input#commodity_generic").change(function(){
+    //     var checkbox = $(this);
+    //     var checked = checkbox.is(":checked");
+    //     var ref_select = $("select#commodity_reference_brand_id");
+    //     var com_select = $("select#commodity_brand_id");
+    //     var div = $("div#commodity-brand");
+    //
+    //     if(checked){
+    //         ref_select.prop("selectedIndex", 0);
+    //         com_select.prop("selectedIndex", 0);
+    //         div.hide();
+    //         checkbox.parent().css("margin-bottom","40px");
+    //     } else {
+    //         checkbox.parent().css("margin-bottom","10px");
+    //         div.show();
+    //     }
+    // });
 
     // on page load
     var source_commodity = $("#reference_source_commodity_id");

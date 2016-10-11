@@ -13,7 +13,6 @@ feature 'Visiting #show page' do
     scenario "It should show the standard's details" do
       expect(page).to have_text(standard.name)
       expect(page).to have_text(standard.description)
-      expect(page).to have_link("Claim This Standard")
     end
   end
 
@@ -25,7 +24,6 @@ feature 'Visiting #show page' do
     scenario "It should show the standard's details" do
       expect(page).to have_text(standard.name)
       expect(page).to have_text(standard.description)
-      expect(page).not_to have_link("Claim This Standard")
     end
   end
 end

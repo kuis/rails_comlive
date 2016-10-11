@@ -1,11 +1,21 @@
-= form_for [@app, @standard] do |f|
-  = errors_for @standard
+= form_for [@app, @standard], html: { class: "form-horizontal" } do |f|
   .form-group
-    = f.label :name
-    = f.text_field :name, class: "form-control"
+    = f.label :name, class: "col-sm-4 control-label"
+    .col-sm-6
+      = f.text_field :name, class: "form-control"
+      = errors_for_field(@standard, :name)
   .form-group
-    = f.label :description
-    = f.text_area :description, class: "form-control"
+    = f.label :description, class: "col-sm-4 control-label"
+    .col-sm-6
+      = f.text_area :description, class: "form-control"
+      = errors_for_field(@standard, :description)
   .form-group
-    = f.select :visibility, options_for_visibility(@standard), {}, class: "form-control"
-  = f.submit class: "btn btn-primary"
+    = f.label :publishing, class: "col-sm-4 control-label"
+    .col-sm-6
+      = f.select :visibility, options_for_visibility(@standard), {}, class: "selectpicker show-tick", data: { width: "fit", header: "Publishing of the data"}
+      = errors_for_field(@standard, :visibility)
+
+  .row
+    .col-sm-8.col-sm-offset-4
+      = f.submit class: "btn btn-primary"
+      = link_to "Cancel", :back, class: "btn btn-default btn-md m-l-sm"

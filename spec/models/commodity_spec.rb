@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Commodity, :type => :model do
+  subject { described_class }
+
   describe "Validations" do
     it "has a valid factory" do
       commodity = build(:commodity)
@@ -13,9 +15,9 @@ RSpec.describe Commodity, :type => :model do
       expect(commodity.errors[:name]).to include("can't be blank")
     end
 
-    it "is generic field is false by default" do
+    it "is generic field is true by default" do
       commodity = Commodity.new
-      expect(commodity.generic).to eq false
+      expect(commodity.generic).to eq true
     end
 
     it "is invalid without measured_in" do
@@ -38,52 +40,58 @@ RSpec.describe Commodity, :type => :model do
 
   describe "Associations" do
     it "belongs to a brand" do
-      assoc = Commodity.reflect_on_association(:brand)
+      assoc = subject.reflect_on_association(:brand)
       expect(assoc.macro).to eq :belongs_to
     end
 
     it "has many commodity references" do
-      assoc = Commodity.reflect_on_association(:commodity_references)
+      assoc = subject.reflect_on_association(:commodity_references)
       expect(assoc.macro).to eq :has_many
     end
 
     it "has many specifications" do
-      assoc = Commodity.reflect_on_association(:specifications)
+      assoc = subject.reflect_on_association(:specifications)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:through]).to eq :commodity_references
     end
 
     it "has many packagings" do
-      assoc = Commodity.reflect_on_association(:packagings)
+      assoc = subject.reflect_on_association(:packagings)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:through]).to eq :commodity_references
     end
 
     it "has many standards" do
-      assoc = Commodity.reflect_on_association(:standards)
+      assoc = subject.reflect_on_association(:standards)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:through]).to eq :commodity_references
     end
 
     it "has many references" do
-      assoc = Commodity.reflect_on_association(:references)
+      assoc = subject.reflect_on_association(:references)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:through]).to eq :commodity_references
     end
 
     it "has many links" do
-      assoc = Commodity.reflect_on_association(:links)
+      assoc = subject.reflect_on_association(:links)
+      expect(assoc.macro).to eq :has_many
+      expect(assoc.options[:through]).to eq :commodity_references
+    end
+
+    it "has many images" do
+      assoc = subject.reflect_on_association(:images)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:through]).to eq :commodity_references
     end
 
     it "has many barcodes" do
-      assoc = Commodity.reflect_on_association(:barcodes)
+      assoc = subject.reflect_on_association(:barcodes)
       expect(assoc.macro).to eq :has_many
     end
 
     it "has many classification commodities" do
-      assoc = Commodity.reflect_on_association(:classification_commodities)
+      assoc = subject.reflect_on_association(:classification_commodities)
       expect(assoc.macro).to eq :has_many
     end
   end
@@ -94,11 +102,11 @@ RSpec.describe Commodity, :type => :model do
         generic_commodity = create(:generic_commodity, name: "Western Digital")
         non_generic_commodity = create(:non_generic_commodity, name: "Dell Inc")
 
-        Commodity.reindex
+        subject.reindex
 
-        generic_search = Commodity.search("western").records
-        non_generic_search = Commodity.search("inc").records
-        no_results_search = Commodity.search("remote").records
+        generic_search = subject.search("western").records
+        non_generic_search = subject.search("inc").records
+        no_results_search = subject.search("remote").records
 
         expect(generic_search).to match_array([generic_commodity])
         expect(generic_search).not_to match_array([non_generic_commodity])

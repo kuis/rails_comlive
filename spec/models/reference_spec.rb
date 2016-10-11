@@ -14,12 +14,12 @@ RSpec.describe Reference, :type => :model do
     it "is invalid without a source commodity" do
       reference = build(:reference, source_commodity_id: nil)
       reference.valid?
-      expect(reference.errors[:source_commodity]).to include("can't be blank")
+      expect(reference.errors[:source_commodity_id]).to include("can't be blank")
     end
     it "is invalid without a target commodity" do
       reference = build(:reference, target_commodity_id: nil)
       reference.valid?
-      expect(reference.errors[:target_commodity]).to include("can't be blank")
+      expect(reference.errors[:target_commodity_id]).to include("can't be blank")
     end
     it "is invalid without a description" do
       reference = build(:reference, description: nil)
@@ -45,7 +45,7 @@ RSpec.describe Reference, :type => :model do
     it "is invalid without a commodity reference" do
       reference = build(:reference, commodity_reference_id: nil)
       reference.valid?
-      expect(reference.errors[:commodity_reference]).to include("can't be blank")
+      expect(reference.errors[:commodity_reference_id]).to include("can't be blank")
     end
     it "is public by default" do
       reference = build(:reference)
