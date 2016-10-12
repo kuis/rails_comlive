@@ -1,0 +1,5 @@
+- @results.each do |result|
+  .search-result
+    %h5= link_to result.name, search_url_for(result)
+    %p.text-muted Type: #{result.class.to_s}
+    %p= search_description(result)
