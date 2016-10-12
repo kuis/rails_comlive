@@ -1,5 +1,6 @@
 class StandardsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_brand
 
   add_breadcrumb "Standards", :standards_path
 
@@ -15,7 +16,7 @@ class StandardsController < ApplicationController
   def new
     @standard = Standard.new
 
-    add_breadcrumb "New", new_standard_path
+    add_breadcrumb "New", new_brand_standard_path(@brand)
   end
 
   def show
@@ -25,13 +26,14 @@ class StandardsController < ApplicationController
       authenticate_user! if params[:id]
       @standard = Standard.find_by(uuid: params[:uuid])
     end
-    add_breadcrumb @standard.name, @standard
+    add_breadcrumb [@brand, @standard.name], @standard
   end
 
   def create
-    @standard = Standard.create(standard_params)
+    @standard = Standard.new(standard_params)
+    @standard.brand_id = @brand.id
     if @standard.save
-      redirect_to [@app,@standard], notice: "Standard successfully created"
+      redirect_to [@brand,@standard], notice: "Standard successfully created"
     else
       render :new
     end
@@ -41,13 +43,13 @@ class StandardsController < ApplicationController
     @standard = Standard.find(params[:id])
 
     add_breadcrumb @standard.name, @standard
-    add_breadcrumb "Edit", edit_standard_path(@standard)
+    add_breadcrumb "Edit", edit_brand_standard_path(@brand,@standard)
   end
 
   def update
     @standard = Standard.find(params[:id])
     if @standard.update(standard_params)
-      redirect_to [@app,@standard], notice: "Standard successfully updated"
+      redirect_to [@brand, @standard], notice: "Standard successfully updated"
     else
       render :edit
     end
@@ -55,8 +57,13 @@ class StandardsController < ApplicationController
 
   private
 
+  def set_brand
+    return unless user_signed_in?
+    @brand = Brand.find(params[:brand_id])
+  end
+
   def standard_params
-    params.require(:standard).permit(:name, :description, :logo)
+    params.require(:standard).permit(:name, :description, :logo, :version, :code, :visibility, :certifier, :certifier_url)
   end
 
 

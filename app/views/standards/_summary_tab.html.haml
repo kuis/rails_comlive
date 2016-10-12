@@ -10,12 +10,14 @@
             %p= @standard.description
         .col-sm-6.col-md-4.col-height
           .brand-info.p-md
-            %a.m-b-sm{:href => "#", :target => "_blank"}
-              Official website
-              %i.fa.fa-external-link.fz-sm{"aria-hidden" => "true"}
+            - if @standard.certifier_url.present?
+              = link_to @standard.certifier_url, class: "m-b-sm", target: "_blank" do
+                Official Website
+                %i.fa.fa-external-link.fz-sm{"aria-hidden" => "true"}
+
     .segment-actions
       - if user_signed_in?
-        = link_to edit_standard_path, class: "btn-edit" do
+        = link_to edit_brand_standard_path(@brand), class: "btn-edit" do
           %i.fa.fa-pencil
           Edit
       .segment-state.dropdown.inline-block

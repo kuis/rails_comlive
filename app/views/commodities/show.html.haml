@@ -10,9 +10,10 @@
 
           .hidden-xs.col-md-6.col-sm-height.col-sm-middle.text-right
             - @brand.commodities.limit(3).each do |commodity|
+              - image = commodity.images.any? ? commodity.images.first.url : "http://placehold.it/60x60"
               .hidden-sm.avatar.avatar-md.avatar-circle.m-r-sm
                 = link_to commodity do
-                  = image_tag "http://placehold.it/60x60"
+                  = image_tag image
 
             .pull-right.text-center
               = link_to "#", class: "m-b-0" do
@@ -20,9 +21,10 @@
                 = "Commodity".pluralize(@brand.commodities.count)
 
       .segment-actions
-        = link_to edit_brand_path(@brand), class: "btn-edit" do
-          %i.fa.fa-pencil
-          Edit
+        - if user_signed_in?
+          = link_to edit_brand_path(@brand), class: "btn-edit" do
+            %i.fa.fa-pencil
+            Edit
         .segment-state.dropdown
           = render 'shared/pubmode', mode: "Official"
 
@@ -33,9 +35,10 @@
           .commodity-heading
             %h1.p-md.pull-left= @commodity.name
           .segment-actions
-            = link_to edit_commodity_path(@commodity), class: "btn-edit" do
-              %i.fa.fa-pencil
-              Edit
+            - if user_signed_in?
+              = link_to edit_commodity_path(@commodity), class: "btn-edit" do
+                %i.fa.fa-pencil
+                Edit
             = link_to "#", class: "btn-share", data: { toggle: "modal", target: "#modalShare" } do
               %i.fa.fa-share-alt
               Share

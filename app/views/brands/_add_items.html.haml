@@ -7,7 +7,7 @@
           %i.fa.fa-times
       .modal-body
         .list-group
-          = link_to "Standard", new_standardization_path(referable_id: @brand.id, referable_type: "Brand"), class: "list-group-item"
+          = link_to "Standard", new_brand_standard_path(@brand), class: "list-group-item"
           %a.list-group-item{:href => "#"}
             Commodity
           %a.list-group-item{:href => "#"}

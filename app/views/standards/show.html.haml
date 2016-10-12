@@ -6,11 +6,11 @@
           %span.standard-logo{:title => ""}
             = image_tag @standard.logo, class: "img-responsive"
       .table-cell.col-sm-middle
-        %h1.m-t-0= @standard.name
-        %h2.fz-lg.fw-500.m-t-0
+        %h1.m-t-0= @standard.code
+        %h2.fz-lg.fw-500.m-t-0= @standard.name
   .segment-actions
     - if user_signed_in?
-      = link_to edit_standard_path, class: "btn-edit" do
+      = link_to edit_brand_standard_path(@brand), class: "btn-edit" do
         %i.fa.fa-pencil
         Edit
     .segment-state.dropdown.inline-block

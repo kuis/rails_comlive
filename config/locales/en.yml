@@ -57,6 +57,8 @@ en:
       title: "New Standard"
     edit:
       title: "Edit Standard"
+    form:
+      upload_logo: "Upload Logo"
 
   images:
     new:

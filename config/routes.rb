@@ -36,7 +36,10 @@ Rails.application.routes.draw do
 
     resources :packagings, only: [:index]
 
-    resources :brands, :standards, :searches
+    resources :brands do
+      resources :standards
+    end
+    resources :searches
 
     resources :apps do
       resources :classifications do

@@ -54,6 +54,21 @@ feature 'Showing a Commodity' do
         expect(page).to have_content commodity.long_description
       end
 
+      scenario "Should not have edit links" do
+        within(".box.commodity-brand.segment-edit .segment-actions") do
+          expect(page).not_to have_link("Edit")
+        end
+
+        within(".box.m-0 .segment.segment-edit.segment-header .segment-actions") do
+          expect(page).not_to have_link("Edit")
+        end
+
+        # within(".row.no-gutter .segment.segment-edit.segment-description .segment-actions") do
+          # skip: "We have more than two figure this out"
+          # expect(page).not_to have_link("Edit")
+        # end
+      end
+
       scenario "Should show a qr code", skip: "Add this when UI ready"
       # scenario "Should show a qr code" do
       #   expect(page).to have_css('img.qr_code')

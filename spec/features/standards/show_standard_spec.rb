@@ -2,12 +2,13 @@ require 'rails_helper'
 
 feature 'Visiting #show page' do
   given(:user){ create(:user) }
+  given(:brand) { create(:brand) }
   given(:standard) { create(:standard) }
 
   context "When user is signed in" do
     background do
       log_in(user)
-      visit standard_path(standard)
+      visit brand_standard_path(brand, standard)
     end
 
     scenario "It should show the standard's details" do

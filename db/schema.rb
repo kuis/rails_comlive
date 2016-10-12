@@ -325,13 +325,19 @@ ActiveRecord::Schema.define(version: 20161007051535) do
 
   create_table "standards", force: :cascade do |t|
     t.string   "name"
+    t.string   "code"
+    t.string   "version"
     t.text     "description"
     t.string   "logo"
+    t.string   "certifier"
+    t.string   "certifier_url"
     t.string   "uuid"
-    t.boolean  "official",    default: false
-    t.integer  "visibility",  default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.boolean  "official",      default: false
+    t.integer  "visibility",    default: 0
+    t.integer  "brand_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["brand_id"], name: "index_standards_on_brand_id", using: :btree
     t.index ["uuid"], name: "index_standards_on_uuid", unique: true, using: :btree
   end
 
@@ -447,6 +453,7 @@ ActiveRecord::Schema.define(version: 20161007051535) do
   add_foreign_key "references", "commodity_references"
   add_foreign_key "standardizations", "standards"
   add_foreign_key "standardizations", "users"
+  add_foreign_key "standards", "brands"
   add_foreign_key "states", "commodity_references"
   add_foreign_key "units", "levels"
   add_foreign_key "unspsc_classes", "unspsc_families"

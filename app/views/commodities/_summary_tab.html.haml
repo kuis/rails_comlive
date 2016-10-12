@@ -32,9 +32,10 @@
             .col-md-12
               .segment.segment-edit.segment-description
                 .segment-actions
-                  = link_to "#", class: "btn-edit" do
-                    %i.fa.fa-pencil
-                    Edit
+                  - if user_signed_in?
+                    = link_to "#", class: "btn-edit" do
+                      %i.fa.fa-pencil
+                      Edit
                   .segment-state.dropdown
                     = render 'shared/pubmode', mode: "Official"
 
