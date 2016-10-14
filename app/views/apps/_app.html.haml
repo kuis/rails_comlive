@@ -1,1 +1,7 @@
-%p= link_to app.name, app
+= link_to app, class: "media-group-item #{current_app == app ? "selected" : "" }" do
+  .media
+    .media-left
+      .avatar.avatar-xs.avatar-circle
+        %span.initial= initials_for(app)
+    .media-body
+      %h5.media-heading= app.name

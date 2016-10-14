@@ -6,7 +6,7 @@ module CommoditiesHelper
   def recent_commodities
     return [] if cookies[:recent_commodities].nil?
     commodity_ids =  cookies[:recent_commodities].split(",")
-    CommodityReference.where_with_order(commodity_ids)
+    Commodity.where_with_order(commodity_ids)
   end
 
   def barcode_for(model)

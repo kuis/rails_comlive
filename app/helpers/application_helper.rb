@@ -52,4 +52,9 @@ module ApplicationHelper
       end
     end
   end
+
+  def initials_for(app)
+    return unless app.valid?
+    app.name.chars.first.upcase
+  end
 end

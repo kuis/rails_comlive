@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     delete "logout" => "sessions#destroy", as: :logout
     get "add-item" => "welcome#add_items", as: :add_items
 
-    root to: "apps#index", constraints: Authenticated
+    root to: "welcome#dashboard", constraints: Authenticated
     root to: "welcome#landing"
 
     constraints(uuid: /\d{10}/) do

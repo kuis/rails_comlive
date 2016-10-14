@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  after_action :last_accessed_app, :record_recent_commodity
+  before_action :last_accessed_app, :record_recent_commodity
   before_action :set_locale
 
   helper_method :current_user, :current_app, :user_signed_in?, :commodity_url

@@ -4,7 +4,10 @@ class WelcomeController < ApplicationController
   def landing
   end
 
-  def add_items
+  def dashboard
+    @recent_commodities = Commodity.recent.limit(5)
+  end
 
+  def add_items
   end
 end
