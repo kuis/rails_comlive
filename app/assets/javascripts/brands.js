@@ -16,11 +16,15 @@ ready = function(){
 
     $("#navbar-search .form-control").on('focus blur', function(){
         $(this).parents("#navbar-search").toggleClass('is_focused');
-    })
+    });
 
     $("#navbar-search .btn").on('click', function(){
         $(this).parents("#navbar-search").addClass('is_focused');
-    })
+    });
+
+    setTimeout(function(){
+        $('#global-alert').slideUp('slow');
+    }, 3500);
 
 }
 $(document).ready(ready);
