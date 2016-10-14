@@ -1,5 +1,5 @@
 class BrandsController < ApplicationController
-  before_action :authenticate_user!, except: [:index,:show]
+  before_action :authenticate_user!, except: [:index,:show, :autocomplete]
 
   add_breadcrumb "Brands", :brands_path
 
@@ -50,6 +50,14 @@ class BrandsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def autocomplete
+    @brands =  Brand.search(params[:query], limit: 10)
+    response = @brands.each_with_object([]) do |brand,arr|
+      arr << { id: brand.id, name: brand.name, href: brand_url(brand) }
+    end
+    render json: response.to_json
   end
 
   private

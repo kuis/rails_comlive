@@ -1,6 +1,6 @@
 class StandardsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_brand
+  before_action :authenticate_user!, except: [:index, :show, :autocomplete]
+  before_action :set_brand, except: :autocomplete
 
   add_breadcrumb "Standards", :standards_path
 
@@ -55,6 +55,14 @@ class StandardsController < ApplicationController
     end
   end
 
+  def autocomplete
+    @standards = Standard.search(params[:query], limit: 10, includes: [:brand])
+    response = @standards.each_with_object([]) do |standard,arr|
+      arr << { id: standard.id, name: standard.name, href: brand_standard_url(standard.brand, standard) }
+    end
+    render json: response.to_json
+  end
+
   private
 
   def set_brand
@@ -65,7 +73,6 @@ class StandardsController < ApplicationController
   def standard_params
     params.require(:standard).permit(:name, :description, :logo, :version, :code, :visibility, :certifier, :certifier_url)
   end
-
 
   def response_for(standards)
     response = {}

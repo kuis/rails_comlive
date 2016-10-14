@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe StandardsController, :type => :controller do
   let!(:user) { create(:user) }
   let!(:brand) { create(:brand) }
-  let!(:standard) { create(:standard, name: "ISO 9000") }
+  let!(:standard) { create(:standard, name: "ISO 9000", brand: brand) }
 
   context "As an authenticated user" do
     before(:each) do
@@ -134,6 +134,13 @@ RSpec.describe StandardsController, :type => :controller do
         expect(response).to redirect_to(login_path)
         expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
+    end
+  end
+
+  describe "GET #autocomplete" do
+    it "returns 200 http status code" do
+      get :autocomplete
+      expect(response.status).to eq 200
     end
   end
 end

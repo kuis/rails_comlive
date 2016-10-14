@@ -130,4 +130,11 @@ end
       end
     end
   end
+
+  describe "GET #autocomplete" do
+    it "returns 200 http status code" do
+      get :autocomplete
+      expect(response.status).to eq 200
+    end
+  end
 end

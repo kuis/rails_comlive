@@ -26,10 +26,8 @@
         = f.select :measured_in, options_for_measures, { prompt: t(".unit_prompt") }, class: "selectpicker show-tick", data: { header: "Units of Measure", width: "fit"}, title: "Select Unit...."
         = errors_for_field(@commodity,:measured_in)
       %p.showmore.help-block
-        %a{:href => "javascript:void(0)"} Are you missing a unit?
-      %p.hidden.m-0
-        %a.btn-link{:href => "javascript:void(0)"} Let us know
-        and we will go through your request and add it ASAP if we agree.
+        = link_to "Are you missing a unit?", "javascript:void(0)", data: { toggle: "tooltip" }, title: t(".missing_unit")
+
   / .form-group
   .checkbox.checkbox-success.hidden
     = f.check_box :generic, {}, "true", "false"

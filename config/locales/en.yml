@@ -135,6 +135,7 @@ en:
     form:
       unit_prompt: "Select Unit"
       brand_prompt: "Select Brand"
+      missing_unit: "Select this to let us know, and we will go through your request and add it ASAP if we agree"
 
   brands:
     new:

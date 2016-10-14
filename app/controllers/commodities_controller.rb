@@ -74,7 +74,7 @@ class CommoditiesController < ApplicationController
     response = @commodities.each_with_object([]) do |commodity,arr|
       arr << { id: commodity.id, name: commodity.name, href: commodity_url(commodity) }
     end
-    render json: response
+    render json: response.to_json
   end
 
   def prefetch

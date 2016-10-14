@@ -37,9 +37,16 @@ Rails.application.routes.draw do
     resources :packagings, only: [:index]
 
     resources :brands do
+      collection do
+        get :autocomplete
+      end
+
       resources :standards
     end
     resources :searches
+    resources :standards do
+      get :autocomplete, on: :collection
+    end
 
     resources :apps do
       resources :classifications do
