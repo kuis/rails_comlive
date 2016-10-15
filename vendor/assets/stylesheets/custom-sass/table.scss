@@ -1,0 +1,53 @@
+/* Datatables */
+.data-table {
+  padding-top: 12px;
+  th,
+  td {
+    padding-left: 16px;
+    &:first-child {
+      padding-left: 16px;
+    }
+  }
+  td {
+    vertical-align: middle !important;
+  }
+  td.segment-actions {
+    position: relative;
+    text-align: right;
+    width: 50px;
+    &:before {
+      @include transition();
+      content: "";
+      height: 100%;
+      width: 1px;
+      display: block;
+      right: 0;
+      top: 0;
+      position: absolute;
+    }
+  }
+  img {
+    width: 50px;
+    margin-right: 10px;
+  }
+}
+
+.dataTables {
+  &_info,
+  &_length {
+    padding-left: 16px;
+  }
+  &_paginate,
+  &_filter {
+    padding-right: 16px;
+  }
+}
+
+.table-responsive {
+  overflow-x: inherit;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd),
+.box-brand {
+  background: $reseda-lightest; 
+}

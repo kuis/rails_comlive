@@ -1,0 +1,39 @@
+.app-footer {
+  border-top: none;
+  .footer-menu {
+    float: none;
+    display: inline-block;
+    li {
+      @media (max-width: $screen-xs-max) {
+        padding: 0;
+      }
+      a {
+        color: $gray-darker;
+        font-weight: 500;
+        @media (max-width: $screen-xs-max) {
+          font-size: $font-size-sm;
+          padding: 0 7px;
+        }
+      }
+    }
+  }
+  .dropup-language {
+    display: inline-block;
+    li {
+      display: block;
+      a {
+        padding: 7px 15px;
+      }
+    }
+    .btn-language {
+      border: none;
+      padding: 0 10px;
+      background: transparent;
+      vertical-align: top;
+      &:hover,
+      &:focus {
+        @include box-shadow(none);
+      }
+    }
+  }
+}

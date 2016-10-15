@@ -64,6 +64,10 @@ en:
     new:
       title: "Add Image"
 
+  invitations:
+    new:
+      title: "Invite Users To"
+
   welcome:
     dashboard:
       title: "Add New"

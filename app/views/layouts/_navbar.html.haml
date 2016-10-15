@@ -7,35 +7,12 @@
           = image_tag "logo.png"
         %span#brand-name.hidden-xs.hidden-sm commodity.live
 
-      / navbar search
-      = render 'layouts/search'
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
 
-      / test this in rspec
-      - if user_signed_in?
-        #navbar-add
-          = link_to add_items_path, class: "btn btn-add-entity" do
-            %i.fa.fa-plus
-          .dropdown.inline-block
-            %a.btn.btn-add-entity{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
-              %i.fa.fa-ellipsis-h
-            %ul.dropdown-menu.animated.flipInY
-              %li.dropdown-header
-                Add New...
-              %li.divider.m-0
-              %li
-                = link_to "Commodity", new_commodity_path
-              %li
-                = link_to "Brand", new_brand_path
-              %li
-                = link_to "Standard", "#"
-              %li
-                = link_to "Classification", "#"
-              %li.dropdown-header
-                Send Invitation
-              %li.divider.m-0
-                %li
-                  = link_to "Invite Users", new_app_invitation_path(current_app)
-    / /navbar-header
     %ul#top-nav.pull-right
       / .list-group-item
       %li.nav-item
@@ -92,3 +69,47 @@
                         %i.fa.fa-plus
                     .media-body
                       %h5.media-heading Add Team
+
+    / navbar-collapse
+    #bs-navbar-collapse.collapse.navbar-collapse
+      / navbar search
+      = render 'layouts/search'
+
+      / test this in rspec
+      - if user_signed_in?
+        #navbar-add.hidden-xs
+          = link_to add_items_path, class: "btn btn-add-entity" do
+            %i.fa.fa-plus
+          .dropdown.inline-block
+            %a.btn.btn-add-entity{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
+              %i.fa.fa-ellipsis-h
+            %ul.dropdown-menu.animated.flipInY
+              %li.dropdown-header
+                Add New...
+              %li.divider.m-0
+              %li
+                = link_to "Commodity", new_commodity_path
+              %li
+                = link_to "Brand", new_brand_path
+              %li
+                = link_to "Standard", "#"
+              %li
+                = link_to "Classification", "#"
+              %li.dropdown-header
+                Send Invitation
+              %li.divider.m-0
+                %li
+                  = link_to "Invite Users", new_app_invitation_path(current_app)
+
+        .visible-xs
+          %ul#navbar-xs
+            %li
+              = link_to "Add New...", add_items_path
+            %li
+              = link_to "Commodity", new_commodity_path
+            %li
+              = link_to "Brand", new_brand_path
+            %li
+              = link_to "Standard", "#"
+            %li
+              = link_to "Classification", "#"

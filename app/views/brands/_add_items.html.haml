@@ -1,14 +1,21 @@
 #modalAddBrand.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
-      .modal-header
-        %h3.pull-left.m-0 Add info to this brand
-        %a.pull-right.fz-lg.text-muted{"data-dismiss" => "modal", :href => "#"}
+      .modal-header.b-0
+        %h3.widget-title.m-b-0 Add Details
+        = link_to "#", class: "modal-close", data: { dismiss: "modal" } do
           %i.fa.fa-times
       .modal-body
-        .list-group
-          = link_to "Standard", new_brand_standard_path(@brand), class: "list-group-item"
-          %a.list-group-item{:href => "#"}
-            Commodity
-          %a.list-group-item{:href => "#"}
+        .list-group.widget-add
+          = link_to new_brand_standard_path(@brand), class: "list-group-item" do
+            Standard
+            %span.btn-add.icon.icon-circle.icon-md
+              %i.fa.fa-plus
+          = link_to "#", class: "list-group-item" do
+            Product
+            %span.btn-add.icon.icon-circle.icon-md
+              %i.fa.fa-plus
+          = link_to "#", class: "list-group-item" do
             Classification
+            %span.btn-add.icon.icon-circle.icon-md
+              %i.fa.fa-plus

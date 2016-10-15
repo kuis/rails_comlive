@@ -1,0 +1,466 @@
+body {
+  background: $gold-lightest;
+}
+
+a {
+  color: $gold;
+  &:hover,
+  &:focus {
+    color: $gold-dark;
+  }
+}
+
+.pace .pace-progress {
+  background: $gold;
+}
+
+.hr {
+  border-top-color: #ddd;
+}
+
+.bg-0 {background: transparent;}
+
+.fa-external-link {
+  vertical-align: super;
+}
+
+.table-cell {
+  display: table-cell;
+}
+
+.block {
+  display: block;
+}
+
+/* Icons */
+.icon {
+  &-md {
+    @media (max-width: $screen-sm-max) {
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+  &-custom {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    vertical-align: middle;
+  }
+  &-wipo {
+    background-image: url(../../assets/images/custom/icons/wipo-logo.png);
+  }
+  &-ocs {
+    background-image: url(../../assets/images/custom/icons/opencorporates-logo.png);
+  }
+  &-xs {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+  }
+  &-info {
+    vertical-align: super;
+    margin-top: -20px;
+  }
+  &-aside {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    vertical-align: middle;
+  }
+  &-commodity {
+    background-image: url(../../assets/images/custom/icons/icon-commodity.png);
+    width: 17px;
+    height: 25px;
+  }
+  &-classification {
+    background-image: url(../../assets/images/custom/icons/icon-classification.png);
+    width: 20px;
+    height: 20px;
+    margin-left: -2px;
+  }
+}
+
+
+/* Dropdown */
+.dropdown-menu {
+  border: 1px solid #ddd;
+} 
+
+.dropdown-menu > {
+  li > a:hover, 
+  li > a:focus {
+    background: lighten($reseda-lightest, 1%);
+  }
+  li.selected {
+    a, a:hover { 
+      font-weight: bold;
+      background: $reseda-lightest;
+    }
+  }
+}
+
+.dropdown {
+  &-menu {
+    padding-bottom: 0;
+    margin-top: 0;
+  }
+  &-header {
+    text-transform: uppercase;
+    letter-spacing: 0.8;
+    padding: 6px 16px;
+  }
+  &-publishing {
+    width: 300px;
+    padding-bottom: 0;
+    margin-top: 0;
+    li {
+      padding: 6px 16px;
+      strong {
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 700;
+        font-size: $font-size-sm;
+        color: $reseda;
+      }
+      small {
+        font-size: $font-size-sm;
+        display: block;
+      }
+      &:hover,
+      &:focus {
+        cursor: pointer;
+        background: lighten($reseda-lightest, 1%);
+        strong {
+          &.official {color: $color-official;}
+          &.private {color: $color-private;}
+          &.public {color: $color-public;}
+        }
+      }
+      &.selected {
+        background: $reseda-lightest;
+        strong {
+          &.official {color: $color-official;}
+          &.private {color: $color-private;}
+          &.public {color: $color-public;}
+        }
+      }
+      &.divider {
+        padding: 0;
+        &:hover {
+          cursor: default;
+        }
+      }
+    }
+    small a {
+      padding: 0;
+    }
+    strong {
+      font-weight: normal;
+    }
+  }
+}
+
+.dropdown-menu .btn-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: $reseda-light;
+  font-size: 1.4em;
+  &:hover {
+    color: $reseda-dark;
+  }
+}
+.btn-default:active:hover, 
+.btn-default:active:focus, 
+.btn-default:active.focus, 
+.btn-default.active:hover, 
+.btn-default.active:focus, 
+.btn-default.active.focus, 
+.open > .btn-default.dropdown-toggle,
+.open > .btn-default.dropdown-toggle:hover, 
+.open > .btn-default.dropdown-toggle:focus, 
+.open > .btn-default.dropdown-toggle.focus {
+  background: $gold-lightest;
+  border-color: $reseda-lighter; 
+}
+
+/* Lists */
+a {
+  &:hover, &:focus {
+  }
+}
+a.list-group-item{
+  &.selected {
+    background-color: #f5f7f9;
+  }
+}
+
+a.media-group-item:hover, a.media-group-item:focus, 
+a.list-group-item:hover, a.list-group-item:focus {
+  background: $reseda-lightest;
+}
+/* Dropzone */
+.dropzone {
+  border: 2px dashed $gold !important;
+}
+
+.btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, 
+.btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus {
+  background: $gold;
+  border-color: $gold; 
+}
+
+/* Buttons */
+.btn {
+  @include transition(opacity .15s linear);
+  &-primary,
+  &-secondary,
+  &-default {
+    @include border-top-radius(25px);
+    @include border-bottom-radius(25px);
+    padding-left: 25px;
+    padding-right: 25px;
+    &.promo-search-submit.dropdown-toggle {
+      @include border-top-radius(0);
+      @include border-bottom-radius(0);
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    &.btn-sm {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    &.dropdown-toggle {
+      border: none;
+      @include border-top-radius(0);
+      @include border-bottom-radius(0);
+      background: transparent;
+    }
+    &.note-btn {
+      @include border-top-radius(0);
+      @include border-bottom-radius(0);
+      padding: 6px 12px;
+    }
+  }
+  &-default {
+    color: $reseda-dark;
+  }
+  &-primary {
+    background: $gold;
+    border-color: $gold;
+    color: #fff; /*$gray-darker*/
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    font-weight: 700;
+    &:hover,
+    &:focus,
+    &:active {
+      background: $gold-dark;
+      border-color: $gold-dark;
+    }
+  }
+  &-secondary {
+    background: lighten($gray-darker, 10%);
+    color: #fff;
+    &:hover,
+    &:focus {
+      background: $gray-darker;
+      color: #fff;
+    }
+    &.btn-outline {
+      color: $gray-darker;
+      border-color: $gray-darker;
+      &:hover,
+      &:focus {
+        color: #fff;
+      }
+    }
+  }
+  &-edit {
+    display: inline-block;
+    padding: 6px;
+    background: transparent;
+    color: $gray-darker;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: .8px;
+  }
+  &-add {
+    border-color: $gold;
+    background: $gold;
+    color: #fff;
+    margin: 10px 6px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    i {
+      font-size: $font-size-md;
+    }
+    &:hover, &:focus {
+      background: $gold-dark;
+      border-color: $gold-dark;
+      color: #fff;
+    }
+    @media (max-width: $screen-sm-max) {
+      margin: 6px 4px 6px 0;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      i {
+        font-size: $font-size-base;
+      }
+    }
+  }
+  &-state {
+    padding: 6px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    font-weight: 700;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &-view-type {
+    color: $reseda-dark;
+    margin-top: 3px;
+    font-size: $font-size-base + 2;
+    padding: 0;
+    position: absolute;
+    right: 25px;
+    top: 0;
+  }
+  &-share {
+    padding: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    color: $reseda-dark;
+  }
+  &-link {
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    color: $gold;
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+      color: $gold-dark;
+    }
+  }
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+  font-size: $font-size-md;
+  margin: 0 0 0 15px;
+  display: inline-block;
+  span {
+    color: $gray-darker;
+  }
+}
+
+/* Tabs */
+.nav-tabs {
+  border: none;
+}
+.nav-tabs-horizontal .nav-tabs > li {
+  a {
+    color: $reseda-light;
+    padding: 16px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    font-weight: 600; 
+    &:hover {
+      color: $gray-darker;
+      border-color: $gold;
+    }
+    @media (max-width: $screen-md-max) {
+      padding: 16px 12px;
+      font-size: 13px;
+    }
+    @media (max-width: $screen-sm-max) {
+      padding: 12px 8px;
+      letter-spacing: 0px;
+      font-size: 12px;
+    }
+  }
+  &.active {
+    a {
+      color: $gray-darker;
+      border-color: $gold;
+    }
+  }
+}
+
+
+/* Share */
+.share-link {
+  margin-bottom: 6px;
+  a {
+    margin-right: 3px;
+  }
+  i {
+    font-size: $font-size-lg;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .fa-facebook {background: #3b5999;}
+  .fa-twitter {background: #00aced;}
+  .fa-google-plus {background: #de5347;}
+  .fa-linkedin {background: #0080b2;}
+  .fa-envelope {background: $gold;}
+}
+
+/* Pagination */
+.pagination > li > a, .pagination > li > span {
+  color: $gold;
+}
+.pagination > .active {
+  a, a:hover, a:focus, 
+  span, span:hover, span:focus {
+    background: $gold;
+    border-color: $gold; 
+  }
+}
+
+/* Alert */
+.alert {
+  @media (max-width: $screen-md-max) {
+    font-size: $font-size-sm;
+    padding: 10px;
+  }
+}
+
+/* System text */
+.system {
+  &-wrapper {
+    text-align: center;
+    padding: 16px;
+  }
+  &-heading {
+    font-size: $font-size-md;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+}
+
+/* Modals */
+.modal-close {
+  font-size: $font-size-lg;
+  color: $reseda-light;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+}

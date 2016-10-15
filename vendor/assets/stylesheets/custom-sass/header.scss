@@ -1,0 +1,256 @@
+#app {
+  &-brand {
+    display: table-cell;
+  }
+}
+
+#brand {
+  &-name {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: $font-size-sm;
+    letter-spacing: 4px;
+  }
+  &-icon {
+    img {
+      height: 30px;
+    }
+  }
+}
+
+.app-user {
+  padding: 16px;
+  display: inline-block;
+  .username {
+    color: $gold;
+    margin: 8px 0 0 0;
+    display: block;
+  }
+  .usertitle {
+    color: $reseda-light;
+    font-size: $font-size-sm;
+  }
+  .media, 
+  .media-body {
+    overflow: visible;
+  }
+}
+
+/* Navbar */
+#app-navbar {
+  background: $gray-darker;
+  @include box-shadow(0 1px 2px #ccc);
+}
+#page-title,
+#top-nav > li > a {
+  color: $gray-darker;
+}
+
+#top-nav {
+  .dropdown-menu>li>a {
+    line-height: 40px;
+  }
+  .avatar-user,
+  .avatar-team {
+    .dropdown-menu {
+      margin-top: 10px;
+    }
+  }
+  .avatar-user {
+    margin: 10px 0 0 0;
+  }
+  .avatar-team {
+    margin: 10px 0 0 -5px;
+    .media-body, 
+    .media-left .avatar,
+    .media-left .icon {
+      vertical-align: middle;
+      margin: 5px 12px 5px 0;
+    }
+    .media-group-item {
+      padding: 0 12px;
+      &.selected {
+        background: $reseda-lightest;
+        h5 {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  /* Notifications */
+  .list-group-item {
+    font-size: $font-size-base - 1;
+  }
+  @media (max-width: $screen-xs-max) {
+    float: none !important;
+    position: absolute;
+    right: 70px;
+    top: 0;
+  }
+}
+
+#navbar {
+  &-add {
+    padding-top: 10px;
+    .btn {
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      background: transparent;
+      border: none;
+      i {
+        vertical-align: middle;
+        font-size: $font-size-md + 2;
+        color: $reseda;
+      }
+      &:hover, 
+      &:focus {
+        i {
+          color: #fff;
+        }
+      }
+    }
+  }
+  &-search {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-top: 10px;
+    @media (max-width: $screen-xs-max) {
+      padding: 0;
+    }
+    .input-group,
+    .btn {
+      float: left;
+    }
+    .form-control {
+      background: $gold-lightest;
+      border-color: darken($gold-lightest, 10%);
+      height: 40px;
+    }
+    input.form-control {
+      border-right: none;
+      width: 300px;
+      @media (max-width: $screen-sm-max) {
+        width: 150px;
+      }
+    } 
+    .btn {
+      margin-left: -1px;
+      width: 50px;
+      @include border-left-radius(0);
+      @include border-right-radius(4px);
+      background: darken($gray-darker, 10%);
+      &.dropdown-toggle {
+        background: $gold-lightest;
+        width: 150px;
+        height: 38px;
+        text-transform: none;
+        font-weight: 500;
+        letter-spacing: 0;
+        padding: 0 15px;
+        margin-left: 0;
+        .filter-option {
+          width: auto;
+        }
+      }
+      @media (max-width: $screen-xs-max) {
+        height: 42px;
+        margin-top: -1px;
+      }
+    }
+    .btn-primary {
+      border-color: darken($gray-darker, 10%);
+      padding-left: 0;
+      padding-right: 0;
+      i {
+        vertical-align: middle;
+        font-size: $font-size-md + 2;
+        color: $reseda;
+      }
+    }
+    &.is_focused {
+      .form-control {
+        background: #fff;
+      }
+      .btn {
+        background: $gold;
+        i {
+          color: #fff;
+        }
+        &.dropdown-toggle {
+          background: #fff;
+        }
+      }
+      .btn-primary {
+        border-color: $gold;
+      }
+    }
+    .dropdown.form-control {
+      padding: 0;
+      .dropdown-menu {
+        width: auto;
+      }
+    }
+    .bootstrap-select {
+      width: 150px;
+      background: transparent;
+      .bs-placeholder {
+        width: 150px;
+        background: transparent;
+        padding: 0 15px;
+      }
+    }
+  }
+  &-add {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 10px;
+    a:hover,
+    a:focus {
+      i {
+        color: $gold;
+      }
+    }
+  }
+  &-xs {
+    margin: 15px 0;
+    float: left;
+    li {
+      a {
+        color: $reseda-lightest;
+        padding: 3px 0;
+        display: block;
+        &:hover,
+        &:focus {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.btn-notification {
+  position: relative;
+  i {
+    font-size: $font-size-md + 2;
+    color: $reseda;
+  }
+  &:hover,
+  &:focus {
+    i {
+      color: #fff;
+    }
+  }
+  .status-unread {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 15px;
+    right: 13px;
+    background: #10c469;
+    border: 2px solid $gray-darker;
+    display: block;
+  }
+}
