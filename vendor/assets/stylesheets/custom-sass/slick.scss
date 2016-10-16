@@ -143,7 +143,7 @@ $slick-opacity-not-active: 0.25 !default;
 
 .slick-list {
     .slick-loading & {
-        background: #fff url("/libs/misc/slick/ajax-loader.gif") center center no-repeat;
+        background: #fff url("public/ajax-loader.gif") center center no-repeat;
     }
 }
 

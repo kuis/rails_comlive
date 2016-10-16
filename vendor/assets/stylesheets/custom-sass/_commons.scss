@@ -51,10 +51,10 @@ a {
     vertical-align: middle;
   }
   &-wipo {
-    background-image: url(../../assets/images/custom/icons/wipo-logo.png);
+    background-image: url(wipo-logo.png);
   }
   &-ocs {
-    background-image: url(../../assets/images/custom/icons/opencorporates-logo.png);
+    background-image: url(opencorporates-logo.png);
   }
   &-xs {
     width: 20px;
@@ -71,17 +71,6 @@ a {
     background-position: center;
     margin: 0;
     vertical-align: middle;
-  }
-  &-commodity {
-    background-image: url(../../assets/images/custom/icons/icon-commodity.png);
-    width: 17px;
-    height: 25px;
-  }
-  &-classification {
-    background-image: url(../../assets/images/custom/icons/icon-classification.png);
-    width: 20px;
-    height: 20px;
-    margin-left: -2px;
   }
 }
 

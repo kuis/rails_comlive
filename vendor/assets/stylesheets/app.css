@@ -2827,7 +2827,7 @@ body.sb-top .side-panel {
   height: 60px;
   border: none;
   z-index: 999;
-  opacity: 0;
+  /*opacity: 0;*/
   transition: opacity 1s; }
 .app-navbar.in {
   opacity: 1; }
@@ -2967,7 +2967,7 @@ body.sb-top .app-navbar {
 .app-main {
   margin-top: 60px;
   margin-left: 0;
-  opacity: 0;
+  /*opacity: 0;*/
   transition: opacity 1s; }
 .app-main.in {
   opacity: 1; }

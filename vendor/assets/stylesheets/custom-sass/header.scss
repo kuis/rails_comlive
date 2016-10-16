@@ -40,6 +40,10 @@
 #app-navbar {
   background: $gray-darker;
   @include box-shadow(0 1px 2px #ccc);
+  .btn {
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
 }
 #page-title,
 #top-nav > li > a {
@@ -172,7 +176,7 @@
     }
     &.is_focused {
       .form-control {
-        background: #fff;
+        background: #fff !important;
       }
       .btn {
         background: $gold;

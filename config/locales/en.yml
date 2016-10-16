@@ -204,14 +204,9 @@ en:
     non-found: "No teams/apps found"
 
   landing:
-    pitch: "is an online, worldwide register of commodities and products: goods and services"
+    pitch: "An online, worldwide and updated database of goods and services"
+    pitch_text_html: "We allow anyone to register and retrieve data, <br />but only the owner of a brand to verify official data."
     searchfor: "search for any product or commodity"
     search: "search"
-    why: "why"
-    whytext: "In a globalized market, companies need accurate and comparable data on the goods they buy and sell. Today, getting this data is a mix of spreadsheets, reading websites, manual punching and a few scattered APIs. Why spend time and effort registering data that already exists? We aim to provide a worldwide database of all goods, both generic (the actual commodities) and specific. The database can be accessed through powerful APIs and an intuitive user interface, and helps simplify and improve cooperation by ensuring that everyone is talking about the same product or version. You can register or retrieve data from the system, eliminating the need for the same inconsistent data in different systems."
-    how: "how"
-    howtext: "This online, worldwide database is both community driven and an official data provider. Anyone who holds data on a product can contribute to evolve and build the database, and anyone has access to add and edit public information. You can add private information to any piece of data within the database to keep it accessible only within an organization or a team. An official brand has the ability to take ownership of the product and verify the data. The database is easy to use, and provides everyone with a neutral and stable platform for data exchange."
-    whom: |
-      for
-      whom
-    whomtext: "Commodity.live is an open and free database where anyone can search for or register both their own or others products, commodites, brands and standards. All parts of the supply chain, system developers and standardization organizations will benefit from using our neutral and stable system."
+    why: "Share your result with the world"
+    whytext_html: "The platform where <strong>ANYONE</strong> can search for or register both their own or others products, commodites, brands and standards. <br />All parts of the supply chain, system developers and standardization organizations will benefit from using our neutral and stable system."
