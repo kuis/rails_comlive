@@ -98,7 +98,9 @@
               %i.fa.fa-ellipsis-h
             %ul.dropdown-menu.animated.flipInY
               %li
-                = link_to "Invite Users", new_app_invitation_path(current_app)
+                = link_to new_app_invitation_path(current_app) do
+                  %i.fa.fa-user
+                  Invite Users
 
         .visible-xs
           %ul#navbar-xs
