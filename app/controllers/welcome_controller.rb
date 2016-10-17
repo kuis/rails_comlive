@@ -1,7 +1,16 @@
 class WelcomeController < ApplicationController
-  layout 'landing', only: :landing
+  layout 'landing', except: [:dashboard,:add_items]
 
   def landing
+  end
+
+  def pricing
+  end
+
+  def team
+  end
+
+  def contact
   end
 
   def dashboard

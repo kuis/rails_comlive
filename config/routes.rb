@@ -15,8 +15,12 @@ Rails.application.routes.draw do
     delete "logout" => "sessions#destroy", as: :logout
     get "add-item" => "welcome#add_items", as: :add_items
 
+    # WELCOME
     root to: "welcome#dashboard", constraints: Authenticated
     root to: "welcome#landing"
+    get '/pricing' => "welcome#pricing", as: :pricing
+    get '/team' => "welcome#team", as: :team
+    get '/contact' => "welcome#contact", as: :contact
 
     constraints(uuid: /\d{10}/) do
       get '/brands/:uuid/:title' => 'brands#show',  as: :slugged_brand

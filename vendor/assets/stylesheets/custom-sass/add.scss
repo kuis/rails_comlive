@@ -1,0 +1,47 @@
+.box {
+  &-add {
+    height: 100%;
+    margin: 0;
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 24px;
+    }
+    h3 {
+      font-size: $font-size-md;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+      color: $gold;
+    }
+    .btn {
+      text-align: center;
+    }
+    &:hover {
+      h3, p {
+        color: $reseda-darker;
+      }
+      .btn {
+        background: $gold-dark;
+      }
+    }
+  }
+  &-front {
+    text-align: center;
+    display: table;
+    width: 100%;
+  }
+  &-back {
+    padding: 8px 12px;
+    text-align: center;
+    color: $reseda-dark;
+  }
+  &-footer {
+    text-align: center;
+    height: 55px;
+    .btn-wrapper {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+    }
+  }
+}

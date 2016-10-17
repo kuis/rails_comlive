@@ -3,8 +3,9 @@
     .row.no-gutter
       .col-sm-12
         .table-cell
-          %span.brand-logo
-            = image_tag @brand.logo
+          - if @brand.logo?
+            %span.brand-logo
+              = image_tag @brand.logo
         .table-cell.col-sm-middle
           %h1.m-t-0= @brand.name
           - if @brand.official?

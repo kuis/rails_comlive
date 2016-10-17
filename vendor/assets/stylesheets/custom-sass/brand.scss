@@ -1,0 +1,42 @@
+.brand {
+  &-logo {
+    border: 1px solid $gray-lighter;
+    background: #fff;
+    box-shadow: 0 1px 2px #ccc;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    @media (max-width: $screen-sm-max) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  &-title {
+    color: $title-color;
+    font-size: $font-size-lg;
+    padding-left: 12px;
+    @media (max-width: $screen-sm-max) {
+      font-size: $font-size-md;
+    }
+  }
+  &-summary {
+    border-right: 1px dashed #ddd;
+  }
+}
+
+.logo {
+  border: 1px solid $gray-lighter;
+  background: #fff;
+  box-shadow: 0 1px 2px #ccc;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  &-sm {
+    width: 60px;
+    height: 60px;
+  }
+  &-xs {
+    width: 40px;
+    height: 40px;
+  }
+}

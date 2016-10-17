@@ -1,0 +1,123 @@
+/* Segment */ 
+.segment {
+  @include transition();
+  &-edit,
+  &-add {
+    position: relative;
+  }
+  &-title {
+    padding: 12px;
+    margin: 0;
+    font-weight: 700;
+    font-size: $font-size-md;
+    span {
+      display: block;
+      padding-bottom: 6px;
+      font-size: $font-size-md;
+    }
+    small {
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+  &-name {
+    font-size: $font-size-base;
+    padding: 16px;
+    margin: 0;
+    float: left;
+    visibility: hidden;
+    padding: 0;
+    height: 32px;
+  }
+  &-description,
+  &-image {
+    padding-top: 15px;
+  }
+}
+
+@mixin segment-state($color) {
+  border-right: 1px solid $color;
+}
+
+.segment-edit {
+  @include segment-state(transparent);
+  .btn-edit {
+    visibility: hidden;
+  }
+  .btn-state {
+    opacity: 0.8;
+  }
+  .segment-actions {
+    a {
+      font-size: 12px;
+      display: inline-block;
+      @media (max-width: $screen-sm-max) {
+        font-size: 11px;
+      }
+    }
+    &:before {
+      background: transparent;
+    }
+  }
+  &:hover {
+    @include segment-state($gold);
+    .btn-edit {
+      visibility: visible;
+    }
+    .segment-actions {
+      &:before {
+        background: $gold;
+      }
+    }
+    .btn-state {
+      opacity: 1;
+    }
+  }
+}
+
+div.segment-actions {
+  position: absolute;
+  right: 1px;
+  top: 0;
+  &.segment-classification {
+    top: 3px;
+    right: -2px;
+  }
+}
+
+div.segment-edit {
+  &:hover{
+    .segment-actions {
+      z-index: 1;
+      @include box-shadow(none);
+    }
+    .btn-state {
+      background: #fff;
+    }
+  }
+  &.segment-alert:hover {
+    .btn-state {
+      background: transparent;
+    }
+  }
+}
+
+div.segment-header {
+  display: table;
+  width: 100%;
+}
+
+.segment-state{
+  display: inline-block;
+}
+.btn-state {
+  &.official {
+    color: $color-official;
+  }
+  &.private {
+    color: $color-private;
+  }
+  &.public {
+    color: $color-public;
+  }
+}

@@ -1,0 +1,66 @@
+.jqtree-all {
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  display: block;
+  padding: 6px 10px; 
+  &.jqtree-selected {
+    background: $reseda-lightest; 
+  }
+}
+
+ul.jqtree-tree {
+  li.jqtree_common {
+    padding: 0 6px 0 6px;
+  }
+  div.jqtree-element {
+    padding-bottom: 6px;
+    padding-top: 6px;
+  }
+  li.jqtree-selected>.jqtree-element, 
+  li.jqtree-selected>.jqtree-element:hover {
+    background: transparent;
+  }
+  .jqtree-selected {
+    background: $reseda-lightest; 
+  }
+}
+
+.classification {
+  &-unit {
+    color: $color-private;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    display: block;
+    padding: 6px 0; 
+  }
+  &-unit-row {
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid $reseda-lightest;
+    h5 {
+      font-size: $font-size-md;
+    }
+    a.number-link {
+      color: $gold;
+      position: absolute;
+      right: 10px;
+      text-align: center;
+      line-height: 1;
+      span {
+        font-size: $font-size-xl;
+      }
+      small {
+        color: $gold;
+        display: block;
+        font-size: $font-size-base;
+        margin-top: 3px;
+      }
+    }
+    ul {
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+  }
+}

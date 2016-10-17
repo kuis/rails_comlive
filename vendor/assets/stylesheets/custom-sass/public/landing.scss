@@ -1,0 +1,174 @@
+.landing {
+  &#app-navbar {
+    @include box-shadow(none);
+    background: transparent;
+    @media (max-width: $screen-xs-max) {
+      background: $gray-darker;
+    }
+    #navbar-search {
+      visibility: hidden;
+      @media (max-width: $screen-xs-max) {
+        visibility: visible;
+        padding-left: 0;
+        padding-top: 10px;
+      }
+    }
+    &.navbar-bg {
+      background: $gray-darker;
+      #navbar-search {
+        visibility: visible;
+      }
+    }
+    .btn-primary,
+    .btn-secondary {
+      @include box-shadow(0px 2px 4px 0px rgba(0,0,0,0.5));
+    }
+  }
+  .wrap {
+    padding: 0;
+
+  }
+  &.app-main {
+    margin-top: 0;
+  }
+  .subheading {
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 140%;
+    text-align: center;
+  }
+}
+
+
+/*.header*/
+.header{
+  height: 700px;
+  background-image: url(landing/header-bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media(max-width: 480px){
+    height: auto;
+    padding-bottom: 30px;
+  }
+
+  .header-content{
+    max-width: 80%;
+    margin: 180px auto 0;
+    text-align: center;
+    @media (max-width: 767px) {
+      max-width: 600px;
+      margin: 160px auto 0;
+    }
+
+    h1 {
+      margin: 30px auto 15px;
+      font-size: 36px;
+      line-height: 50px;
+      letter-spacing: 2.25px;
+      color: #fff;
+
+      @media (max-width: $screen-xs-max){
+        font-size: 30px;
+        line-height: 120%;
+      }
+    }
+
+    .subheading {
+      font-size: 14px;
+      color: #fff;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 60px;
+      line-height: 160%;
+    }
+
+    form{
+      margin: 0 auto;
+      .input-group {     
+        width: 80%;
+        float: left;     
+        @media (max-width: $screen-xs-max){
+          width: 100%;
+          float: none;
+        }
+      }
+
+      .form-control,
+      .btn-primary{
+        display: table-cell;
+
+        @media(max-width: 767px){
+         
+        }
+      }
+      input.form-control {
+        @include border-left-radius(25px);
+        @media (max-width: $screen-xs-max){
+          @include border-left-radius(5px);
+        }
+      }
+      .form-control{
+        z-index: 0;
+        border: none;
+        @include box-shadow(2px 2px 4px 0px rgba(0,0,0,0.5));
+
+        @media (max-width: $screen-xs-max){
+          font-size: $font-size-base;
+          z-index: 2;
+        }
+      }
+
+      .bootstrap-select.btn-group {
+        float: right;
+        margin-right: 20px;
+        @media (max-width: $screen-sm-max) {
+          margin-right: 10px;
+        }
+        @media (max-width: $screen-xs-max) {
+          width: 110px;
+          margin: 0;
+        }
+        .btn {
+          font-size: $font-size-md + 2;
+          padding: 0;
+          @media (max-width: $screen-xs-max) {
+            font-size: $font-size-base;
+          }
+        }
+        .dropdown-menu {
+          width: 200px;
+          @media (max-width: $screen-xs-max) {
+            width: 140px;
+          }
+          a span.text {
+            font-size: $font-size-md;
+          }
+        }
+      }
+
+      .btn-primary {
+        width: 20%;
+        margin-top: -1px;
+        margin-left: -45px;
+        line-height: 1;
+        height: 47px;
+        position: relative;
+        z-index: 1;
+        @include box-shadow(0px 2px 4px 0px rgba(0,0,0,0.5));
+        @media (max-width: $screen-sm-max){
+          font-size: 16px;
+          padding-left: 0;
+          padding-right: 0;
+        }
+        @media (max-width: $screen-xs-max){
+          width: 100%;
+          margin: 10px auto 0 auto;
+          @include border-left-radius(5px);
+          @include border-right-radius(5px);
+        }
+      }
+    }
+  }
+}

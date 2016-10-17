@@ -1,0 +1,119 @@
+.footer-main {
+  background: $gray-darker;
+  padding: 30px 0;
+  dl {
+    dt {
+      text-transform: uppercase;
+      color: rgba(255,255,255, 0.5);
+      letter-spacing: 0.8px;
+      margin: 0 10px 10px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.1); 
+    }
+    dd a {
+      color: #fff;
+      display: block;
+      margin-bottom: 5px;
+      &:hover {
+        color: $gold;
+      }
+      &.selected {
+        color: $gold;
+        position: relative;
+        &:before {
+          content: "\f00c";
+          font-family: FontAwesome;
+          color: $gold;
+          position: absolute;
+          top: 0;
+          right: 10px;
+        }
+      }
+    }
+  }
+  .social {
+    float: right;
+    @media (max-width: $screen-sm-max) {
+      padding: 0 25%;
+    }
+    @media (max-width: $screen-xs-max) {
+      padding: 0;
+    }
+    ul {
+      text-align: center;
+      margin: 0;
+    }
+    li {
+      padding-left: 2px;
+      padding-right: 2px;
+      a{
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        padding: 11px 6px;
+        color: #fff;
+        @include border-top-radius(50%);
+        @include border-bottom-radius(50%);
+        text-align: center;
+        .fa {
+          font-size: 1.5em;
+        }
+      }
+
+      &.twitter a{
+        background-color: #55ACEE;
+        &:hover {
+          background-color: darken(#55ACEE, 5%);
+        }
+      }
+      &.google-plus a{
+        background-color: #D94D44;
+        &:hover {
+          background-color: darken(#D94D44, 5%);
+        }
+      }
+      &.facebook a{
+        background-color: #3B5A99;
+        &:hover {
+          background-color: darken(#3B5A99, 5%);
+        }
+      }
+      &.linkedin a{
+        background-color: #006087;
+        &:hover {
+          background-color: darken(#006087, 5%);
+        }
+      }
+    }
+  }
+  h5 {
+    color: #fff;
+    margin: 0 0 10px 0;
+    font-size: $font-size-sm;
+    text-align: center;
+  }
+  .newsletter {
+    margin-top: 25px;
+    .form-control {
+      @include border-left-radius(25px);
+    }
+    .btn {
+      @include box-shadow(0px 2px 4px 0px rgba(0,0,0,0.5));
+      &:hover {
+        background: lighten($gray-darker, 5%);
+      }
+    }
+  }
+}
+
+.footer-meta {
+  background: darken($gray-darker, 10%);
+  padding: 15px 0;
+  .footer-menu li a {
+    font-size: $font-size-sm;
+    color: rgba(255,255,255, 0.7);
+    &:hover {
+      color: #fff;
+    }
+  }
+}
