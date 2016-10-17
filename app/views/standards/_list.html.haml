@@ -3,7 +3,7 @@
     - if standard.logo.present?
       = image_tag standard.logo
   %td= standard.code
-  %td= link_to standard.name, [@brand, standard]
+  %td= link_to standard.name, [standard.brand, standard]
   %td
     = standard.certifier
     - if standard.certifier_url

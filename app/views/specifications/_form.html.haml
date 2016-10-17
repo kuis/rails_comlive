@@ -4,7 +4,7 @@
     .col-sm-6
       = f.text_field :property, class: "form-control"
       = errors_for_field(@specification, :property)
-  .row.m-b-xs
+  #value-min-max.row.m-b-xs
     .col-sm-8.col-sm-offset-4
       .radio.radio-inline.radio-primary.p-t-0
         = radio_button_tag 'value-opts', 'value', is_checked?(@specification,'value')
@@ -15,7 +15,7 @@
   #value-container{:class => "form-group #{is_checked?(@specification, 'value') ? "" : "hidden"}"}
     = f.label :value, class: "col-sm-4 control-label"
     .col-sm-6
-      = f.number_field :value, class: "form-control", step: "0.01"
+      = f.text_field :value, class: "form-control"
       = errors_for_field(@specification, :value)
   #min-max-container{:class => "form-group #{is_checked?(@specification, 'min-max') ? "" : "hidden"}"}
     %label.col-sm-4.control-label{:for => ""} Min / Max Value

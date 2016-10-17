@@ -42,7 +42,7 @@ class Commodity < ApplicationRecord
   def create_reference(user)
     app = user.default_app
     attributes = self.class.attribute_names.select{|a|
-      ["measured_in","generic","moderated","brand_id"].include?(a)
+      ["measured_in","generic","moderated","brand_id","name"].include?(a)
     }
     attributes = attributes.each_with_object({}) do |attribute,hash|
       hash[attribute] = self.send(attribute)

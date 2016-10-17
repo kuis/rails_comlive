@@ -36,4 +36,5 @@
 //= require standards
 //= require references
 //= require classifications
-//= require searches 
+//= require searches
+//= require specifications

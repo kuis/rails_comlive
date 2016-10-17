@@ -79,6 +79,8 @@ feature 'Creating a specification' do
       end
     end
   end
+
+  scenario "Adding pre-defined units", skip: "Pending"
 end
 
 def properties

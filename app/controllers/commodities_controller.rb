@@ -19,6 +19,7 @@ class CommoditiesController < ApplicationController
   def show
     if user_signed_in?
       @commodity = Commodity.find_by(id: params[:id])
+      @commodity = Commodity.find_by(uuid: params[:uuid]) if params[:uuid]
       @com_ref = CommodityReference.find_by(app_id: current_app.id, commodity_id: @commodity.id)
       @com_ref = @commodity.create_reference(current_user) if @com_ref.nil?
     else

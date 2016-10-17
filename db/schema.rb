@@ -300,7 +300,7 @@ ActiveRecord::Schema.define(version: 20161007051535) do
 
   create_table "specifications", force: :cascade do |t|
     t.string   "property"
-    t.decimal  "value"
+    t.string   "value"
     t.decimal  "min"
     t.decimal  "max"
     t.string   "uom"

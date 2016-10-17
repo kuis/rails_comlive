@@ -18,7 +18,8 @@ class LinksController < ApplicationController
 
   def create
     authorize @app, :show?
-    @link = @app.links.create(link_params)
+    @link = @app.links.new(link_params)
+    @link.commodity_reference_id = @commodity_reference.id
     if @link.save
       redirect_to @link.commodity_reference.commodity, notice: "link successfully created"
     else
@@ -56,6 +57,6 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:url,:description, :commodity_reference_id, :visibility)
+    params.require(:link).permit(:url,:description,:visibility)
   end
 end
