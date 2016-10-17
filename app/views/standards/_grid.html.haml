@@ -7,7 +7,7 @@
           %hr.m-0/
       .col-md-12
         %h5.segment-title
-          = link_to [@brand, standard] do
+          = link_to [standard.brand, standard] do
             %span= standard.code
             %small= standard.name
       .col-md-12
@@ -23,7 +23,7 @@
             Expires on:
             %strong 27 Sept 2018
     .segment-actions
-      = link_to edit_brand_standard_path(@brand, standard), class: "btn-edit" do
+      = link_to edit_brand_standard_path(standard.brand,standard), class: "btn-edit" do
         %i.fa.fa-pencil
         Edit
 

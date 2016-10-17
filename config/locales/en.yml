@@ -51,6 +51,8 @@ en:
   links:
     new:
       title: "Add Link To"
+    edit:
+      title: "Edit Link"
 
   standards:
     new:
@@ -113,7 +115,7 @@ en:
         standards:
           title: "There's no standard added yet."
           description: "-"
-          button: "Add Standard"
+          button: "Assign Standard"
         barcodes:
           title: "There's no barcode added yet."
           description: "-"

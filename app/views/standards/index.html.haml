@@ -21,8 +21,9 @@
                 %small Certifiers
           / .nav-tabs
           .segment-actions
-            = link_to new_brand_standard_path(@brand), class: "btn-add icon icon-circle icon-md", title: "Add" do
-              %i.fa.fa-plus
+            - if @brand
+              = link_to new_brand_standard_path(@brand), class: "btn-add icon icon-circle icon-md", title: "Add" do
+                %i.fa.fa-plus
         / Tab panes
         .tab-content
           #tab-1.tab-pane.in.active.fade{:role => "tabpanel"}

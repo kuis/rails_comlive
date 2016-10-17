@@ -1,2 +1,7 @@
-%h1 Edit Link
-= render 'form'
+.widget.widget-form
+  %header.widget-header
+    %h4= t(".title")
+    %p.subheading= @commodity_reference.name
+
+  .widget-body
+    = render 'form'

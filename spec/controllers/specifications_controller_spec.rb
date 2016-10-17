@@ -72,7 +72,7 @@ RSpec.describe SpecificationsController, :type => :controller do
           specification.value = 5.0004
           patch :update, params: { app_id: app.id, commodity_reference_id: commodity_reference.id, id: specification.id, specification: specification.attributes }
           specification.reload
-          expect(specification.value).to eq  BigDecimal.new("5.0004")
+          expect(specification.value).to eq "5.0004"
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe SpecificationsController, :type => :controller do
           specification.value = ""
           patch :update, params: { app_id: app.id, commodity_reference_id: commodity_reference.id, id: specification.id, specification: specification.attributes }
           specification.reload
-          expect(specification.value).to eq BigDecimal.new("6.9000")
+          expect(specification.value).to eq "6.9"
         end
       end
     end

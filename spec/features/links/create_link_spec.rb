@@ -16,7 +16,6 @@ feature 'Create Link' do
 
       fill_in "link[url]", with: link.url
       fill_in "link[description]", with: link.description
-      select commodity_reference.name, from: "link[commodity_reference_id]"
 
       click_button "Create Link"
 
@@ -29,7 +28,6 @@ feature 'Create Link' do
 
       fill_in "link[url]", with: ""
       fill_in "link[description]", with: ""
-      select commodity_reference.name, :from => "link[commodity_reference_id]"
 
       click_button "Create Link"
 

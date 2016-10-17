@@ -1,6 +1,6 @@
 class StandardsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :autocomplete]
-  before_action :set_brand, except: :autocomplete
+  before_action :set_brand, except: [:autocomplete, :index]
 
   add_breadcrumb "Standards", :standards_path
 
