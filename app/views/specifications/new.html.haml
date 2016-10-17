@@ -4,4 +4,19 @@
     %p.subheading= @parent.name
 
   .widget-body
+    .text-center.m-b-lg
+      .btn-group{"data-toggle" => "buttons"}
+        %label.btn.btn-default.active
+          %input{:autocomplete => "off", :value=> "custom", :checked => "checked", :name => "spec-type", :type => "radio"}/
+          Custom Spec
+        %label.btn.btn-default
+          %input{:autocomplete => "off", :value=> "predefined", :name => "spec-type", :type => "radio"}/
+          Predefined Spec
+
+    #predefined-properties.text-center.m-b-lg.hidden
+      - predefined_opts.each_with_index do |option, index|
+        %label.radio-inline
+          = radio_button_tag :kind, option["property"], index.zero?, data: { type: option["type"]}
+          = option["property"].titleize
+
     = render 'form'
