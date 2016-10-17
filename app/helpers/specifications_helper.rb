@@ -40,4 +40,8 @@ module SpecificationsHelper
     uoms += custom_units.map{|u| ["#{u.property} (#{u.uom})", u.uom] } if custom_units.any?
     return uoms
   end
+
+  def predefined_opts
+    YAML::load_file('data/predefined_properties.yml')
+  end
 end

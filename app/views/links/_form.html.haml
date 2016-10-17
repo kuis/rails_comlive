@@ -5,11 +5,6 @@
       = f.text_field :url, class: "form-control"
       = errors_for_field(@link, :url)
   .form-group
-    = f.label :commodity, class: "col-sm-4 control-label"
-    .col-sm-6
-      = f.select :commodity_reference_id, @app.commodity_references.map {|c| [c.name, c.id] }, {}, class: "form-control"
-      = errors_for_field(@link, :commodity_reference_id)
-  .form-group
     = f.label :description, class: "col-sm-4 control-label"
     .col-sm-6
       = f.text_area :description, class: "form-control autoresize"

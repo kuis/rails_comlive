@@ -2,7 +2,7 @@
   .form-group
     = f.label :source_commodity, class: "col-sm-4 control-label"
     .col-sm-6
-      = f.select :source_commodity_id, [], {prompt: "Search commodities"}, data: { url: app_commodity_references_path(@app, generic: true) },  class: "form-control"
+      = f.select :source_commodity_id, [], {prompt: "Search commodities"}, data: { url: commodities_path(@app, generic: true) },  class: "form-control"
       = errors_for_field(@reference, :source_commodity_id)
   .form-group
     = f.label :kind, class: "col-sm-4 control-label"
@@ -12,7 +12,7 @@
   .form-group
     = f.label :target_commodity, class: "col-sm-4 control-label"
     .col-sm-6
-      = f.select :target_commodity_id, [], {prompt: "Search commodities"},data: { url: app_commodity_references_path(@app, generic: false) }, class: "form-control"
+      = f.select :target_commodity_id, [], {prompt: "Search commodities"},data: { url: commodities_path(@app, generic: false) }, class: "form-control"
       = errors_for_field(@reference, :target_commodity_id)
   .form-group
     = f.label :description, class: "col-sm-4 control-label"

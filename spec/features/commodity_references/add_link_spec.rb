@@ -20,7 +20,6 @@ feature 'Adding link to a commodity reference' do
 
     fill_in 'link[url]', with: link.url
     fill_in 'link[description]',with: link.description
-    select commodity_reference.name, from: 'link[commodity_reference_id]'
     page.execute_script("$('#link_visibility').selectpicker('val','privatized')")
 
     # select "Private", from: 'link[visibility]'
