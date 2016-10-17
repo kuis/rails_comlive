@@ -26,9 +26,10 @@
         %dl
           %dt Select language
           %dd
-            %a.selected{:href => "#"} English
+            = link_to t('menu.languages.en'), url_for(locale: 'en'), class: I18n.locale == :en ? "selected" : ""
           %dd
-            %a{:href => "#"} Norwegian
+            = link_to t('menu.languages.nb'), url_for(locale: 'nb'),  class: I18n.locale == :nb ? "selected" : ""
+
       .col-sm-12.col-md-4.social
         %h5 Think people should hear about commodity.live?
         %ul.list-inline

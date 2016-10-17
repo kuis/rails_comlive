@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  layout 'landing', only: :landing
+  layout 'landing', except: [:dashboard,:add_items]
 
   def landing
   end

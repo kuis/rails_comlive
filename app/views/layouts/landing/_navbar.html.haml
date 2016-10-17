@@ -1,4 +1,4 @@
-%nav#app-navbar.app-navbar.navbar-fixed-top.public
+%nav#app-navbar.app-navbar.navbar-fixed-top.public{ class: current_page?(root_path) ? "landing"  : ""}
   .container
     / navbar-header
     #navbar-header.pull-left
@@ -19,8 +19,9 @@
       
       %ul.nav-auth
         %li.nav-item.dropdown
-          %a.btn.btn-secondary{:href => "#signup"} Sign up
-        %li.nav-item= button_to "LOGIN", login_path, class: "btn btn-primary", method: :get
+          = link_to "Sign up", "#", class: "btn btn-secondary auth-btn signup"
+        %li.nav-item
+          = link_to "LOGIN", "#", class: "btn btn-primary auth-btn login"
     / /.navbar-collapse
   / /.container
 / navbar
