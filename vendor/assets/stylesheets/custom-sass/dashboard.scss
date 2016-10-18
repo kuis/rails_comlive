@@ -1,0 +1,37 @@
+.recent {
+	&.box {
+		.box-header {
+			padding: 12px 16px;
+			border-bottom-color: $reseda-light;
+		}
+	}
+	.btn-state {
+		font-size: $font-size-sm - 1;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.list-group-item {
+		border-left: none;
+		border-right: none;
+		border-bottom-color: $gold-lightest;
+		strong {
+			font-size: $font-size-md;
+			color: $gold;
+		}
+		&:first-child {
+			@include border-top-radius(0);
+			border-top: none;
+		}
+		&:hover {
+			background: $reseda-lightest;
+		}
+		img {
+			@include border-top-radius(50%);
+			@include border-bottom-radius(50%);
+			height: 50px;
+			width: 50px;
+			margin-right: 12px;
+		}
+	}
+}

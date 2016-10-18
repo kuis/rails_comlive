@@ -6,7 +6,7 @@
           .col-md-6.col-sm-height.col-sm-middle
             = link_to @brand, class: "brand-logo" do
               = image_tag @brand.logo
-            = link_to @brand.name, @brand, class: "fz-lg p-l-sm brand-title"
+            = link_to @brand.name, @brand, class: "brand-title"
 
           .hidden-xs.col-md-6.col-sm-height.col-sm-middle.text-right
             - @brand.commodities.limit(3).each do |commodity|
@@ -15,9 +15,9 @@
                 = link_to commodity do
                   = image_tag image
 
-            .pull-right.text-center
-              = link_to "#", class: "m-b-0" do
-                %span.fz-xl.fw-500.lh-1.block= @brand.commodities.count
+            .summary
+              = link_to "#" do
+                %span= @brand.commodities.count
                 = "Commodity".pluralize(@brand.commodities.count)
 
       .segment-actions

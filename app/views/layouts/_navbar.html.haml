@@ -57,7 +57,7 @@
           %li.nav-item
             .avatar.avatar-circle.avatar-team.dropdown
               %a{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
-                = image_tag "http://placehold.it/50x50"
+                %i.icon-team.bg-1= initials_for(current_app)
               .media-group.dropdown-menu.animated.flipInY
                 = render current_user.apps
 
@@ -96,9 +96,17 @@
           .dropdown.inline-block
             %a.btn.btn-add-entity{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
               %i.fa.fa-ellipsis-h
-            %ul.dropdown-menu.animated.flipInY
+            %ul.dropdown-menu.media-group.animated.flipInY
+
               %li
-                = link_to "Invite Users", new_app_invitation_path(current_app)
+                / .media-group-item
+                = link_to new_app_invitation_path(current_app), class: "media-group-item" do
+                  .media
+                    .media-left
+                      .icon.icon-sm.icon-circle.m-r-md.m-b-0
+                        %i.fa.fa-user
+                    .media-body
+                      %h5.media-heading Invite Users
 
         .visible-xs
           %ul#navbar-xs

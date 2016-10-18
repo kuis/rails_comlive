@@ -1,27 +1,35 @@
 .row
   .col-md-6
-    .widget
-      %header.widget-header.text-center
-        %h4.widget-title Recently Added
-      .widget-body
+    .box.recent
+      %header.box-header
+        %h4.box-title Recently Added
+      .box-body
         .list-group.recently-added
           - if @recent_commodities.any?
             - @recent_commodities.each do |commodity|
               = link_to user_signed_in? ? commodity : slugged_commodity_path(commodity.uuid, commodity.name.parameterize), class: "list-group-item" do
-                = commodity.name
+                = image_tag "commodity-default.gif", alt: ""
+                %strong
+                  = commodity.name
+                %span.btn-state.public
+                  = commodity.visibility_status
           - else
             %p No commodities found
-  / .widget
+  / .box
   .col-md-6
-    .widget
-      %header.widget-header.text-center
-        %h4.widget-title Recently Visited
-      .widget-body
+    .box.recent
+      %header.box-header
+        %h4.box-title Recently Visited
+      .box-body
         .list-group.recently-visited
           - if recent_commodities.any?
             - recent_commodities.each do |commodity|
               = link_to commodity, class: "list-group-item" do
-                = commodity.name
+                = image_tag "commodity-default.gif", alt: ""
+                %strong
+                  = commodity.name
+                %span.btn-state.public
+                  = commodity.visibility_status
           - else
             %p No recent commodities visited
 

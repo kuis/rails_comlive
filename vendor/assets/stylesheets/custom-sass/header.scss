@@ -63,21 +63,55 @@
   .avatar-user {
     margin: 10px 0 0 0;
   }
+  .media-body, 
+  .media-left .avatar,
+  .media-left .icon {
+    vertical-align: middle;
+    margin: 5px 12px 5px 0;
+  }
+  .media-group-item {
+    padding: 0 12px;
+    &.selected {
+      background: $reseda-lightest;
+      h5 {
+        font-weight: 700;
+      }
+    }
+  }
   .avatar-team {
     margin: 10px 0 0 -5px;
-    .media-body, 
-    .media-left .avatar,
-    .media-left .icon {
-      vertical-align: middle;
-      margin: 5px 12px 5px 0;
-    }
-    .media-group-item {
-      padding: 0 12px;
-      &.selected {
-        background: $reseda-lightest;
-        h5 {
-          font-weight: 700;
-        }
+    .icon-team {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      @include border-top-radius(50%);
+      @include border-bottom-radius(50%);
+      color: #fff;
+      text-align: center;
+      font-weight: 700;
+      font-size: $font-size-lg;
+      display: inline-block;
+      font-style: normal;
+      &.icon-sm {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: $font-size-md;
+      }
+      &.bg-1 {
+        background: #72cac5; //teal
+      }
+      &.bg-2 {
+        background: #f69833; //orange
+      }
+      &.bg-3 {
+        background: #7e57c2; //purple
+      }
+      &.bg-4 {
+        background: #f6334f; //magenta
+      }
+      &.bg-5 {
+        background: #4584f0; //blue
       }
     }
   }
