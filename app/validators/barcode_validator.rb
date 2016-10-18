@@ -1,3 +1,5 @@
+require 'barcode_generator'
+
 class BarcodeValidator < ActiveModel::Validator
 
   def validate(record)
