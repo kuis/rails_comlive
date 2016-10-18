@@ -17,7 +17,7 @@
 .byebug_history
 
 # Ignore data folder
-/data/*
+/data/unspsc.xlsx
 
 # Ignore application configuration
 /config/application.yml

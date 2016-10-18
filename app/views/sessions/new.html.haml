@@ -1,5 +1,4 @@
 - content_for :scripts do
-  = javascript_include_tag "https://cdn.auth0.com/js/lock/10.0/lock.min.js"
   :javascript
     var lock = new Auth0Lock("#{ENV["AUTH0_API_KEY"]}", 'ntty.eu.auth0.com', {
       auth: {
@@ -10,6 +9,13 @@
           device: 'api'
         }
       },
-      closable: false
+      closable: false,
+      theme: {
+        logo: "#{asset_path("commodity-live_logo.png")}",
+        primaryColor: "#c9ac60"
+      },
+      languageDictionary: {
+        title: "Commodity Live"
+      },
     });
     lock.show();

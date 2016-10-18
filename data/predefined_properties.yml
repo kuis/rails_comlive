@@ -1,0 +1,9 @@
+---
+- property: length
+  type: length
+- property: width
+  type: length
+- property: height
+  type: length
+- property: weight
+  type: mass

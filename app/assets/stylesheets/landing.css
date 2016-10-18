@@ -13,5 +13,6 @@
  *= require bootstrap
  *= require bootstrap-select.min
  *= require custom
+ *= require searches
  *= require_self
  */
