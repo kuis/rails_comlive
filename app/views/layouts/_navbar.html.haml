@@ -57,7 +57,7 @@
           %li.nav-item
             .avatar.avatar-circle.avatar-team.dropdown
               %a{"data-toggle" => "dropdown", :href => "javascript:void(0)"}
-                %i.icon-team.bg-1 D
+                %i.icon-team.bg-1= initials_for(current_app)
               .media-group.dropdown-menu.animated.flipInY
                 = render current_user.apps
 
