@@ -12,20 +12,9 @@ feature 'Login with Omniauth' do
       expect(page).to have_link("Logout", href: logout_path)
     end
 
-    scenario "Should redirect to last visited app if user visited app" do
-      log_in(user)
-      visit app_path(app)
-      click_link "Logout"
-
+    scenario "Should redirect to dashboard page" do
       log_in(user)
 
-      expect(page.current_path).to eq app_path(app)
-    end
-
-    scenario "should redirect to root path if no last visited app" do
-      log_in(user)
-      click_link "Logout"
-      log_in(user)
       expect(page.current_path).to eq root_path
     end
   end

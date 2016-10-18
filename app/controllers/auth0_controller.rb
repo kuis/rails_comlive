@@ -19,9 +19,6 @@ class Auth0Controller < ApplicationController
   private
 
   def after_sign_in_path
-    return root_path unless cookies[:last_app_id]
-    app = App.find_by(id: cookies[:last_app_id])
-    return root_path if app.nil?
-    app_path(app)
+    root_path
   end
 end
