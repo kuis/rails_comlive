@@ -1,6 +1,7 @@
 class Standard < ApplicationRecord
   include Uuideable
   include Visibility
+  include Searchable
 
   belongs_to :brand
 

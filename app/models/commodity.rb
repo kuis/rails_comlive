@@ -1,6 +1,7 @@
 class Commodity < ApplicationRecord
   include Uuideable
   include Visibility
+  include Searchable
 
   belongs_to :brand, optional: true
   has_many :commodity_references

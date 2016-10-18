@@ -1,4 +1,6 @@
 class CommodityReference < ApplicationRecord
+  include Searchable
+
   belongs_to :app
   belongs_to :commodity
   belongs_to :brand, optional: true
@@ -29,8 +31,6 @@ class CommodityReference < ApplicationRecord
   scope :generic, -> { where(generic: true )}
   scope :not_generic, -> { where(generic: false )}
   scope :recent, -> { order("created_at DESC") }
-
-  searchkick word_start: [:name, :short_description, :long_description]
 
   # http://stackoverflow.com/questions/1680627/activerecord-findarray-of-ids-preserving-order
   scope :where_with_order, ->(ids) {

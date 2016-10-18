@@ -1,5 +1,6 @@
 class Brand < ApplicationRecord
   include Uuideable
+  include Searchable
 
   has_many :memberships, as: :member
   has_many :users, through: :memberships
