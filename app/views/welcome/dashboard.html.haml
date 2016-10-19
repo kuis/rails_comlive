@@ -8,11 +8,13 @@
           - if @recent_commodities.any?
             - @recent_commodities.each do |commodity|
               = link_to user_signed_in? ? commodity : slugged_commodity_path(commodity.uuid, commodity.name.parameterize), class: "list-group-item" do
-                = image_tag "commodity-default.gif", alt: ""
-                %strong
-                  = commodity.name
-                %span.btn-state.public
-                  = commodity.visibility_status
+                = image_tag commodity.avatar_url, alt: ""
+                %strong= commodity.name
+                - if commodity.brand
+                  %span.text-muted
+                    by #{commodity.brand.name}
+
+                %span.btn-state.public= commodity.visibility_status
           - else
             %p No commodities found
   / .box
@@ -26,10 +28,11 @@
             - recent_commodities.each do |commodity|
               = link_to commodity, class: "list-group-item" do
                 = image_tag "commodity-default.gif", alt: ""
-                %strong
-                  = commodity.name
-                %span.btn-state.public
-                  = commodity.visibility_status
+                %strong= commodity.name
+                - if commodity.brand
+                  %span.text-muted
+                    by #{commodity.brand.name}
+                %span.btn-state.public= commodity.visibility_status
           - else
             %p No recent commodities visited
 

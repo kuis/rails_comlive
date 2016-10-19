@@ -42,6 +42,7 @@ class CommoditiesController < ApplicationController
 
   def new
     @commodity = Commodity.new
+    @brand = Brand.find(params[:brand_id]) if params[:brand_id]
 
     add_breadcrumb "Commodities", :commodities_path
     add_breadcrumb "New", new_commodity_path

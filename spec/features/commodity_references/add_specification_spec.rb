@@ -21,7 +21,9 @@ feature 'Adding specification to a commodity_reference' do
       end
     end
 
-    scenario "Providing only value" do
+    scenario "Providing only value", js: true do
+      page.execute_script("$('input[value=\"custom\"]').click()") # switch tab
+
       fill_in "specification[property]", with: specification.property
       fill_in "specification[value]", with: specification.value
       select specification.property, from: "type_of_measure"
@@ -39,7 +41,8 @@ feature 'Adding specification to a commodity_reference' do
       expect(page).to have_text(specification.uom)
     end
 
-    scenario "Providing either a min or a max" do
+    scenario "Providing either a min or a max", js: true do
+      page.execute_script("$('input[value=\"custom\"]').click()") # switch tab
 
       fill_in "specification[property]", with: specification.property
       find(:css, 'label[for="value-opts_min-max"]').click

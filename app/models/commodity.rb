@@ -40,6 +40,11 @@ class Commodity < ApplicationRecord
     cr.state
   end
 
+  # Maybe refactor to presenter?
+  def avatar_url
+    images.any? ? images.first.url : "commodity-default.gif"
+  end
+
   def create_reference(user)
     app = user.default_app
     attributes = self.class.attribute_names.select{|a|

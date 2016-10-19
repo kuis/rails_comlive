@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Updating a Standard' do
-  given!(:user){ create(:user) }
+  given(:user){ create(:user) }
   given(:brand) { create(:brand)}
-  given!(:standard) { create(:standard, brand: brand) }
+  given(:standard) { create(:standard, brand: brand) }
   given(:new_standard) { build(:standard) }
 
   background do

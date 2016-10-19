@@ -39,6 +39,8 @@ en:
   specifications:
     new:
       title: "Add Specification To"
+    edit:
+      title: "Edit Specification"
 
   packagings:
     new:

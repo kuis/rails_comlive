@@ -13,11 +13,14 @@
       = f.text_field :short_description, class: "form-control"
       = errors_for_field(@commodity,:short_description)
   / .form-group
-  #commodity-brand.form-group{ class: @commodity.generic? ? "hidden" : "" }
-    = f.label :brand, class: "control-label col-sm-4"
-    .col-sm-6
-      = f.select :brand_id, Brand.all.map{|b| [b.name, b.id]}, { prompt: t(".brand_prompt") },  class: "form-control select2"
-      = errors_for_field(@commodity,:brand_id)
+  - if @brand.present?
+    = f.hidden_field :brand_id, value: @brand.id
+  - else
+    #commodity-brand.form-group{ class: @commodity.generic? ? "hidden" : "" }
+      = f.label :brand, class: "control-label col-sm-4"
+      .col-sm-6
+        = f.select :brand_id, Brand.all.map{|b| [b.name, b.id]}, { prompt: t(".brand_prompt") },  class: "form-control select2"
+        = errors_for_field(@commodity,:brand_id)
   / .form-group
   .form-group
     = f.label :measured_in, class: "control-label col-sm-4"

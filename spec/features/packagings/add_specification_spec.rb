@@ -15,6 +15,8 @@ feature 'Adding specification to a packaging' do
 
   feature 'User can add a specification to a packaging', js: true do
     scenario "Providing only value" do
+      page.execute_script("$('input[value=\"custom\"]').click()") # switch tab
+
       fill_in "specification[property]", with: specification.property
       fill_in "specification[value]", with: specification.value
       select specification.property, from: "type_of_measure"
@@ -29,6 +31,8 @@ feature 'Adding specification to a packaging' do
     end
 
     scenario "Providing either a min or a max" do
+      page.execute_script("$('input[value=\"custom\"]').click()") # switch tab
+
       fill_in "specification[property]", with: specification.property
       find(:css, 'label[for="value-opts_min-max"]').click
       fill_in 'specification[min]', with: specification.min

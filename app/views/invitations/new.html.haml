@@ -10,6 +10,7 @@
         = f.label :email, class: "col-sm-4 control-label"
         .col-sm-6
           = f.email_field :recipient_email, class: "form-control", placeholder: "user@example.com"
+          = errors_for_field(@invitation, :recipient_email)
       .row
         .col-sm-8.col-sm-offset-4
           = f.submit "Send Invitation", class: "btn btn-primary"

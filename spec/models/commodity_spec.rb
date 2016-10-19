@@ -96,6 +96,27 @@ RSpec.describe Commodity, :type => :model do
     end
   end
 
+  describe "Instance Methods" do
+    describe "#avatar_url" do
+      context "With images present" do
+        it "returns the name of the first image" do
+          images = create_list(:image,2)
+          commodity = images.first.commodity_reference.commodity
+
+          expect(commodity.avatar_url).to eq images.first.url
+        end
+      end
+
+      context "With no images present" do
+        it "returns the name of the default commodity image" do
+          commodity = create(:commodity)
+
+          expect(commodity.avatar_url).to eq "commodity-default.gif"
+        end
+      end
+    end
+  end
+
   describe "Class Methods" do
     describe ".search" do
       it "returns commodities matching the query" do

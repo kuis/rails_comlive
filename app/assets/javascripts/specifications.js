@@ -20,6 +20,8 @@ ready = function(){
             minMaxDiv.addClass("hidden");
             filterUomsSelect.parents('.form-group').addClass('hidden');
             specPropertyInput.parents('.form-group').addClass('hidden');
+            $("#min-max-container").addClass('hidden');
+            $("#value-container").removeClass('hidden');
         }
 
         var checkedRadioBtnValue = $('#predefined-properties input[type="radio"]:checked').val();

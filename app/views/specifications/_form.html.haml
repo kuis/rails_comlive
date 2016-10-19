@@ -1,10 +1,10 @@
 = form_for object_url(@parent, @specification), html: { class: "form-horizontal" } do |f|
-  .form-group
+  .form-group.hidden
     = f.label :property, class: "col-sm-4 control-label"
     .col-sm-6
       = f.text_field :property, class: "form-control"
       = errors_for_field(@specification, :property)
-  #value-min-max.row.m-b-xs
+  #value-min-max.row.m-b-xs.hidden
     .col-sm-8.col-sm-offset-4
       .radio.radio-inline.radio-primary.p-t-0
         = radio_button_tag 'value-opts', 'value', is_checked?(@specification,'value')
@@ -27,7 +27,7 @@
         .col-sm-6
           = f.number_field :max, class: "form-control", step: "0.01", placeholder: "Maximum"
           = errors_for_field(@specification, :max)
-  .form-group
+  .form-group.hidden
     = f.label :filter_uoms, class: "col-sm-4 control-label"
     .col-sm-6
       = select_tag :type_of_measure, grouped_options_for_select(options_for_property(@app), nil, prompt: "Select Type"), class: "form-control select2", data: { url: uoms_path }
