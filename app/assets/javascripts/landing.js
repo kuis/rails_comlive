@@ -10,26 +10,27 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap
+//= require_tree
+//= require slick.min
+
 
 function menuShowHide(){
-    if( $(window).scrollTop() > 50 ){
-
-        $('.navbar-brand').removeClass('visible-xs');
-        $('.navbar-fixed-top').addClass('navbar-bg')
+    if( $(window).scrollTop() > 200 ){
+    
+      $('.landing .navbar-brand').removeClass('visible-xs');
+      $('.landing.navbar-fixed-top').addClass('navbar-bg')
     }
-
+   
     else{
-        $('.navbar-brand').addClass('visible-xs');
-        $('.navbar-fixed-top').removeClass('navbar-bg');
+      $('.landing .navbar-brand').addClass('visible-xs');
+      $('.landing.navbar-fixed-top').removeClass('navbar-bg');
     }
-}
+  }
 
 $(window).scroll(function(){
     menuShowHide();
 });
+
 
 //scrolling for top navigation
 var ready;
@@ -49,6 +50,50 @@ ready = function(){
             }
         }
     });
+
+    window.cookieconsent.initialise({
+        "palette":{
+            "popup": {
+                "background":"#edeff5","text":"#838391"
+            },
+            "button":{
+                "background":"#4b81e8"
+            }
+        },
+        "position":"bottom-right",
+        "content":{
+            "message":"This website uses cookies to ensure you get the best experience when you use it."
+        }
+    });
 }
 
 $(document).ready(ready);
+
+$(document).on('ready', function() {
+
+  $(".center").slick({
+    dots: true,
+    infinite: true,    
+    slidesToShow: 4,
+    slidesToScroll: 1, 
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          arrows: false,
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          slidesToShow: 1
+        }
+      }
+    ]
+  });
+
+});

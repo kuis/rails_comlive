@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :packaging do
-    uom { Faker::Lorem.word }
-    quantity { Faker::Number.decimal(2) }
     name { Faker::Name.name  }
     description { Faker::Lorem.sentence }
-    association :commodity
+    quantity { Faker::Number.decimal(2) }
+    uom { Faker::Lorem.word }
+    association :commodity_reference
 
     factory :invalid_packaging do
       name nil

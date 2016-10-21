@@ -1,0 +1,116 @@
+.standard {
+  &-logo {
+    max-width: 140px;
+    float: left;
+  }
+  &-name {
+    padding: 12px;
+    margin: 0;
+    strong {
+      display: block;
+      padding-top: 6px; 
+    }
+  }
+  &-description {
+    font-size: $font-size-sm;
+    padding: 0 12px;
+    a {
+      display: block;
+      margin-top: 6px;
+    }
+  }
+  &-filter {
+    margin: 0 12px;
+    a {
+      position: relative;
+      padding: 12px 10px;
+      border-bottom: 2px solid #fff;
+      display: inline-block;
+      color: $text-color;
+      /*&:first-child {
+        padding-left: 12px;
+      }
+      &:last-child {
+        padding-right: 12px;
+      }*/
+      &.active {
+        color: $primary;
+        border-bottom: 2px solid $primary;
+      }
+      &:after {
+        content:"\f111";
+        font-family: FontAwesome;
+        color: $gray-lighter;
+        padding-left: 6px;
+        font-weight: bold;
+        font-size: 60%;
+        position: absolute;
+        top: 16px;
+      }
+    }
+  }
+  &-row {
+    border-top: 1px solid #eee;
+    padding: 12px;
+    display: block;
+    small {
+      font-size: $font-size-base;
+      display: block;
+      padding-bottom: 8px;
+    }
+  }
+  &-status {
+    display: block;
+    color: $gray;
+    padding-top: 5px;
+  }
+  &-links {
+    .current {
+      background: #fff2cc;
+    }
+  }
+  &-commodities {
+    .icon-circle {
+      vertical-align: top;
+      margin: 0;
+    }
+  }
+  &-brand {
+    .logo {
+      margin: 0 6px 6px 0;
+      float: left;
+    }
+  }
+}
+
+.row-link {
+  display: block;
+  border-top: 1px solid #eee;
+  padding: 12px;
+  background: $reseda-lightest;
+  &:before {
+    font-family: FontAwesome;
+    content: "\f105";
+    font-size: 2em;
+    float: right;
+    line-height: 1.2;
+    vertical-align: middle;
+    color: $gray-light;
+  }
+  &:hover{
+    background: #fff;
+    color: $title-color;
+    p {
+      color: $title-color; 
+    }
+  }
+  p {
+    margin: 0;
+    color: $text-color;
+  }
+}
+
+.number {
+  font-family: "Open Sans Condensed";
+  font-size: $font-size-md + 2;
+}

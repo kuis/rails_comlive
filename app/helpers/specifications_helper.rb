@@ -11,12 +11,14 @@ module SpecificationsHelper
     properties ||= atoms.map{|a| [a, a.titleize.split(' ').join.underscore] }
   end
 
-  def object_url(model, specification = Specification.new)
-    case model
-      when Commodity
-        [model.app, model, specification]
+  def object_url(parent, record = Specification.new)
+    case parent
+      when CommodityReference
+        [parent.app, parent, record]
       when Packaging
-        [model.commodity.app, model.commodity, model, specification]
+        [parent.commodity_reference.app, parent.commodity_reference, parent, record]
+      when Commodity
+        [parent, record]
     end
   end
 
@@ -37,5 +39,9 @@ module SpecificationsHelper
     custom_units = CustomUnit.where(property: property)
     uoms += custom_units.map{|u| ["#{u.property} (#{u.uom})", u.uom] } if custom_units.any?
     return uoms
+  end
+
+  def predefined_opts
+    YAML::load_file('data/predefined_properties.yml')
   end
 end

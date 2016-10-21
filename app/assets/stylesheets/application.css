@@ -13,12 +13,29 @@
  *= require bootstrap
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require font-awesome
+ *= require bootstrap-select.min
  *= require material-design-iconic-font
  *= require animate.min
  *= require perfect-scrollbar
  *= require typeahead
+ *= require jqtree
  *= require select2.min
- *= require app
+ *= require lightslider
+ *= require custom
  *= require commodities
+ *= require barcodes
+ *= require searches
+ *= require apps
  *= require_self
  */
+
+.breadcrumb li:last-child {
+    color: #464441;
+}
+.alert{
+    border-radius: 0px;
+}
+
+#global-alert{
+    margin: 0px !important;
+}

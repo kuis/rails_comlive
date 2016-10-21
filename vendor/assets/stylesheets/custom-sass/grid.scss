@@ -1,0 +1,66 @@
+@mixin grid-item($width1, $width2) {
+  .grid-item,
+  .grid-sizer {
+    width: $width1;
+    &-20 {
+      width: $width2;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  @include grid-item(50%, 50%);
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  @include grid-item(33.3%, 33.3%);
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  @include grid-item(25%, 25%);
+}
+@media (min-width: $screen-lg-min) {
+  @include grid-item(25%, 20%);
+}
+
+.grid {
+  margin-left: -20px;
+  .segment {
+    margin: 0 0 20px 20px;
+    padding-top: 30px;
+    &-edit {
+      border: none;
+      border-top: 1px solid transparent;    
+      .btn-edit {
+        display: inline-block;
+        float: left;
+      }
+      &:hover {
+        border: none;
+        border-top: 1px solid $gold;
+      }
+    }
+    &-actions {
+      right: 0;
+      top: 0;
+      left: 0;
+      text-align: right; 
+    }
+  }
+  &-item {
+    img {
+      margin: 0 auto;
+      padding: 0 12px;
+    }
+    .brand-logo img,
+    .logo img,
+    .avatar img {
+      padding: 0;
+    }
+    .brand-logo {
+      margin: 0 12px 12px 12px;
+      float: left;
+    }
+    .btn-state {
+      display: inline-block;
+    }
+  }
+}

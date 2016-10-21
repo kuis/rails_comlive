@@ -5,7 +5,7 @@ FactoryGirl.define do
     status { %w(warning stop recall ).sample }
     info { Faker::Lorem.paragraph }
     url { Faker::Internet.url }
-    association :commodity
+    association :commodity_reference
 
     factory :invalid_state do
       status "wrong status"

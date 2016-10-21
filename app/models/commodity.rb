@@ -1,29 +1,29 @@
 class Commodity < ApplicationRecord
-  belongs_to :app
+  include Uuideable
+  include Visibility
+  include Searchable
+
   belongs_to :brand, optional: true
-  belongs_to :hscode_section, optional: true
-  belongs_to :hscode_chapter, optional: true
-  belongs_to :hscode_heading, optional: true
-  belongs_to :hscode_subheading, optional: true
-  belongs_to :unspsc_class, optional: true
-  belongs_to :unspsc_commodity, optional: true
-  belongs_to :unspsc_family, optional: true
-  belongs_to :unspsc_segment, optional: true
+  has_many :commodity_references, dependent: :destroy
+  has_many :specifications, through: :commodity_references
+  has_many :packagings, through: :commodity_references
+  has_many :standards, through: :commodity_references
+  has_many :references, through: :commodity_references
+  has_many :links, through: :commodity_references
+  has_many :images, through: :commodity_references
+  has_many :barcodes, as: :barcodeable
+  has_many :classification_commodities
 
-  has_many :links
-  has_many :references
-  has_many :packagings
-  has_many :standardizations, as: :referable
-  has_many :standards, through: :standardizations
-  has_many :specifications, as: :parent
-  has_one :state
-
-  validates_presence_of :app, :name, :measured_in
+  validates_presence_of :measured_in, :name
   validates_presence_of :brand_id, unless: "generic?"
 
   scope :generic, -> { where(generic: true )}
   scope :not_generic, -> { where(generic: false )}
   scope :recent, -> { order("created_at DESC") }
+
+  before_update :update_references
+  before_destroy :remove_from_lists
+
 
   searchkick word_start: [:name, :short_description, :long_description]
 
@@ -35,30 +35,40 @@ class Commodity < ApplicationRecord
     where(:id => ids).order(order)
   }
 
-  before_save :set_unspsc_fields
-  before_create :set_uuid
-
-  def as_json(options={})
-    super(:only => [:id,:name]).merge(href:  Rails.application.routes.url_helpers.app_commodity_path(self.app,self))
+  def state(app)
+    return commodity_references.first.state if app.nil?
+    cr = commodity_references.find_by(app_id: app.id)
+    return nil unless cr
+    cr.state
   end
 
+  # Maybe refactor to presenter?
+  def avatar_url
+    images.any? ? images.first.url : "commodity-default.gif"
+  end
+
+  def create_reference(user)
+    app = user.default_app
+    attributes = self.class.attribute_names.select{|a|
+      ["measured_in","generic","moderated","brand_id","name"].include?(a)
+    }
+    attributes = attributes.each_with_object({}) do |attribute,hash|
+      hash[attribute] = self.send(attribute)
+    end
+    self.commodity_references.create!(attributes.merge(app_id: app.id))
+  end
 
   private
 
-  def set_unspsc_fields
-    return unless self.unspsc_commodity_id
-    unspsc_commodity = UnspscCommodity.find(unspsc_commodity_id)
-    unspsc_class = unspsc_commodity.unspsc_class
-    unspsc_family = unspsc_class.unspsc_family
-    unspsc_segment = unspsc_family.unspsc_segment
-    self.unspsc_commodity, self.unspsc_class, self.unspsc_family, self.unspsc_segment = [
-        unspsc_commodity, unspsc_class, unspsc_family, unspsc_segment
-    ]
+  def update_references
+    commodity_references.update_all(name: name, short_description: short_description, long_description: long_description)
   end
 
-  private
-
-  def set_uuid
-    self.uuid = SecureRandom.uuid
+  def remove_from_lists
+    lists = List.where("'#{id}' = ANY (commodities)")
+    lists.each do |list|
+      updated_ids = list.commodities - [ id.to_s ]
+      list.update(commodities: updated_ids)
+    end
   end
 end

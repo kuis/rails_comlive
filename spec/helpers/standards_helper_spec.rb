@@ -12,16 +12,14 @@ require 'rails_helper'
 # end
 RSpec.describe StandardsHelper, :type => :helper do
   describe ".options_for_standards" do
-    it "returns official standards related to the current user's apps" do
-      user = FactoryGirl.create(:user)
-      2.times { FactoryGirl.create(:app, user: user) }
-      first_app  = user.apps.first
-      second_app = user.apps.last
-      official_standard   = FactoryGirl.create(:official_standard, app: first_app)
-      FactoryGirl.create(:standard, app: second_app)
-      options = helper.options_for_standards(user)
+    it "returns official standards" do
+      official_standard   = FactoryGirl.create(:official_standard)
+      other_standards  = FactoryGirl.create_list(:standard,2)
+
+      options = helper.options_for_standards
 
       expect(options).to match_array([[official_standard.name, "Standard-#{official_standard.id}"]])
+      expect(options).not_to match_array(other_standards.map{|b| [ b.name, "Standard-#{b.id}"]})
     end
   end
 end

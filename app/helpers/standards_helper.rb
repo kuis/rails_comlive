@@ -1,9 +1,5 @@
 module StandardsHelper
-  def options_for_standards(user)
-    user.apps.each_with_object([]) do |app, arr|
-      app.standards.official.each do |standard|
-        arr << [standard.name, "Standard-#{standard.id}"]
-      end
-    end
+  def options_for_standards
+    Standard.where(official: true).find_each.map {|s| [s.name, "Standard-#{s.id}"] }
   end
 end

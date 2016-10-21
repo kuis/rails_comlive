@@ -101,6 +101,8 @@ var loader = loader || {};
 
 }(jQuery, document, loader);
 
+var LIBS = {};
+
 +function($, LIBS) { 'use strict';
   $.fn.plugins = function(){
 

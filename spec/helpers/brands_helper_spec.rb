@@ -12,16 +12,13 @@ require 'rails_helper'
 # end
 RSpec.describe BrandsHelper, :type => :helper do
   describe ".options_for_brands" do
-    it "returns official brands related to the current user's apps" do
-      user = FactoryGirl.create(:user)
-      2.times { FactoryGirl.create(:app, user: user) }
-      first_app  = user.apps.first
-      second_app = user.apps.last
-      official_brand   = FactoryGirl.create(:official_brand, app: first_app)
-      FactoryGirl.create(:brand, app: second_app)
-      options = helper.options_for_brands(user)
+    it "returns official brands" do
+      official_brand   = FactoryGirl.create(:official_brand)
+      other_brands = FactoryGirl.create_list(:brand,2)
+      options = helper.options_for_brands
 
       expect(options).to match_array([[official_brand.name, "Brand-#{official_brand.id}"]])
+      expect(options).not_to match_array(other_brands.map{|b| [ b.name, "Brand-#{b.id}"]})
     end
   end
 end

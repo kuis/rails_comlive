@@ -7,6 +7,7 @@ FactoryGirl.define do
     target_commodity_id { create(:non_generic_commodity).id }
     description { Faker::Lorem.paragraph }
     association :app
+    association :commodity_reference
 
     factory :invalid_reference do
       description nil

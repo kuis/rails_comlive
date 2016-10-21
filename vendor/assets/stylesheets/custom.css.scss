@@ -1,0 +1,55 @@
+//= Boostrat Variables and mixins
+@import "bootstrap-sass/bootstrap/variables";
+@import "bootstrap-sass/bootstrap/mixins";
+@import "bootstrap-sass/bootstrap/mixins/responsive-visibility";
+@import "bootstrap-sass/bootstrap/responsive-utilities";
+
+//= Core Variables and mixins
+@import 'app-sass/variables';
+@import 'app-sass/mixins';
+@import 'app';
+
+//= Building Blocks
+@import 'custom-sass/variables';
+@import 'custom-sass/equal-columns';
+@import 'custom-sass/commons';
+@import 'custom-sass/jqtree';
+@import 'custom-sass/header';
+@import 'custom-sass/grid';
+@import 'custom-sass/table';
+@import 'custom-sass/slider';
+@import 'custom-sass/slick';
+@import 'custom-sass/segment';
+@import 'custom-sass/brand';
+@import 'custom-sass/commodity';
+@import 'custom-sass/standard';
+@import 'custom-sass/search';
+@import 'custom-sass/typeahead';
+@import 'custom-sass/classification';
+@import 'custom-sass/footer';
+@import 'custom-sass/form';
+@import 'custom-sass/add';
+@import 'custom-sass/public';
+@import 'custom-sass/public/landing';
+@import 'custom-sass/public/footer';
+@import 'custom-sass/dashboard';
+
+@media (max-width: 1366px) {
+  .container {
+    width: auto;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 64px; /* Margin bottom by footer height */
+}
+.app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 64px; /* the fixed height of the footer */
+}

@@ -1,26 +1,201 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
+  activerecord:
+    attributes:
+      commodity:
+        name: "Name"
+        measured_in: "Measured in"
+        short_description: "Short Description"
+        long_description: "Long Description"
+        generic: "Generic"
+        brand: "Brand"
+      brand:
+        name: "Name"
+        Description: "Description"
+        logo: "Logo"
+
+
+  helpers:
+    submit:
+      commodity:
+        create: "Create %{model}"
+        update: "Update %{model}"
+      brand:
+        create: "Create %{model}"
+        update: "Update %{model}"
+      ownership:
+        create: "Submit Claim"
+
+  menu:
+    languages:
+      lang: "Language"
+      en: "English"
+      nb: "Norwegian"
+
+  states:
+    new:
+      title: "Add Product Lifecycle State To"
+
+  specifications:
+    new:
+      title: "Add Specification To"
+    edit:
+      title: "Edit Specification"
+
+  packagings:
+    new:
+      title: "Add Packaging To"
+
+  references:
+    new:
+      title: "Add Reference To"
+    edit:
+      title: "Edit Reference"
+
+  links:
+    new:
+      title: "Add Link To"
+    edit:
+      title: "Edit Link"
+
+  standards:
+    new:
+      title: "New Standard"
+    edit:
+      title: "Edit Standard"
+    form:
+      upload_logo: "Upload Logo"
+
+  images:
+    new:
+      title: "Add Image"
+
+  invitations:
+    new:
+      title: "Invite Users To"
+
+  welcome:
+    dashboard:
+      title: "Add New"
+      button_text: "Add"
+      commodity:
+        title: "Commodity"
+        description: 'A generic product that does not belong to any specific brand. Examples are "Gold", "Wheat Flour" and "Milk"'
+      product:
+        title: "Product"
+        description: 'A product or service from a specific brand. An example is the "iPhone 7 by Apple".'
+      brand:
+        title: "Brand"
+        description: 'Although they not always make the products themselves, the Brands are the make behind a product or a service. Some of the most famous brands are "Apple", "Microsoft" and "The Coca Cola Company".'
+      standard:
+        title: "Standard"
+        description: 'An established norm or set of requirements for products or services. Can be developed privately or unilaterally.'
+      classification:
+        title: "Classification"
+        description: 'A hierarchy of products and commodities. Can enforce the use of standards and specifications or just group stuff together in an usable manner.'
+
+  commodities:
+    new:
+      title: "Add Commodity / Product"
+      description:
+        commodity: 'A generic product that does not belong to any specific brand. Examples are "Gold", "Wheat Flour" and "Milk".'
+        product: 'A product or service from a specific brand. An example is the "iPhone 7 by Apple".'
+    edit:
+      title: "Edit Commodity / Product"
+    show:
+      tabs:
+        summary:
+          title: "There's no summary added yet."
+          description: "Adding images and description will increase the authenticity of the commodity/product."
+          button: "Add Summary"
+        specifications:
+          title: "There's no specifications added yet."
+          description: "-"
+          button: "Add Specification"
+        classifications:
+          title: "There's no classification added yet."
+          description: "-"
+          button: "Add Classification"
+        packagings:
+          title: "There's no packaging added yet."
+          description: "-"
+          button: "Add Packaging"
+        standards:
+          title: "There's no standard added yet."
+          description: "-"
+          button: "Assign Standard"
+        barcodes:
+          title: "There's no barcode added yet."
+          description: "-"
+          button: "Add Barcode"
+        references:
+          title: "There's no reference added yet."
+          description: "-"
+          button: "Add Reference"
+        links:
+          title: "There's no links added yet."
+          description: "-"
+          button: "Add Link"
+    messages:
+      created: "Commodity successfully created"
+      updated: "Commodity successfully updated"
+    count:
+      one: "%{count} Commodity"
+      other: "%{count} Commodities"
+    form:
+      unit_prompt: "Select Unit"
+      brand_prompt: "Select Brand"
+      missing_unit: "Select this to let us know, and we will go through your request and add it ASAP if we agree"
+
+  brands:
+    new:
+      title: "Add Brand"
+      description: 'Although they not always make the products themselves, the Brands are the make behind a product or a service. Some of the most famous brands are "Apple", "Microsoft" and "The Coca Cola Company".'
+    edit:
+      title: "Edit Brand"
+      description: "Edit brand's details"
+    show:
+      tabs:
+        summary:
+          title: "There's no summary added yet."
+          description: "Adding logo, description, official website and social information will increase the authenticity of the brand."
+          button: "Add Summary"
+        commodities:
+          title: "There're no products added yet."
+          description: "Adding products increase the authenticity of the brand."
+          button: "Add Product"
+        standards:
+          title: "There're no standards added yet."
+          description: "Adding standards increase the authenticity of the brand."
+          button: "Add Standard"
+    messages:
+      created: "Brand Successfully created"
+      updated: "Brand successfully updated"
+    count:
+      one: "%{count} Brand"
+      other: "%{count} Brands"
+    form:
+      upload_logo: "Upload Logo"
+
+  ownerships:
+    new:
+      title: "Claim Ownership"
+      prompt: "You have requested to claim <b>%{name}</b>. In order to claim this %{type}, you must work for or be working on behalf of the %{type}. You must be also be authorized to claim this %{type}"
+    messages:
+      created: "Ownership claimed, we will contact you for verification shortly"
+
+  lists:
+    messages:
+      updated: "Commodity saved to your list of favourites"
+
+  publishing:
+    public: "This information will be publicly available and published under 'Creative Commons Attribution 4.0 International Public License. Please make sure that you are allowed to publish this information and not violating any security regulations or copyrights, and that it may be freely redistributed."
+    official: "Approved data by the actual maker of commodity."
+    private: "This information will only be visible to yourself and other users in your app/team."
   sitename: "commodity.live"
+
+  functions:
+    update: "update"
 
   misc:
     commodity: "commodity"
@@ -31,3 +206,17 @@ en:
     collections: collections
     search: "search"
     latest: "latest"
+    more: "read more"
+
+  app:
+    app: "Team/App"
+    apps: "Teams/Apps"
+    non-found: "No teams/apps found"
+
+  landing:
+    pitch: "An online, worldwide and updated database of goods and services"
+    pitch_text_html: "We allow anyone to register and retrieve data, <br />but only the owner of a brand to verify official data."
+    searchfor: "search for any product or commodity"
+    search: "search"
+    why: "Share your result with the world"
+    whytext_html: "The platform where <strong>ANYONE</strong> can search for or register both their own or others products, commodites, brands and standards. <br />All parts of the supply chain, system developers and standardization organizations will benefit from using our neutral and stable system."

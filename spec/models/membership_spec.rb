@@ -18,6 +18,11 @@ RSpec.describe Membership, :type => :model do
       membership.valid?
       expect(membership.errors[:member]).to include("can't be blank")
     end
+
+    it "initializes owner to false by default" do
+      membership = build(:membership)
+      expect(membership.owner).to eq false
+    end
   end
 
   describe "Associations" do

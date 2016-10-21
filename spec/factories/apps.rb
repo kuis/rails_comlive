@@ -1,11 +1,9 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :app do
+  factory :app, aliases: [:added_by] do
     name { Faker::App.name}
     description { Faker::Lorem.paragraph }
-
-    association :user
 
     factory :invalid_app do
       name nil

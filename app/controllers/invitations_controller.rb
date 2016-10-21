@@ -1,26 +1,45 @@
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_app
+  before_action :authenticate_user!, except: :accept
+  before_action :set_app, except: :accept
+  after_action :verify_authorized, except: :index
+
+  layout "landing", only: :accept
 
   def new
-    @user = User.new
-    render layout: !request.xhr?
+    @invitation = Invitation.new(app_id: @app.id)
+    authorize @invitation
   end
 
   def create
-    @user = User.invite!(:email => params[:email])
-    if @user.save
-      @user.invited_apps << @app
-      flash[:notice] = "Invitation sent to #{@user.email}"
-      redirect_back(fallback_location: app_path(@app))
+    @invitation = @app.invitations.new(invitation_params)
+    authorize @invitation
+    @invitation.sender = current_user
+    if @invitation.save
+      InvitationMailer.invite(@invitation).deliver!
+      redirect_to @app, notice: "Invitation sent to #{@invitation.recipient_email}"
     else
       render :new
     end
   end
 
+  def accept
+    authorize Invitation
+    @invitation = Invitation.find_by(token: params[:token])
+    if user_signed_in?
+      current_user.accept_invite(@invitation.token)
+      redirect_to app_path(@invitation.app), notice: "Invitation accepted"
+    else
+      redirect_to root_path, alert: "Invalid invitation token" unless @invitation
+    end
+  end
+
   private
 
+  def invitation_params
+    params.require(:invitation).permit(:recipient_email)
+  end
+
   def set_app
-    @app = current_user.apps.find(params[:app_id])
+    @app = App.find(params[:app_id])
   end
 end

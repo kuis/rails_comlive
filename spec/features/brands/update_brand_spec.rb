@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 feature 'Updating a Brand' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
-  given!(:app) { create(:app, user_id: user.id) }
-  given!(:brand) { create(:brand, app_id: app.id) }
+  given!(:user) { create(:user) }
+  given!(:brand) { create(:brand) }
 
   background do
     log_in(user)
-    visit edit_app_brand_path(app,brand)
+    visit edit_brand_path(brand)
   end
 
   context "With valid details" do
@@ -17,7 +16,7 @@ feature 'Updating a Brand' do
 
       click_button 'Update Brand'
 
-      expect(page).to have_content("brand successfully updated")
+      expect(page).to have_content(I18n.t("brands.messages.updated"))
       expect(page).to have_content("Samsung")
       expect(page).to have_content("Plays nicely with kaminari and will_paginate.")
     end
@@ -26,12 +25,14 @@ feature 'Updating a Brand' do
   context "With invalid details" do
     scenario 'it should not update the brand' do
       fill_in 'brand[name]', with: ''
-      fill_in 'brand[description]', with: ''
 
       click_button 'Update Brand'
 
       expect(page).to have_content("Name can't be blank")
-      expect(page).to have_content("Description can't be blank")
     end
+  end
+
+  context "When brand is official" do
+    scenario "should be able to set additional fields", pending: "fields such as logo,wipo_url etc"
   end
 end

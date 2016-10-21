@@ -9,46 +9,6 @@ var renderOptions = function(options, select){
     select.html(opts);
 }
 
-var select2For = function(select){
-    url = select.data("url");
-
-    select.select2({
-        ajax: {
-            url: url,
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page || 1
-                };
-            },
-            processResults: function (data, params) {
-                // parse the results into the format expected by Select2
-                // since we are using custom formatting functions we do not need to
-                // alter the remote JSON data, except to indicate that infinite
-                // scrolling can be used
-                params.page = params.page || 1;
-
-                return {
-                    results: $.map(data.items, function(item){
-                        return {
-                            text: item.name,
-                            id: item.id
-                        }
-                    }),
-                    pagination: {
-                        more: !data.last_page
-                    }
-                };
-            },
-            cache: true
-        },
-        minimumInputLength: 1,
-        width: '100%'
-    });
-}
-
 ready = function(){
     // fix for selec2 inside bootstrap modal
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
@@ -58,22 +18,21 @@ ready = function(){
         width: '100%'
     });
 
-    $("input#commodity_generic").change(function(){
-        var checkbox = $(this);
-        var checked = checkbox.is(":checked");
-        var select = $("select#commodity_brand_id");
-        var div = $("div#commodity-brand");
-
-        if(checked){
-            select.prop("selectedIndex", 0);
-            div.hide();
-            checkbox.parent().css("margin-bottom","40px");
-        } else {
-            checkbox.parent().css("margin-bottom","10px");
-            div.show();
+    // Images slider
+    $('#image-gallery').lightSlider({
+        gallery:true,
+        item:1,
+        thumbItem:9,
+        slideMargin: 0,
+        speed:500,
+        auto:false,
+        loop:false,
+        onSliderLoad: function() {
+            $('#image-gallery').removeClass('cS-hidden');
         }
     });
 
+    
     $("button#assign-hscode").click(function(e){
         e.preventDefault();
 
@@ -162,15 +121,7 @@ ready = function(){
             modalBody.find("form input[type='submit']").hide();
 
             $("#sharedModal").modal();
-
-            // additional scripts
-            var source_commodity = $("#reference_source_commodity_id");
-            var target_commodity = $("#reference_target_commodity_id");
-            if(source_commodity.length && target_commodity.length){
-                select2For(source_commodity);
-                select2For(target_commodity);
-            }
-
+            
             var specificationProperty =  $("select#type_of_measure");
             if(specificationProperty.length){
                 specificationPropertyCallbacks();
@@ -191,15 +142,7 @@ ready = function(){
         var form = $("#sharedModal").find("form");
         form.submit();
     });
-
-    // additional scripts
-    var source_commodity = $("#reference_source_commodity_id");
-    var target_commodity = $("#reference_target_commodity_id");
-    if(source_commodity.length && target_commodity.length){
-        select2For(source_commodity);
-        select2For(target_commodity);
-    }
-
+    
     // autocomplete
     var engine, prefetch_url, autocomplete_url;
 
@@ -235,6 +178,28 @@ ready = function(){
                 }
             }
         });
+    
+    $("input[name='commodity-product']").change(function(){
+        var selected = $(this).val();
+        var select = $("select#commodity_brand_id");
+        var div = $("div#commodity-brand");
+        var checkbox =  $("input#commodity_generic");
+
+        if(selected == "commodity"){
+            select.prop("selectedIndex", 0);
+            checkbox.prop("checked",true);
+            div.addClass("hidden");
+            $("p.commodity-desc").removeClass("hidden");
+            $("p.product-desc").addClass("hidden");
+        } else if(selected == "product"){
+            checkbox.prop("checked",false);
+            div.removeClass('hidden');
+            $("p.commodity-desc").addClass("hidden");
+            $("p.product-desc").removeClass("hidden");
+        }
+    });
+
+
 }
 
 $(document).on("click", "a.unspsc-drilldown", function(e){

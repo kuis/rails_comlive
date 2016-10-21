@@ -8,4 +8,17 @@ RSpec.describe WelcomeController, :type => :controller do
     end
   end
 
+  describe "GET #add_items" do
+    it "returns 200 http status code" do
+      get :add_items
+      expect(response.status).to eq 200
+    end
+  end
+
+  describe "GET #dashboard" do
+    it "returns 200 http status code" do
+      get :dashboard
+      expect(response.status).to eq 200
+    end
+  end
 end

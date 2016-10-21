@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 feature 'Creating a Brand' do
-  given!(:user) { create(:user, email: 'user@example.com', password: 'secretpass') }
-  given!(:app) { create(:app, user_id: user.id) }
+  given!(:user) { create(:user) }
   given(:brand) { build(:brand) }
 
   background do
     log_in(user)
-    visit new_app_brand_path(app)
+    visit new_brand_path(brand)
   end
 
   context "With valid details" do
@@ -17,7 +16,7 @@ feature 'Creating a Brand' do
 
       click_button 'Create Brand'
 
-      expect(page).to have_content("Brand Successfully created")
+      expect(page).to have_content(I18n.t("brands.messages.created"))
       expect(page).to have_content(brand.name)
       expect(page).to have_content(brand.description)
     end
@@ -26,12 +25,10 @@ feature 'Creating a Brand' do
   context "With invalid details" do
     scenario 'should not create the brand' do
       fill_in 'brand[name]', with: ''
-      fill_in 'brand[description]', with: ''
 
       click_button 'Create Brand'
 
       expect(page).to have_content("Name can't be blank")
-      expect(page).to have_content("Description can't be blank")
     end
   end
 end
