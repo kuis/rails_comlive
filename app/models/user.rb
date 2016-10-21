@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :apps, source: :member, source_type: "App", through: :memberships
   has_many :brands, source: :member, source_type: "Brand", through: :memberships
   has_many :standards, source: :member, source_type: "Standard", through: :memberships
+  has_one :list
+
+  after_create :create_user_list
 
   def self.from_omniauth(auth)
     # where(provider: auth.provider, uid: auth.uid)
@@ -59,5 +62,9 @@ class User < ApplicationRecord
 
   def token_expired?
     expires_at < Time.now
+  end
+
+  def create_user_list
+    create_list
   end
 end

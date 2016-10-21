@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007051535) do
+ActiveRecord::Schema.define(version: 20161019104753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,14 @@ ActiveRecord::Schema.define(version: 20161007051535) do
     t.index ["commodity_reference_id"], name: "index_links_on_commodity_reference_id", using: :btree
   end
 
+  create_table "lists", force: :cascade do |t|
+    t.string   "commodities", default: [],              array: true
+    t.integer  "user_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.boolean  "owner",       default: false
@@ -447,6 +455,7 @@ ActiveRecord::Schema.define(version: 20161007051535) do
   add_foreign_key "levels", "classifications"
   add_foreign_key "links", "apps"
   add_foreign_key "links", "commodity_references"
+  add_foreign_key "lists", "users"
   add_foreign_key "memberships", "users"
   add_foreign_key "packagings", "commodity_references"
   add_foreign_key "references", "apps"

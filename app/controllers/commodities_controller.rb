@@ -1,12 +1,17 @@
 class CommoditiesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :autocomplete, :prefetch]
+  after_action :record_recent_commodity, only: :show
 
   def index
-    add_breadcrumb "Commodities", :commodities_path
-
     if params[:q]
-      generic = params[:generic] == "true"
-      @commodities = Commodity.search params[:q], where: { generic: generic }, page: params[:page], per_page: 10
+      if params[:q].empty?
+        recently_visited =  cookies[:recent_commodities].nil? ? [] : cookies[:recent_commodities].split(",")
+        saved_commodiites = current_user.list.commodities
+        ids = recently_visited + saved_commodiites
+        @commodities = Commodity.where(id: ids.uniq).page(params[:page])
+      else
+        @commodities = Commodity.search params[:q], page: params[:page], per_page: 10
+      end
       render json: response_for(@commodities)
     elsif params[:query]
       @commodities = Commodity.search(params[:query], operator: "or", match: :word_start,
@@ -35,17 +40,12 @@ class CommoditiesController < ApplicationController
     @links = policy_scope(@commodity.links)
     @state = @commodity.state(current_app)
     @barcodes = @commodity.barcodes # policy_scope(@commodity.barcodes)
-
-    add_breadcrumb "Commodities", :commodities_path
-    add_breadcrumb @commodity.name, @commodity
+    @com_source_references = Reference.where(source_commodity_id: @commodity.id)
   end
 
   def new
     @commodity = Commodity.new
     @brand = Brand.find(params[:brand_id]) if params[:brand_id]
-
-    add_breadcrumb "Commodities", :commodities_path
-    add_breadcrumb "New", new_commodity_path
   end
 
   def create
@@ -97,6 +97,21 @@ class CommoditiesController < ApplicationController
     response[:items]        = []
     commodities.each {|c| response[:items] << c }
     return response
+  end
+
+  def record_recent_commodity
+    return unless params[:id]
+    commodities = cookies.permanent[:recent_commodities] || []
+    commodity_id = params[:id]
+    if commodities.empty?
+      commodities << commodity_id
+    else
+      commodities = cookies.permanent[:recent_commodities].split(",")
+      commodities.delete(commodity_id) if commodities.include?(commodity_id)
+      commodities.unshift(commodity_id)
+      commodities.pop if commodities.size > 5
+    end
+    cookies.permanent[:recent_commodities] = commodities.join(",")
   end
 
   def commodity_params

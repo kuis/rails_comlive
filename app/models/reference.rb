@@ -8,5 +8,5 @@ class Reference < ApplicationRecord
 
   validates_presence_of :app, :commodity_reference_id,:source_commodity_id,:target_commodity_id,:description, :kind
   validates_inclusion_of :kind, in: %w(specific_of variation_of alternative_to), message: "is not allowed"
-  validates :source_commodity, generic: true
+  # validates :source_commodity, generic: true
 end

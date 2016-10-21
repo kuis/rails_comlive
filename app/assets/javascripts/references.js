@@ -1,7 +1,7 @@
 var ready, select2For;
 
 select2For = function(select){
-    url = select.data("url");
+    var url = select.data("url");
 
     select.select2({
         ajax: {
@@ -10,7 +10,7 @@ select2For = function(select){
             delay: 250,
             data: function (params) {
                 return {
-                    q: params.term, // search term
+                    q: params.term || "", // search term
                     page: params.page || 1
                 };
             },
@@ -33,11 +33,11 @@ select2For = function(select){
                     }
                 };
             },
-            cache: true
+            cache: true,
         },
-        minimumInputLength: 1,
+        // minimumInputLength: 3,
         width: '100%'
-    });
+    })
 }
 
 ready = function(){
@@ -61,10 +61,8 @@ ready = function(){
 
     // on page load
     var source_commodity = $("#reference_source_commodity_id");
-    var target_commodity = $("#reference_target_commodity_id");
-    if(source_commodity.length && target_commodity.length){
+    if(source_commodity.length){
         select2For(source_commodity);
-        select2For(target_commodity);
     }
     // Textarea auto resize
     $('textarea.autoresize').each(function () {

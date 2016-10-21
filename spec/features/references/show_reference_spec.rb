@@ -12,7 +12,6 @@ feature "Visiting reference#show page" do
   end
 
   scenario "Should show the reference's details" do
-
     expect(page).to have_text(reference.kind)
     expect(page).to have_text(reference.description)
     expect(page).to have_text(reference.source_commodity.name)

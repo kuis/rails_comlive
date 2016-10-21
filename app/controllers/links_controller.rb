@@ -5,15 +5,9 @@ class LinksController < ApplicationController
 
   after_action :verify_authorized
 
-  add_breadcrumb "Apps", :apps_path
-
   def new
     authorize @app, :show?
     @link = Link.new
-
-    add_breadcrumb @app.name, @app
-    add_breadcrumb "Links", app_commodity_reference_links_path(@app,@commodity_reference)
-    add_breadcrumb "New", new_app_commodity_reference_link_path(@app, @commodity_reference)
   end
 
   def create
@@ -30,10 +24,6 @@ class LinksController < ApplicationController
   def edit
     authorize @app
     @link = @app.links.find(params[:id])
-
-    add_breadcrumb @app.name, @app
-    add_breadcrumb "Links", app_commodity_reference_link_path(@app,@commodity_reference,@link)
-    add_breadcrumb "Edit", edit_app_commodity_reference_link_path(@app,@commodity_reference,@link)
   end
 
   def update

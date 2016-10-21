@@ -2,8 +2,6 @@ class StandardsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :autocomplete]
   before_action :set_brand, except: [:autocomplete, :index]
 
-  add_breadcrumb "Standards", :standards_path
-
   def index
     if params[:q]
       @standards = Standard.search params[:q], page: params[:page], per_page: 10
@@ -15,8 +13,6 @@ class StandardsController < ApplicationController
 
   def new
     @standard = Standard.new
-
-    add_breadcrumb "New", new_brand_standard_path(@brand)
   end
 
   def show
@@ -26,7 +22,6 @@ class StandardsController < ApplicationController
       authenticate_user! if params[:id]
       @standard = Standard.find_by(uuid: params[:uuid])
     end
-    add_breadcrumb [@brand, @standard.name], @standard
   end
 
   def create
@@ -41,9 +36,6 @@ class StandardsController < ApplicationController
 
   def edit
     @standard = Standard.find(params[:id])
-
-    add_breadcrumb @standard.name, @standard
-    add_breadcrumb "Edit", edit_brand_standard_path(@brand,@standard)
   end
 
   def update

@@ -72,7 +72,7 @@ Rails.application.routes.draw do
     resources :hscode_chapters, :hscode_headings, :hscode_subheadings
     resources :unspsc_segments, :unspsc_families, :unspsc_classes, :unspsc_commodities
     resources :ownerships, path: "claims"
-    resources :standardizations
+    resources :standardizations, :lists
     resources :uoms, only: [:index]
   end
 

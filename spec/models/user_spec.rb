@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
+  subject { described_class }
+
   describe "Validations" do
     it "has a valid factory" do
       user = build(:user)
@@ -10,18 +12,23 @@ RSpec.describe User, :type => :model do
 
   describe "Associations" do
     it "has many brands" do
-      assoc = User.reflect_on_association(:brands)
+      assoc = subject.reflect_on_association(:brands)
       expect(assoc.macro).to eq :has_many
     end
 
     it "has many standards" do
-      assoc = User.reflect_on_association(:standards)
+      assoc = subject.reflect_on_association(:standards)
       expect(assoc.macro).to eq :has_many
     end
 
     it "has many apps" do
-      assoc = User.reflect_on_association(:apps)
+      assoc = subject.reflect_on_association(:apps)
       expect(assoc.macro).to eq :has_many
+    end
+
+    it "has one list" do
+      assoc = subject.reflect_on_association(:list)
+      expect(assoc.macro).to eq :has_one
     end
   end
 
@@ -87,6 +94,13 @@ RSpec.describe User, :type => :model do
           expect(user.accept_invite("fakeToken")).to be_nil
         end
       end
+    end
+  end
+
+  describe "Callbacks" do
+    it "creates a list for the user after_create" do
+      user = create(:user)
+      expect(user.list).to be_present
     end
   end
 end

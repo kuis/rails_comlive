@@ -49,6 +49,8 @@ en:
   references:
     new:
       title: "Add Reference To"
+    edit:
+      title: "Edit Reference"
 
   links:
     new:

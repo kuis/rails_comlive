@@ -13,10 +13,10 @@ feature 'Updating a Reference' do
 
   feature "Visiting #edit page" do
     scenario "Should show the current reference's details" do
-      expect(page).to have_text("Edit Reference")
-      expect(page).to have_select('reference[kind]', selected: reference.kind)
-      # expect(page).to have_select('reference_source_commodity_id', selected: @reference.source_commodity.short_description)
-      # expect(page).to have_select('reference_target_commodity_id', selected: @reference.target_commodity.short_description)
+      expect(page).to have_text(I18n.t("references.edit.title"))
+      expect(page).to have_text(reference.source_commodity.name)
+      expect(page).to have_select('reference[kind]', selected: reference.kind.titleize)
+      expect(page).to have_select('reference_source_commodity_id', selected: reference.source_commodity.name)
       expect(find_field('reference[description]').value).to eq reference.description
     end
   end
@@ -24,7 +24,7 @@ feature 'Updating a Reference' do
   context "With valid details" do
     scenario "should successfully update the reference" do
       fill_in "reference[description]", with: "description of reference updated"
-      select "alternative_to", :from => "reference[kind]"
+      select "alternative_to".titleize, :from => "reference[kind]"
 
       click_button "Update Reference"
 
@@ -40,7 +40,7 @@ feature 'Updating a Reference' do
 
       click_button "Update Reference"
 
-      expect(page).to have_text("Description can't be blank")
+      expect(page).to have_text("can't be blank")
     end
   end
 end

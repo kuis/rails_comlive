@@ -4,7 +4,7 @@ class Commodity < ApplicationRecord
   include Searchable
 
   belongs_to :brand, optional: true
-  has_many :commodity_references
+  has_many :commodity_references, dependent: :destroy
   has_many :specifications, through: :commodity_references
   has_many :packagings, through: :commodity_references
   has_many :standards, through: :commodity_references
@@ -22,6 +22,8 @@ class Commodity < ApplicationRecord
   scope :recent, -> { order("created_at DESC") }
 
   before_update :update_references
+  before_destroy :remove_from_lists
+
 
   searchkick word_start: [:name, :short_description, :long_description]
 
@@ -60,5 +62,13 @@ class Commodity < ApplicationRecord
 
   def update_references
     commodity_references.update_all(name: name, short_description: short_description, long_description: long_description)
+  end
+
+  def remove_from_lists
+    lists = List.where("'#{id}' = ANY (commodities)")
+    lists.each do |list|
+      updated_ids = list.commodities - [ id.to_s ]
+      list.update(commodities: updated_ids)
+    end
   end
 end

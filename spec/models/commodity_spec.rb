@@ -139,4 +139,20 @@ RSpec.describe Commodity, :type => :model do
       end
     end
   end
+
+  describe "Callbacks" do
+    it "removes commodity_id from any lists present with its id" do
+      create_list(:user, 3)
+      commodities = create_list(:commodity, 3)
+      commodity = commodities.sample
+      commodity_id = commodity.id
+      ids = commodities.map(&:id)
+      List.update_all(commodities: ids)
+
+      commodity.destroy
+
+      lists = List.where("'#{commodity_id}' = ANY (commodities)")
+      expect(lists).to be_empty
+    end
+  end
 end

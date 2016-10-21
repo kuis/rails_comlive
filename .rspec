@@ -1,4 +1,4 @@
 --color
 --require spec_helper
 --format documentation
---order rand:42151
+--order rand:14030

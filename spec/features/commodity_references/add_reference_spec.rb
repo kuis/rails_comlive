@@ -7,13 +7,10 @@ feature 'Adding a reference to commodity reference' do
   given!(:commodity_reference) { create(:commodity_reference, commodity: commodity, app_id: app.id) }
   given(:reference) { build(:reference, app: app, commodity_reference: commodity_reference) }
 
-  given(:generic_commodities) { create_list(:generic_commodity, 3) }
-  given(:non_generic_commodities) { create_list(:non_generic_commodity, 3) }
+  given(:commodities) { create_list(:commodity, 3) }
 
-  given(:generic_commodity) { generic_commodities.first }
-  given(:non_generic_commodity) { non_generic_commodities.first }
-  given(:generic_search_term) { generic_commodity.name.split(" ").first }
-  given(:non_generic_search_term) { non_generic_commodity.name.split(" ").first }
+  given(:sample_commodity) { commodities.first }
+  given(:search_term) { sample_commodity.name.split(" ").first }
 
   background do
     log_in(user)
@@ -26,9 +23,8 @@ feature 'Adding a reference to commodity reference' do
       click_link "Reference"
     end
 
-    select reference.kind, from: 'reference[kind]'
-    select2("reference_source_commodity_id",generic_search_term, generic_commodity.id,generic_commodity.name)
-    select2("reference_target_commodity_id",non_generic_search_term, non_generic_commodity.id,non_generic_commodity.name)
+    select reference.kind.titleize, from: 'reference[kind]'
+    select2("reference_source_commodity_id",search_term, sample_commodity.id,sample_commodity.name)
     select 'Private', from: 'reference[visibility]'
     # page.execute_script("$('#reference_visibility').selectpicker('val','privatized')")
 
@@ -38,10 +34,12 @@ feature 'Adding a reference to commodity reference' do
 
     page.execute_script("$('a[href=\"#tab-5\"]').tab('show')")
 
-    expect(page).to have_content(generic_commodity.name)
-    expect(page).to have_content(reference.kind)
-    expect(page).to have_content(/Private/i)
-    expect(page).to have_content(non_generic_commodity.name)
+    within("#tab-5") do
+      expect(page).to have_content(sample_commodity.name)
+      expect(page).to have_content(reference.kind)
+      expect(page).to have_content(/Private/i)
+      expect(page).to have_content(commodity.name)
+    end
   end
 
 end

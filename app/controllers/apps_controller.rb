@@ -3,8 +3,6 @@ class AppsController < ApplicationController
   after_action :verify_authorized, except: :index
   # after_action :verify_policy_scoped, only: :index
 
-  add_breadcrumb "Apps", :apps_path
-
   def index
     @apps = current_user.apps
   end
@@ -12,8 +10,6 @@ class AppsController < ApplicationController
   def new
     @app = App.new
     authorize App
-
-    add_breadcrumb "New", :new_app_path
   end
 
   def create
@@ -30,16 +26,11 @@ class AppsController < ApplicationController
   def show
     @app = App.find(params[:id])
     authorize @app
-
-    add_breadcrumb @app.name, @app
   end
 
   def edit
     @app = App.find(params[:id])
     authorize @app
-
-    add_breadcrumb @app.name, @app
-    add_breadcrumb "Edit", edit_app_path(@app)
   end
 
   def update

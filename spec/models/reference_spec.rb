@@ -36,12 +36,6 @@ RSpec.describe Reference, :type => :model do
       reference.valid?
       expect(reference.errors[:kind]).to include("is not allowed")
     end
-    it "is invalid if source commodity is not generic" do
-      commodity = create(:non_generic_commodity)
-      reference = build(:reference, source_commodity: commodity)
-      reference.valid?
-      expect(reference.errors[:source_commodity]).to include("is not generic")
-    end
     it "is invalid without a commodity reference" do
       reference = build(:reference, commodity_reference_id: nil)
       reference.valid?
