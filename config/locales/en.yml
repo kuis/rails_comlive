@@ -184,6 +184,10 @@ en:
     messages:
       created: "Ownership claimed, we will contact you for verification shortly"
 
+  lists:
+    messages:
+      updated: "Commodity saved to your list of favourites"
+
   publishing:
     public: "This information will be publicly available and published under 'Creative Commons Attribution 4.0 International Public License. Please make sure that you are allowed to publish this information and not violating any security regulations or copyrights, and that it may be freely redistributed."
     official: "Approved data by the actual maker of commodity."
