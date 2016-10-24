@@ -45,6 +45,8 @@ en:
   packagings:
     new:
       title: "Add Packaging To"
+    edit:
+      title: "Edit Packaging"
 
   references:
     new:

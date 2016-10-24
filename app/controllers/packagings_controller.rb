@@ -16,7 +16,6 @@ class PackagingsController < ApplicationController
   def new
     authorize @app, :show?
     @packaging = Packaging.new
-    render layout: !request.xhr?
   end
 
   def create
