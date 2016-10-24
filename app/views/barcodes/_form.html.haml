@@ -2,7 +2,7 @@
   .form-group
     = f.label :format, class: "col-sm-4 control-label"
     .col-sm-6
-      = f.select :format, options_for_barcodes, {}, class: "form-control"
+      = f.select :format, options_for_barcodes, {}, class: "form-control select2"
       = errors_for_field(@barcode, :format)
   .form-group
     = f.label :content, class: "col-sm-4 control-label"
@@ -13,7 +13,7 @@
   .form-group
     = f.label :publishing, class: "col-sm-4 control-label"
     .col-sm-6
-      = f.select :visibility, options_for_visibility(@barcode), {}, class: "selectpicker show-tick", data: { width: "fit", header: "Publishing of the data"}
+      = f.select :visibility, options_for_visibility(@barcode), {}, class: "selectpicker show-tick", data: { width: "fit", header: t('barcodes.publishing')}
       = errors_for_field(@barcode, :visibility)
 
   .row

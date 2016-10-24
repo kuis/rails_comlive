@@ -36,7 +36,7 @@
             = f.text_field :location, class: "form-control"
             = errors_for_field(@brand, :location)
           .col-sm-6
-            = f.text_field :phone, class: "form-control", placeholder: "Phone No."
+            = f.text_field :phone, class: "form-control", placeholder: t('activerecord.attributes.brand.phone')
             = errors_for_field(@brand, :phone)
 
     .form-group
@@ -47,7 +47,7 @@
             = f.email_field :email, class: "form-control"
             = errors_for_field(@brand, :email)
           .col-sm-6
-            = f.text_field :url, class: "form-control", placeholder: "Website Url"
+            = f.text_field :url, class: "form-control", placeholder: t('activerecord.attributes.brand.url')
             = errors_for_field(@brand, :url)
 
     .form-group
@@ -58,7 +58,7 @@
             = f.text_field :skype_username, class: "form-control"
             = errors_for_field(@brand, :skype_username)
           .col-sm-6
-            = f.text_field :twitter_handle, class: "form-control", placeholder: "Twitter Handle @username"
+            = f.text_field :twitter_handle, class: "form-control", placeholder: t('activerecord.attributes.brand.twitter_handle')
             = errors_for_field(@brand, :twitter_handle)
 
     .form-group
@@ -69,7 +69,7 @@
             = f.text_field :facebook_address, class: "form-control"
             = errors_for_field(@brand, :facebook_address)
           .col-sm-6
-            = f.text_field :open_corporate_url, class: "form-control", placeholder: "Open Corporate Url"
+            = f.text_field :open_corporate_url, class: "form-control", placeholder: t('activerecord.attributes.brand.open_corporate_url')
             = errors_for_field(@brand, :open_corporate_url)
 
     .form-group

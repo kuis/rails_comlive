@@ -11,9 +11,19 @@ en:
         brand: "Brand"
       brand:
         name: "Name"
-        Description: "Description"
+        description: "Description"
         logo: "Logo"
-
+        brand_logo: "Brand Logo"
+        location: "Location"
+        email: "Email"
+        phone: "Phone"
+        url: "Webiste Url"
+        skype_username: "Skype Username"
+        twitter_handle: "Twitter Handle @username"
+        facebook_url: "Facebook Url"
+        facebook_address: "Facebook Address"
+        open_corporate_url: "Open Corporate Url"
+        wipo_url: "Wipo Url"
 
   helpers:
     submit:
@@ -25,6 +35,8 @@ en:
         update: "Update %{model}"
       ownership:
         create: "Submit Claim"
+      app:
+        create: "Create App"
 
   menu:
     languages:
@@ -81,19 +93,14 @@ en:
       title: "Add New"
       button_text: "Add"
       commodity:
-        title: "Commodity"
         description: 'A generic product that does not belong to any specific brand. Examples are "Gold", "Wheat Flour" and "Milk"'
       product:
-        title: "Product"
         description: 'A product or service from a specific brand. An example is the "iPhone 7 by Apple".'
       brand:
-        title: "Brand"
         description: 'Although they not always make the products themselves, the Brands are the make behind a product or a service. Some of the most famous brands are "Apple", "Microsoft" and "The Coca Cola Company".'
       standard:
-        title: "Standard"
         description: 'An established norm or set of requirements for products or services. Can be developed privately or unilaterally.'
       classification:
-        title: "Classification"
         description: 'A hierarchy of products and commodities. Can enforce the use of standards and specifications or just group stuff together in an usable manner.'
 
   commodities:
@@ -152,16 +159,31 @@ en:
   brands:
     new:
       title: "Add Brand"
-      description: 'Although they not always make the products themselves, the Brands are the make behind a product or a service. Some of the most famous brands are "Apple", "Microsoft" and "The Coca Cola Company".'
+      description: 'Although they do not always make the products themselves, the Brands are the make behind a product or a service. Some of the most famous brands are "Apple", "Microsoft" and "The Coca Cola Company".'
     edit:
       title: "Edit Brand"
       description: "Edit brand's details"
+    additems:
+      title: "Add details"
     show:
+      claim: "Claim this brand"
       tabs:
         summary:
+          header: "Summary"
           title: "There's no summary added yet."
           description: "Adding logo, description, official website and social information will increase the authenticity of the brand."
           button: "Add Summary"
+          recognized: "Recognized in"
+          open_corp: "Open Corporate description"
+          wipo: "Wipo description"
+          skype: "Skype"
+          website: "Official website"
+          phone: "Phone"
+          email: "Email Address"
+          facebook: "Facebook"
+          twitter: "Twitter"
+          open_corp_title: "Open Corporate site"
+          wipo_title: "WIPO"
         commodities:
           title: "There're no products added yet."
           description: "Adding products increase the authenticity of the brand."
@@ -171,6 +193,7 @@ en:
           description: "Adding standards increase the authenticity of the brand."
           button: "Add Standard"
     messages:
+      non-found: "There are no brands found"
       created: "Brand Successfully created"
       updated: "Brand successfully updated"
     count:
@@ -200,6 +223,14 @@ en:
     update: "update"
 
   misc:
+    brand: "Brand"
+    brands: "Brands"
+    product: "Product"
+    products: "Products"
+    classification: "Classification Lene"
+    classifications: "Slassifications"
+    standard: "Standard"
+    standards: "Standards"
     commodity: "commodity"
     commoditites: "commodities"
     company: "company"
@@ -210,10 +241,33 @@ en:
     latest: "latest"
     more: "read more"
 
+  barcodes:
+    title: "Barcode"
+    barcode: "Barcode"
+    type: "Type"
+    content: "Content"
+    publishing: "Publishing of the data"
+    guide: "Barcode Content Quide"
+    bookland: "Should be a valid ISBN with / without number system or check digit. Example: 978-82-92526-14-9, 82-92526-14-9, 82-92526-14"
+    code128: "Can be any alphanumeric or numeric-only characters. Example: ABC-abc-1234"
+    code25iata: "Should consist of decimal digits 0-9 only. Example: 1023456789"
+    code25: "Should consist of decimal digits 0-9 only. Example: 1387549"
+    code25interleaved: "Should consist of evenly paired decimal digits only 0-9. Example: 034597 can be paired to 03, 45, 97"
+    code39: "Should consist of any combination of uppercase letters (A-Z), numeric digits (0-9) and any of the following special characters (-, ., $, /, +, %, and space) Example: WIKI-980"
+    code93: "Should consist of any combination of uppercase letters (A-Z), numeric digits (0-9) and any of the following special characters (-, ., $, /, +, %, and space) Example: WIKI-980 $, /, + and %:"
+    ean13: "Should consist of exactly 12 digits. Example: 589365802134"
+    ean8: "Should consist of exactly 7 digits. Example: 5893658"
+    qrcode: "Can be any alpha-numeric string, text, url etc. Example: MyBrandShoe1"
+    upcsupplemental: "Should be valid with 2 or 5 digits. Example: 45 or 67894 are valid inputs"
+
+
+
   app:
     app: "Team/App"
     apps: "Teams/Apps"
     non-found: "No teams/apps found"
+    create: "Create App"
+    edit: "Edit Team/App"
 
   landing:
     pitch: "An online, worldwide and updated database of goods and services"
@@ -221,4 +275,4 @@ en:
     searchfor: "search for any product or commodity"
     search: "search"
     why: "Share your result with the world"
-    whytext_html: "The platform where <strong>ANYONE</strong> can search for or register both their own or others products, commodites, brands and standards. <br />All parts of the supply chain, system developers and standardization organizations will benefit from using our neutral and stable system."
+    whytext_html: "The platform where <strong>ANYONE</strong> can search for or register both their own or others products, commodities, brands and standards. <br />All parts of the supply chain, system developers and standardization organizations will benefit from using our neutral and stable system."

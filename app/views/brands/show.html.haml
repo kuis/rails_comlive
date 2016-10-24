@@ -15,8 +15,7 @@
           - else
             .m-t-sm
               = link_to new_ownership_path(child_id: @brand.id, child_type: "Brand"), class: "btn btn-outline btn-secondary" do
-                %i.fa.fa-gavel.fa-md
-                Claim this brand
+                %i.fa.fa-gavel.fa-md= t('brands.show.claim')
 
     .segment-actions
       - if user_signed_in?
