@@ -6,7 +6,7 @@
           .col-md-12
             %h4.segment-name
               = @brand.name
-              Products
+              = t('misc.products')
             %a.btn.btn-sm.btn-view-type{"data-placement" => "bottom", "data-toggle" => "tooltip", :href => "javascript:;", :title => "Change view"}
               %i.fa.fa-th-list
         = render 'commodities/gridview', commodities: @brand.commodities

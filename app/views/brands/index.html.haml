@@ -2,5 +2,4 @@
 - if @brands.any?
   = render @brands
 - else
-  %p
-    No brands found. #{link_to "Create Brand", new_brand_path}
+  %p= t('brands.messages.non-found') #{link_to t('brands.new.title'), new_brand_path}

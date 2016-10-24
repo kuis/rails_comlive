@@ -7,3 +7,7 @@
   type: length
 - property: weight
   type: mass
+- property: volume
+  type: volume
+- property: color
+  type: color

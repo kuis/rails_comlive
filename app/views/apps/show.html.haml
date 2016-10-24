@@ -4,7 +4,7 @@
       .widget
         %header.widget-header
           %h4.widget-title.pull-left= @app.name
-          %span.pull-right= link_to "Edit App", edit_app_path(@app)
+          %span.pull-right= link_to t('app.edit'), edit_app_path(@app)
         %hr.widget-separator/
         .widget-body
           = @app.description

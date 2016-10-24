@@ -2,5 +2,4 @@
 - if @apps.any?
   = render @apps
 - else
-  %p
-    No apps found. #{link_to "Create First App", new_app_path}
+  %p= t('app.non-found') #{link_to t('app.create'), new_app_path}
