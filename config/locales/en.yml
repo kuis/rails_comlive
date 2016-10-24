@@ -89,6 +89,8 @@ en:
       title: "Invite Users To"
 
   welcome:
+    contact:
+      success_message: "Thank you for your message. We will get in touch soon!"
     dashboard:
       title: "Add New"
       button_text: "Add"

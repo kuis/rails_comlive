@@ -12,6 +12,7 @@
 //
 //= require_tree
 //= require slick.min
+//= require jquery.form-validator.min
 
 
 function menuShowHide(){
@@ -36,6 +37,10 @@ $(window).scroll(function(){
 var ready;
 
 ready = function(){
+    $.validate({
+        form : '#contact-form'
+    });
+    
     menuShowHide();
 
     $('a[href*="#"]:not([href="#"])').click(function() {

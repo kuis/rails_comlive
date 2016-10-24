@@ -1,4 +1,4 @@
-- title "Commodity Live Contact"
+- title "Contact Us"
 
 %main#app-main.app-main
   .container
@@ -12,11 +12,17 @@
         .contact-us
           .row
             .col-sm-8.col-sm-push-2.col-md-6.col-md-push-3
-              %form
-                %input.form-control.input-lg{:placeholder => "Your Name", :type => "text"}/
-                %input.form-control.input-lg{:placeholder => "Your Email", :type => "text"}/
-                %textarea.form-control.input-lg{:placeholder => "Your Message"}
-                %button.btn.btn-primary.btn-lg{:type => "submit"} SUBMIT
+              = render 'shared/flash'
+
+              = form_tag send_message_path, id: "contact-form" do
+                .form-group
+                  = text_field_tag :name, nil, class: "form-control input-lg", placeholder: "Your Name", data: { validation: "required"}
+                .form-group
+                  = email_field_tag :email, nil, class: "form-control input-lg", placeholder: "Your Email", data: { validation: "email required"}
+                .form-group
+                  = text_area_tag :message, nil, class: "form-control input-lg", placeholder: "Your Message", data: { validation: "required" }
+                = button_tag type: "submit", class: "btn btn-primary btn-lg" do
+                  Submit
               %ul.list-unstyled
                 %li NTTY AS
                 %li Grensen 12

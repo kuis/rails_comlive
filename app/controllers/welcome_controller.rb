@@ -19,4 +19,9 @@ class WelcomeController < ApplicationController
 
   def add_items
   end
+
+  def send_message
+    NotificationMailer.contact_message(params[:name], params[:email], params[:message]).deliver!
+    redirect_to contact_path, notice: t("welcome.contact.success_message")
+  end
 end

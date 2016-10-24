@@ -20,7 +20,8 @@ Rails.application.routes.draw do
     root to: "welcome#landing"
     get '/pricing' => "welcome#pricing", as: :pricing
     get '/team' => "welcome#team", as: :team
-    get '/contact' => "welcome#contact", as: :contact
+    get '/contact-us' => "welcome#contact", as: :contact
+    post '/contact' => "welcome#send_message", as: :send_message
 
     constraints(uuid: /\d{10}/) do
       get '/brands/:uuid/:title' => 'brands#show',  as: :slugged_brand
