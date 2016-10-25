@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get '/pricing' => "welcome#pricing", as: :pricing
     get '/team' => "welcome#team", as: :team
     get '/contact' => "welcome#contact", as: :contact
+    post '/landing/_footer/newsletter' => "welcome#subscribe", as: :subscribe
 
     constraints(uuid: /\d{10}/) do
       get '/brands/:uuid/:title' => 'brands#show',  as: :slugged_brand

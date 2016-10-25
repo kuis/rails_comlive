@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20161019104753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "app_accesses", force: :cascade do |t|
     t.boolean  "owner",             default: false
@@ -252,6 +251,7 @@ ActiveRecord::Schema.define(version: 20161019104753) do
     t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["commodities"], name: "index_lists_on_commodities", using: :gin
     t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
 

@@ -47,12 +47,14 @@
               %i.fa.fa-linkedin
         .newsletter
           %h5 Get the latest updates straight to your inbox
-          %form
-            .input-group
-              %input.form-control{:placeholder => "Enter your email", :type => "text"}/
-              %span.input-group-btn
-                %button.btn.btn-secondary{:type => "button"} Subscribe
-            / /input-group
+          = form_tag subscribe_path, id: "subscribe-form" do
+            .form-group
+              .input-group
+                = email_field_tag :email, nil, class: "form-control", placeholder: "Your Email", data: { validation: "email required"}
+                .span.input-group-btn
+                  = button_tag type: "submit", class: "btn btn-secondary" do
+                    Submit
+
   .footer-meta.text-center
     .container
       %ul.footer-menu

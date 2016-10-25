@@ -21,4 +21,11 @@ RSpec.describe WelcomeController, :type => :controller do
       expect(response.status).to eq 200
     end
   end
+
+  describe "POST #subscribe" do
+    it "subscribes the user" do
+      post :subscribe, params:  { email: "johndoe@email.com"  }
+      expect(response.status).to eq 302
+    end
+  end
 end

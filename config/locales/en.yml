@@ -89,6 +89,8 @@ en:
       title: "Invite Users To"
 
   welcome:
+    subscribe:
+      success_message: "You have successfully subscribed to our newsletter, thank you for showing interest"
     dashboard:
       title: "Add New"
       button_text: "Add"

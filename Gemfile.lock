@@ -135,6 +135,9 @@ GEM
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
     formatador (0.2.5)
+    gibbon (2.2.4)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     guard (2.14.0)
@@ -388,6 +391,7 @@ DEPENDENCIES
   faker!
   figaro
   font-awesome-rails
+  gibbon
   guard-rspec
   haml-rails (~> 0.9)
   jbuilder (~> 2.0)
@@ -421,5 +425,8 @@ DEPENDENCIES
   will_paginate (~> 3.1.0)
   will_paginate-bootstrap
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.13.3
