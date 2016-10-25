@@ -54,4 +54,11 @@ RSpec.describe WelcomeController, :type => :controller do
       }.to change(ActionMailer::Base.deliveries, :count).by(1)
     end
   end
+
+  describe "POST #subscribe" do
+    it "subscribes the user" do
+      post :subscribe, params:  { subscribe_email: "johndoe@email.com"  }
+      expect(response.status).to eq 302
+    end
+  end
 end

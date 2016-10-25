@@ -91,6 +91,8 @@ en:
   welcome:
     contact:
       success_message: "Thank you for your message. We will get in touch soon!"
+    subscribe:
+      success_message: "You have successfully subscribed to our newsletter, thank you for showing interest"
     dashboard:
       title: "Add New"
       button_text: "Add"
