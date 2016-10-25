@@ -10,10 +10,9 @@
 
           .hidden-xs.col-md-6.col-sm-height.col-sm-middle.text-right
             - @brand.commodities.limit(3).each do |commodity|
-              - image = commodity.images.any? ? commodity.images.first.url : "http://placehold.it/60x60"
               .hidden-sm.avatar.avatar-md.avatar-circle.m-r-sm
                 = link_to commodity do
-                  = image_tag image
+                  = image_tag commodity.avatar_url
 
             .summary
               = link_to "#" do

@@ -1,5 +1,10 @@
 %tr.segment.segment-edit
   %td
+    // move to presenter?
+    - if commodity.images.any?
+      - image = commodity.images.first
+      = image_tag "https://process.filestackapi.com/resize=width:50,height:35,fit:crop/#{image.handle}"
+
   %td= link_to commodity.name, commodity
   %td= commodity.short_description
   %td.segment-actions

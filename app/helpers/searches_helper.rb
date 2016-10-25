@@ -3,6 +3,8 @@ module SearchesHelper
     case result
       when Standard
         [result.brand, result]
+      when Commodity
+        user_signed_in? ? [result] : slugged_commodity_path(result.uuid, result.name.parameterize)
       else
         [result]
     end
