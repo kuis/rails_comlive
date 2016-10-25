@@ -248,6 +248,7 @@ en:
     barcode: "Barcode"
     type: "Type"
     content: "Content"
+    name: "Name"
     publishing: "Publishing of the data"
     guide: "Barcode Content Quide"
     bookland: "Should be a valid ISBN with / without number system or check digit. Example: 978-82-92526-14-9, 82-92526-14-9, 82-92526-14"

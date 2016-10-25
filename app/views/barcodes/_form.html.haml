@@ -1,5 +1,10 @@
 = form_for object_url(@parent, @barcode), html: { class: "form-horizontal" } do |f|
   .form-group
+    = f.label :name, class: "col-sm-4 control-label"
+    .col-sm-6
+      = f.text_field :name, class: "form-control select2"
+      = errors_for_field(@barcode, :name)
+  .form-group
     = f.label :format, class: "col-sm-4 control-label"
     .col-sm-6
       = f.select :format, options_for_barcodes, {}, class: "form-control select2"
