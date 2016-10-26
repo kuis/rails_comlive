@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get '/team' => "welcome#team", as: :team
     get '/contact-us' => "welcome#contact", as: :contact
     post '/contact' => "welcome#send_message", as: :send_message
-    post '/landing/_footer/newsletter' => "welcome#subscribe", as: :subscribe
+    post '/subscribe' => "welcome#subscribe", as: :subscribe
 
     constraints(uuid: /\d{10}/) do
       get '/brands/:uuid/:title' => 'brands#show',  as: :slugged_brand

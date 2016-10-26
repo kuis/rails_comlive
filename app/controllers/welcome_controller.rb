@@ -14,10 +14,17 @@ class WelcomeController < ApplicationController
   end
 
   def subscribe
-    gb = Gibbon::Request.new
-    lower_case_md5_hashed_email_address = Digest::MD5.hexdigest(params[:subscribe_email].downcase)
-    subscribe = gb.lists('8527b9a2e3').members(lower_case_md5_hashed_email_address).upsert(body: {email_address: params[:subscribe_email], status: "subscribed"})
-    redirect_to root_path, notice: t("welcome.subscribe.success_message")
+    begin
+      gb = Gibbon::Request.new
+      hashed_email = Digest::MD5.hexdigest(params[:subscribe_email].downcase)
+      gb.lists('8527b9a2e3').members(hashed_email).upsert(body: {email_address: params[:subscribe_email], status: "subscribed"})
+      flash[:notice] = t("welcome.subscribe.success_message")
+    rescue Gibbon::MailChimpError => e
+      response = JSON.parse(e.raw_body)
+      message = response["detail"]
+      flash[:alert] = message
+    end
+    redirect_to root_path
   end
 
   def dashboard

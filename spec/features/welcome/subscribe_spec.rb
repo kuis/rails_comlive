@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 feature 'Welcome#subscribe' do
-  let(:message) { OpenStruct.new(subscribe_email: "johndoe@email.com")}
+  let(:message) { OpenStruct.new(subscriber_email: "johndoe@email.com")}
 
   background do
     visit root_path
   end
 
   scenario "User can subscribe to newsletter" do
-    fill_in "subscribe_email", with: message.subscribe_email
+    fill_in "subscribe_email", with: message.subscriber_email
 
     click_button "Subscribe"
 

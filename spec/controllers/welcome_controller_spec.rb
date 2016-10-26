@@ -58,6 +58,7 @@ RSpec.describe WelcomeController, :type => :controller do
   describe "POST #subscribe" do
     it "subscribes the user" do
       post :subscribe, params:  { subscribe_email: "johndoe@email.com"  }
+      expect(flash[:notice]).to eq(I18n.t("welcome.subscribe.success_message"))
       expect(response.status).to eq 302
     end
   end
