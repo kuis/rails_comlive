@@ -29,6 +29,8 @@ gem "haml-rails", "~> 0.9"
 gem "breadcrumbs_on_rails"
 gem 'aws-sdk', '~> 2'
 gem 'rails-i18n', '~> 5.0.0'
+# Mailchimp
+gem "gibbon"
 
 # gem 'semacode', '~> 0.7.4' # dependency for barby
 
@@ -47,6 +49,7 @@ group :test do
   gem "database_cleaner", "~> 1.3.0"
   gem "launchy", "~> 2.4.2"
   gem 'poltergeist'
+  gem 'webmock'
 end
 
 group :development do

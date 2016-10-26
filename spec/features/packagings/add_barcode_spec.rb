@@ -17,13 +17,14 @@ feature 'Adding barcode to a packaging' do
     scenario "User can successfully add barcode to a package", js: true do
       select barcode.format.titleize.upcase, from: "barcode[format]"
       fill_in "barcode[content]", with: barcode.content
+      fill_in "barcode[name]", with: barcode.name
 
       click_button "Create Barcode"
 
       page.execute_script("$('a[href=\"#tab-4\"]').tab('show')")
 
       expect(page).to have_text("Barcode successfully created")
-      expect(page).to have_text(barcode.format.titleize)
+      expect(page).to have_text(barcode.name)
       expect(page).to have_text(barcode.content)
       expect(page).to have_css('img[src*="png"]')
     end

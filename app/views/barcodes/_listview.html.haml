@@ -3,9 +3,9 @@
     %table.table.table-striped.no-cellborder.dataTable{:cellspacing => "0", :width => "100%"}
       %thead
         %tr
-          %th Barcode
-          %th Type
-          %th Content
+          %th= t('barcodes.barcode')
+          %th= t('barcodes.name')
+          %th= t('barcodes.content')
           %th
       %tbody
         = render partial: 'barcodes/list', collection: barcodes, as: :barcode

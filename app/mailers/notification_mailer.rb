@@ -6,4 +6,11 @@ class NotificationMailer < ApplicationMailer
 
     mail to: "info@ntty.com", subject: "New #{@type} Claim"
   end
+
+  def contact_message(name, email, message)
+    @name = name
+    @message = message
+
+    mail to: "info@ntty.com", subject: "Someone contacted you", reply_to: email
+  end
 end

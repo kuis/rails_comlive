@@ -56,3 +56,6 @@ nb:
       other: "%{count} Brands"
     form:
       upload_logo: "Last opp logo"
+
+  misc:
+    classification: "Klassifisering"

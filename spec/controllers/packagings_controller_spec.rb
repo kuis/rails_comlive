@@ -18,6 +18,27 @@ RSpec.describe PackagingsController, :type => :controller do
       end
     end
 
+    describe "GET #show" do
+      it "returns 200 http status code" do
+        get :show, params: { app_id: app.id, commodity_reference_id: commodity_reference.id, id: packaging.id }
+        expect(response.status).to eq 200
+      end
+    end
+
+    describe "GET #new" do
+      it "returns 200 http status code" do
+        get :new, params: { app_id: app.id, commodity_reference_id: commodity_reference.id }
+        expect(response.status).to eq 200
+      end
+    end
+
+    describe "GET #edit" do
+      it "return 200 http status code" do
+        get :edit, params: { app_id: app.id, commodity_reference_id: commodity_reference.id, id: packaging }
+        expect(response.status).to eq 200
+      end
+    end
+
     describe "POST #create" do
       context "with valid attributes" do
         it "saves the new packaging state in the database" do
@@ -57,34 +78,6 @@ RSpec.describe PackagingsController, :type => :controller do
         end
       end
     end
-    
-    describe "GET #show" do
-      it "returns 200 http status code" do
-        get :show, params: { app_id: app.id, commodity_reference_id: commodity_reference.id, id: packaging.id }
-        expect(response.status).to eq 200
-      end
-    end
-
-    describe "GET #new" do
-      it "returns 200 http status code" do
-        get :new, params: { app_id: app.id, commodity_reference_id: commodity_reference.id }
-        expect(response.status).to eq 200
-      end
-    end
-
-    describe "GET #show" do
-      it "returns 200 http status code" do
-        get :show, params: {  app_id: app.id, commodity_reference_id: commodity_reference.id, id: packaging }
-        expect(response.status).to eq 200
-      end
-    end
-
-    describe "GET #index" do
-      it "returns 200 http status code" do
-        get :index
-        expect(response.status).to eq 200
-      end
-    end
   end
 
   context "As an unauthenticated user" do
@@ -100,6 +93,24 @@ RSpec.describe PackagingsController, :type => :controller do
       it "returns 200 http status code" do
         get :show, params: { uuid: packaging.uuid, title: packaging.name.parameterize}
         expect(response.status).to eq 200
+      end
+    end
+
+    describe "GET #edit" do
+      it "return 302 http status code" do
+        get :edit, params: { app_id: app.id, commodity_reference_id: commodity_reference.id, id: packaging }
+        expect(response.status).to eq 302
+        expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
+      end
+    end
+
+    describe "GET #new" do
+      it "return 302 http status code" do
+        get :new, params: { app_id: app.id, commodity_reference_id: commodity_reference.id }
+        expect(response.status).to eq 302
+        expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
 
